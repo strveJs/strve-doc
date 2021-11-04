@@ -36,22 +36,22 @@ module.exports = {
                         title: 'Introduce',
                         path: '/introduce/',
                     },
-                    // {
-                    //     title: 'Install',
-                    //     path: '/install/',
-                    // },
-                    // {
-                    //     title: 'Started',
-                    //     path: '/started/',
-                    // },
-                    // {
-                    //     title: 'Use',
-                    //     path: '/use/',
-                    // },
-                    // {
-                    //     title: 'Build',
-                    //     path: '/build/',
-                    // },
+                    {
+                        title: 'Install',
+                        path: '/install/',
+                    },
+                    {
+                        title: 'Started',
+                        path: '/started/',
+                    },
+                    {
+                        title: 'Use',
+                        path: '/use/',
+                    },
+                    {
+                        title: 'Build',
+                        path: '/build/',
+                    },
                 ],
             },
             '/zh/': {
@@ -62,22 +62,22 @@ module.exports = {
                         title: '介绍',
                         path: '/zh/introduce/',
                     },
-                    // {
-                    //     title: '安装',
-                    //     path: '/zh/install/',
-                    // },
-                    // {
-                    //     title: '快速上手',
-                    //     path: '/zh/started/',
-                    // },
-                    // {
-                    //     title: '基本使用',
-                    //     path: '/zh/use/',
-                    // },
-                    // {
-                    //     title: '部署',
-                    //     path: '/zh/build/',
-                    // },
+                    {
+                        title: '安装',
+                        path: '/zh/install/',
+                    },
+                    {
+                        title: '快速上手',
+                        path: '/zh/started/',
+                    },
+                    {
+                        title: '基本使用',
+                        path: '/zh/use/',
+                    },
+                    {
+                        title: '部署',
+                        path: '/zh/build/',
+                    },
                 ],
             }
         },

@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: /logo.png
-heroText: Strview.js
+heroText: Strve.js
 tagline: A JS library that can convert strings into view
 actionText: Getting Started →
 actionLink: /started/

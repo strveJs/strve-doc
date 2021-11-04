@@ -1,5 +1,5 @@
 # 快速上手
-尝试 `Strview.js` 最简单的方法是使用 Hello World 例子。你可以在浏览器新标签页中打开它，跟着例子学习一些基础用法。你可以使用CDN版本下的`strview.global.js`。使用这个文件，会将`Strview`全局暴露，您可以直接调用。
+尝试 `Strve.js` 最简单的方法是使用直接引入CDN链接。你可以在浏览器打开它，跟着例子学习一些基础用法。
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -8,26 +8,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strview.js</title>
+    <title>Strve.js</title>
 </head>
 
 <body>
     <div id="app"></div>
-    <script src="https://cdn.jsdelivr.net/npm/strview@1.9.0/dist/strview.global.js"></script>
-    <script>
-        Strview.createView({
-            el: "#app",
-            data: {
-                msg: 'Hello World'
-            },
-            template: `<p>{msg}</p>`,
+    <script type="module">
+        import { Strve, render, useEvent, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs@1/dist/strve.esm.min.js';
+
+        const state = {
+            arr: ['1', '2'],
+        };
+
+        function App() {
+            return render`
+              <div class='inner'>
+                  <button id='btn2'>push</button>
+                  <ul>
+                    ${state.arr.map((todo) => render`<li key=${todo}>${todo}</li>`)}
+                  </ul>
+              </div>
+          `;
+        }
+
+        Strve('#app', {
+            data: Object.assign(state),
+            template: App,
+            ways: [useEvent('#btn2', 'click', f2)],
         });
+
+        function f2() {
+            updateView(() => {
+                state.arr.push('3');
+            });
+        }
     </script>
 </body>
 
 </html>
-
 ```
-如下图所示：
-
-<demo-1/>

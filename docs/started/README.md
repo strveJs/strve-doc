@@ -1,6 +1,6 @@
 # Started
 
-The easiest way to try `Strview.js` is to use the Hello World example. You can open it in a new tab of your browser and follow the examples to learn some basic usage. You can use `strview.global.js` under the CDN version. Using this file will expose `Strview` globally, and you can call it directly.
+The easiest way to try `Strve.js` is to use the direct import CDN link. You can open it in your browser and follow the examples to learn some basic usage.
 
 ```html
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ The easiest way to try `Strview.js` is to use the Hello World example. You can o
 <body>
     <div id="app"></div>
     <script type="module">
-        import { Strve, render, useEvent, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs@1.0.4/dist/strve.esm.min.js';
+        import { Strve, render, useEvent, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs@1/dist/strve.esm.min.js';
 
         const state = {
             arr: ['1', '2'],
@@ -49,6 +49,3 @@ The easiest way to try `Strview.js` is to use the Hello World example. You can o
 
 </html>
 ```
-As shown below：
-
-<demo-1/>

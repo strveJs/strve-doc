@@ -2,40 +2,37 @@
 
 ## CDN
 
-Directly introduce the following address：
-```html
-<script src="https://cdn.jsdelivr.net/npm/strview@1.9.0/dist/strview.global.js"></script>
-```
-
-If you use native ES Modules, there is also a build file compatible with ES Module：
+If you use native ES Modules.
 
 ```html
 <script type="module">
-  import { createView } from 'https://cdn.jsdelivr.net/npm/strview@1.9.0/dist/strview.esm.js'
+ import { Strve, render, useEvent, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs@1/dist/strve.esm.min.js';
 </script>
 ```
 ## NPM
+<a href="https://npmjs.com/package/strvejs"><img src="https://badgen.net/npm/v/strvejs" alt="npm package"></a>
 
-Latest stable version：`1.9.0`
 ```shell
-npm install strview
+npm i strvejs
 ```
 
 ## CLI
+<a href="https://npmjs.com/package/create-strve"><img src="https://badgen.net/npm/v/create-strve" alt="npm package"></a>
 
-`strviewApp` is a project building tool based on `strview.js`, you can use it to build pages more conveniently and flexibly. How to install it, you can use `strviewCli` to quickly install `strviewApp`.
+`create-strve` is a project building tool based on `strve.js`, you can use it to build pages more conveniently and flexibly.
 
 **Global installation**
+
 ```shell
-npm install strview-cli -g
+npm install create-strve -g
 ```
 
 **View version**
 ```shell
-strview-cli -v
+create-strve -v
 ```
 
 **Initialize the project**
 ```shell
-strview-cli init <projectName>
+create-strve init <projectName>
 ```

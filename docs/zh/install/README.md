@@ -2,40 +2,37 @@
 
 ## CDN
 
-直接引入以下地址：
-```html
-<script src="https://cdn.jsdelivr.net/npm/strview@1.9.0/dist/strview.global.js"></script>
-```
-
-如果你使用原生 ES Modules，这里也有一个兼容 ES Module 的构建文件：
+如果你使用原生 ES Modules。
 
 ```html
 <script type="module">
-  import { createView } from 'https://cdn.jsdelivr.net/npm/strview@1.9.0/dist/strview.esm.js'
+ import { Strve, render, useEvent, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs@1/dist/strve.esm.min.js';
 </script>
 ```
 ## NPM
+<a href="https://npmjs.com/package/strvejs"><img src="https://badgen.net/npm/v/strvejs" alt="npm package"></a>
 
-最新稳定版本：`1.9.0`
 ```shell
-npm install strview
+npm i strvejs
 ```
 
-## 命令行工具 (CLI)
+## 命令行工具
+<a href="https://npmjs.com/package/create-strve"><img src="https://badgen.net/npm/v/create-strve" alt="npm package"></a>
 
-`strviewApp`是基于`strview.js`的项目构建工具，您可以使用它更方便灵活地搭建页面。如何安装它，你可以使用`strviewCli`来快速安装`strviewApp`。
+`create-strve`是基于`strve.js`的项目构建工具，您可以使用它更方便灵活地搭建页面。
 
 **全局安装**
+
 ```shell
-npm install strview-cli -g
+npm install create-strve -g
 ```
 
 **查看版本**
 ```shell
-strview-cli -v
+create-strve -v
 ```
 
 **初始化项目**
 ```shell
-strview-cli init <projectName>
+create-strve init <projectName>
 ```
