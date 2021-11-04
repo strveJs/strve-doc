@@ -1,2 +1,2 @@
-# strviewDoc
-Strview.js document address.
+# StrveDoc
+Strve.js document address.
