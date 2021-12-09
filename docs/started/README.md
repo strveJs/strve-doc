@@ -1,4 +1,4 @@
-# Started
+# Started1
 
 The easiest way to try `Strve.js` is to use the direct import CDN link. You can open it in your browser and follow the examples to learn some basic usage.
 
