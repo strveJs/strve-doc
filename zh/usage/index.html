@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>使用 | Strve.js</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/strvejs-doc/logo.png">
+    <meta name="description" content="一个可以将字符串转换为视图的JS库">
+    
+    <link rel="preload" href="/strvejs-doc/assets/css/0.styles.e35fd1d0.css" as="style"><link rel="preload" href="/strvejs-doc/assets/js/app.f1a52310.js" as="script"><link rel="preload" href="/strvejs-doc/assets/js/2.7ad84555.js" as="script"><link rel="preload" href="/strvejs-doc/assets/js/20.98ea3c7b.js" as="script"><link rel="prefetch" href="/strvejs-doc/assets/js/10.6d569901.js"><link rel="prefetch" href="/strvejs-doc/assets/js/11.c2da93c9.js"><link rel="prefetch" href="/strvejs-doc/assets/js/12.684c6ea9.js"><link rel="prefetch" href="/strvejs-doc/assets/js/13.61902838.js"><link rel="prefetch" href="/strvejs-doc/assets/js/14.799d5e6b.js"><link rel="prefetch" href="/strvejs-doc/assets/js/15.f9860121.js"><link rel="prefetch" href="/strvejs-doc/assets/js/16.8fd403a3.js"><link rel="prefetch" href="/strvejs-doc/assets/js/17.248a90e7.js"><link rel="prefetch" href="/strvejs-doc/assets/js/18.a248f8ff.js"><link rel="prefetch" href="/strvejs-doc/assets/js/19.21abebef.js"><link rel="prefetch" href="/strvejs-doc/assets/js/3.1cd0f6c6.js"><link rel="prefetch" href="/strvejs-doc/assets/js/4.45c5c4c8.js"><link rel="prefetch" href="/strvejs-doc/assets/js/5.eca4c4a3.js"><link rel="prefetch" href="/strvejs-doc/assets/js/6.44e89575.js"><link rel="prefetch" href="/strvejs-doc/assets/js/7.74f2c223.js"><link rel="prefetch" href="/strvejs-doc/assets/js/8.6c24e2b0.js"><link rel="prefetch" href="/strvejs-doc/assets/js/9.c76fe64d.js">
+    <link rel="stylesheet" href="/strvejs-doc/assets/css/0.styles.e35fd1d0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/strvejs-doc/zh/" class="home-link router-link-active"><!----> <span class="site-name">Strve.js</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://github.com/maomincoding/strve" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/strvejs-doc/usage/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/strvejs-doc/zh/usage/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="https://github.com/maomincoding/strve" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/strvejs-doc/usage/" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/strvejs-doc/zh/usage/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/strvejs-doc/zh/introduce/" class="sidebar-link">介绍</a></li><li><a href="/strvejs-doc/zh/install/" class="sidebar-link">安装</a></li><li><a href="/strvejs-doc/zh/started/" class="sidebar-link">快速上手</a></li><li><a href="/strvejs-doc/zh/usage/" aria-current="page" class="active sidebar-link">使用</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/strvejs-doc/zh/usage/#api" class="sidebar-link">API</a></li><li class="sidebar-sub-header"><a href="/strvejs-doc/zh/usage/#插值" class="sidebar-link">插值</a></li><li class="sidebar-sub-header"><a href="/strvejs-doc/zh/usage/#属性绑定" class="sidebar-link">属性绑定</a></li><li class="sidebar-sub-header"><a href="/strvejs-doc/zh/usage/#条件渲染" class="sidebar-link">条件渲染</a></li><li class="sidebar-sub-header"><a href="/strvejs-doc/zh/usage/#列表渲染" class="sidebar-link">列表渲染</a></li><li class="sidebar-sub-header"><a href="/strvejs-doc/zh/usage/#事件处理" class="sidebar-link">事件处理</a></li><li class="sidebar-sub-header"><a href="/strvejs-doc/zh/usage/#与vue-js搭配" class="sidebar-link">与Vue.js搭配</a></li><li class="sidebar-sub-header"><a href="/strvejs-doc/zh/usage/#与react-js搭配" class="sidebar-link">与React.js搭配</a></li></ul></li><li><a href="/strvejs-doc/zh/tool/" class="sidebar-link">工具</a></li><li><a href="/strvejs-doc/zh/other/" class="sidebar-link">其它</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="使用"><a href="#使用" class="header-anchor">#</a> 使用</h1> <h2 id="api"><a href="#api" class="header-anchor">#</a> API</h2> <p><code>Strve.js</code>目前仅仅有三个API。</p> <ul><li>Strve</li> <li>render</li> <li>updateView</li></ul> <p>是不是很简单！快来看看这三个API是什么意思？怎么使用它们？</p> <h3 id="strve"><a href="#strve" class="header-anchor">#</a> Strve</h3> <ul><li><p>参数：</p> <ul><li><code>string</code></li> <li><code>object</code></li></ul></li> <li><p>详细：</p></li></ul> <p>初始化<code>Strve.js</code>。第一个参数传入需要挂载到HTML页面的节点选择器名称。第二个参数传入一个对象，第一个属性<code>data</code>表示的意思是状态对象，第二个属性<code>template</code>表示模板函数。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">Strve</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    data<span class="token operator">:</span> <span class="token punctuation">{</span> state <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    template<span class="token operator">:</span> App
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="render"><a href="#render" class="header-anchor">#</a> render</h3> <ul><li>类型：<code>Function</code></li> <li>详细：</li></ul> <p><code>render``</code> 是一个标签函数，标签函数的语法是函数名后面直接带一个模板字符串，并从模板字符串中的插值表达式中获取参数。比如说，你可以在模板字符串中直接可以写HTML标签。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;h1&gt;Hello&lt;/h1&gt;
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="updateview"><a href="#updateview" class="header-anchor">#</a> updateView</h3> <ul><li>参数：
+<ul><li><code>Function</code></li></ul></li> <li>详细：</li></ul> <p>它仅仅有一个参数，这个参数是一个函数。函数体中需要执行将改变页面状态的值，例如以下示例中的<code>state.msg</code>。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    msg<span class="token operator">:</span><span class="token string">'1'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;button onclick=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>useChange<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&gt;change&lt;/button&gt;
+            &lt;p&gt;{state.msg}&lt;/p&gt;
+        }
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">useChange</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        state<span class="token punctuation">.</span>msg <span class="token operator">=</span> <span class="token string">'2'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="插值"><a href="#插值" class="header-anchor">#</a> 插值</h2> <p><code>Strve.js</code> 使用了基于 JavaScript 的模板字符串语法，允许开发者声明式地将 DOM 绑定至底层实例的数据。所有 <code>Strve.js</code> 的模板字符串都是合法的 HTML，所以能被遵循规范的浏览器和 HTML 解析器解析。</p> <p>在底层的实现上，<code>Strve.js</code> 将模板字符串编译成虚拟 DOM 渲染函数，并把 DOM 操作次数减到最少。</p> <p>在<code>Strve.js</code>中，你可以尽情的使用JavaScript 的模板字符串，感受它独特的魅力吧！</p> <h3 id="文本"><a href="#文本" class="header-anchor">#</a> 文本</h3> <p>数据绑定最常见的形式就是使用符号<code>${}</code>的文本插值：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    msg<span class="token operator">:</span> <span class="token string">'hello'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;p&gt;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>state<span class="token punctuation">.</span>msg<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/p&gt;
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>另外你还可以使用更简便的方法符号<code>{}</code>，同样可以达到预想的效果。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    msg<span class="token operator">:</span> <span class="token string">'hello'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;p&gt;{state.msg}&lt;/p&gt;
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>但是，使用这种符号<code>{}</code>需要注意的是，它只适用于标签内的文本插值。例如如下这种情况，它是不起作用的，不过你可以使用强大的符号<code>${}</code>。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Bad</span>
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;input type=&quot;text&quot; value={state.msg}/&gt;
+        }
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Good</span>
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;input type=&quot;text&quot; value=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>state<span class="token punctuation">.</span>msg<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/&gt;
+        }
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="表达式"><a href="#表达式" class="header-anchor">#</a> 表达式</h3> <p>目前仅支持在符号<code>${}</code>中使用表达式。例如，</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    a<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    b<span class="token operator">:</span> <span class="token number">2</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;p&gt;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">String</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>a <span class="token operator">+</span> state<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/p&gt;
+        }
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="属性绑定"><a href="#属性绑定" class="header-anchor">#</a> 属性绑定</h2> <p>前面，我们可以看到使用符号<code>${}</code>可以与属性<code>value</code>绑定值。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;input type=&quot;text&quot; value=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>state<span class="token punctuation">.</span>msg<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/&gt;
+        }
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>另外，你还可以绑定其他属性，例如<code>class</code>。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    isRed<span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+    &lt;div class='inner'&gt;
+        &lt;p class=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>state<span class="token punctuation">.</span>isRed <span class="token operator">?</span> <span class="token string">'red'</span> <span class="token operator">:</span> <span class="token string">''</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&gt;Strve.js&lt;/p&gt;
+    &lt;/div &gt;
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="条件渲染"><a href="#条件渲染" class="header-anchor">#</a> 条件渲染</h2> <p>我们也可以使用符号<code>${}</code>，这块内容只会在指令的表达式返回 <code>true</code> 值的时候被渲染。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    isShow<span class="token operator">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;button onclick=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>useShow<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&gt;show&lt;/button&gt;
+            </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>state<span class="token punctuation">.</span>isShow <span class="token operator">?</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;p&gt;Strve.js&lt;/p&gt;</span><span class="token template-punctuation string">`</span></span> <span class="token operator">:</span> <span class="token string">''</span>
+        <span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">useShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        state<span class="token punctuation">.</span>isShow <span class="token operator">=</span> <span class="token operator">!</span>state<span class="token punctuation">.</span>isShow<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="列表渲染"><a href="#列表渲染" class="header-anchor">#</a> 列表渲染</h2> <p>我们可以用符号<code>${}</code>基于一个数组来渲染一个列表。比如我们使用数组的<code>map</code>方法来渲染列表，并且可以动态添加数组项。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    arr<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token string">'2'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;button onclick=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>usePush<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&gt;push&lt;/button&gt;
+            &lt;ul&gt;
+            </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>state<span class="token punctuation">.</span>arr<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">todo</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;li key=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>todo<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&gt;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>todo<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/li&gt;</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">
+            &lt;/ul&gt;
+        }
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">usePush</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        state<span class="token punctuation">.</span>arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="事件处理"><a href="#事件处理" class="header-anchor">#</a> 事件处理</h2> <p>我们可以使用原生<code>onclick</code>指令来监听 DOM 事件，并在触发事件时执行一些 JavaScript。需要使用符号<code>${}</code>来绑定事件。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;div class='inner'&gt;
+            &lt;button onclick=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>useClick<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&gt;sayHello&lt;/button&gt;
+        }
+        &lt;/div &gt;
+    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">useClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="与vue-js搭配"><a href="#与vue-js搭配" class="header-anchor">#</a> 与Vue.js搭配</h2> <p><code>Strve.js</code>不仅可以单独使用，也可以与<a href="'https://v3.vuejs.org/'">Vue.js</a>搭配使用。你需要在Vue实例挂载完成后被调用<code>Strve()</code>注册方法，并且第一个参数已经在<code>template</code>标签中存在。</p> <p><strong>App.vue</strong></p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>container<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>HelloWorld</span><span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> HelloWorld <span class="token punctuation">,</span><span class="token punctuation">{</span>hello<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./components/HelloWorld.vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> about<span class="token punctuation">,</span>state <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./components/About.vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> render<span class="token punctuation">,</span> Strve <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;strvejs&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">AppTm</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+      &lt;div&gt;
+        </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">
+        </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">about</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">
+      &lt;/div&gt;
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span> <span class="token string">&quot;App&quot;</span><span class="token punctuation">,</span>
+  components<span class="token operator">:</span><span class="token punctuation">{</span>
+    HelloWorld
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">Strve</span><span class="token punctuation">(</span><span class="token string">&quot;#container&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      data<span class="token operator">:</span> <span class="token punctuation">{</span>state<span class="token punctuation">}</span><span class="token punctuation">,</span>
+      template<span class="token operator">:</span> AppTm<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>如果需要与Vue共享一个方法，推荐在<code>setup</code>方法中使用。</p> <p><strong>HelloWorld.vue</strong></p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>../assets/logo.png<span class="token punctuation">&quot;</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>useCliimg<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> render <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;strvejs&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> styles <span class="token keyword">from</span> <span class="token string">'../assets/hello/hello.module.css'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">hello</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span>render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+&lt;h2 class=&quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>styles<span class="token punctuation">.</span>color<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; onclick=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>useCliimg<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&gt;hello&lt;/h2&gt;
+</span><span class="token template-punctuation string">`</span></span>
+<span class="token keyword">function</span> <span class="token function">useCliimg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token operator">:</span><span class="token string">'HelloWorld'</span><span class="token punctuation">,</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      useCliimg
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><p>如果，你想在Vue组件中完全使用<code>Strve.js</code>，当然也可以。不过最后，推荐使用<code>export default</code>导出组件名。</p> <p><strong>About.vue</strong></p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> render<span class="token punctuation">,</span> updateView <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;strvejs&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> styles <span class="token keyword">from</span> <span class="token string">'../assets/about/about.module.css'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">about</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span>render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+&lt;div&gt;
+    &lt;p&gt;{state.msg}&lt;/p&gt;
+   &lt;h2 class=&quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>styles<span class="token punctuation">.</span>color<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; onclick=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>useClick<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&gt;about&lt;/h2&gt;
+&lt;/div&gt;
+</span><span class="token template-punctuation string">`</span></span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+    msg<span class="token operator">:</span><span class="token string">&quot;hello&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">useClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+        state<span class="token punctuation">.</span>msg <span class="token operator">=</span> <span class="token string">'world'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    name<span class="token operator">:</span><span class="token string">&quot;About&quot;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><h2 id="与react-js搭配"><a href="#与react-js搭配" class="header-anchor">#</a> 与React.js搭配</h2> <p><code>Strve.js</code>与<a href="'https://v3.vuejs.org/'">Vue.js</a>搭配相比，与<a href="'https://reactjs.org/'">React.js</a>搭配使用更为灵活。同样需要在组件第一次渲染完成后调用<code>Strve()</code>方法注册方法。</p> <p><strong>App.js</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>useEffect<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>Strve<span class="token punctuation">,</span>render<span class="token punctuation">,</span>updateView<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'strvejs'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'./App.css'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+  msg<span class="token operator">:</span><span class="token string">&quot;Hello&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">Home</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">return</span> render<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;h1 onclick=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>useClick<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&gt;{state.msg}&lt;/h1&gt;</span><span class="token template-punctuation string">`</span></span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">useClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">updateView</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    state<span class="token punctuation">.</span>msg <span class="token operator">=</span> <span class="token string">&quot;World&quot;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token function">Strve</span><span class="token punctuation">(</span><span class="token string">&quot;.App&quot;</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+      data<span class="token operator">:</span><span class="token punctuation">{</span>state<span class="token punctuation">}</span><span class="token punctuation">,</span>
+      template<span class="token operator">:</span> Home
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span>div className<span class="token operator">=</span><span class="token string">&quot;App&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> App<span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/strvejs-doc/zh/started/" class="prev">
+        快速上手
+      </a></span> <span class="next"><a href="/strvejs-doc/zh/tool/">
+        工具
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/strvejs-doc/assets/js/app.f1a52310.js" defer></script><script src="/strvejs-doc/assets/js/2.7ad84555.js" defer></script><script src="/strvejs-doc/assets/js/20.98ea3c7b.js" defer></script>
+  </body>
+</html>
