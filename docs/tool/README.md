@@ -52,7 +52,7 @@ Strve Router is the official route manager of Strve.js. It is deeply integrated 
 
 Currently only supports Hash mode.
 
-### 开始
+### Start
 
 The easiest way to try strve-router is to use the direct import CDN link. You can open it in your browser and follow the examples to learn some basic usage.
 
