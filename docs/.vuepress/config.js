@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/strvejs-doc/',
+    base: '/site/strvejs/', // /strvejs-doc/
     title: 'Strve.js',
     description: 'A JS library that can convert strings into view',
     head: [
