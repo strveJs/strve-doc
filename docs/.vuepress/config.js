@@ -6,7 +6,7 @@ module.exports = {
         ['link', { rel: 'icon', href: '/logo.png' }],
     ],
     markdown: {
-        lineNumbers: false
+        lineNumbers: true
     },
     locales: {
         '/': {
@@ -21,6 +21,9 @@ module.exports = {
         }
     },
     themeConfig: {
+        displayAllHeaders: true,
+        sidebar: 'auto',
+        sidebarDepth:4,
         nav: [
             { text: 'GitHub', link: 'https://github.com/maomincoding/strve' }
         ],

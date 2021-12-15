@@ -22,10 +22,24 @@ yarn create strve-app
 ```bash
 pnpm create strve-app
 ```
+### Choose a template
+
+You can choose the corresponding template according to your needs.
+
+- strve
+
+Only contains the basic functions of Strve.js. This template is suitable for applications that only have a single page in the project and do not jump to other pages.
+
+- strve-apps
+
+Not only includes the basic functions of Strve.js, but also includes Strve Router, which is suitable for jumping multiple pages and slightly more complex applications.
+
 ## create-strve
 <a href="https://npmjs.com/package/create-strve"><img src="https://badgen.net/npm/v/create-strve" alt="npm package"></a>
 
 We also briefly introduced before, Create Strve is a project construction tool based on Strve.js, you can use it to build pages more conveniently and flexibly. Create Strve is also built with [Vite](https://vitejs.dev/).
+
+However, it is recommended to use Create Strve App here, which is more flexible and faster than installation.
 
 ### Install
 

@@ -23,10 +23,25 @@ yarn create strve-app
 ```bash
 pnpm create strve-app
 ```
+
+### 选择模板
+
+你可以根据自己的需要选择对应的模板。
+
+- strve
+
+只包含Strve.js基本使用的功能。此模板适用于项目中仅仅单页面，没有跳转其他页面的应用。
+
+- strve-apps
+
+不仅包含了Strve.js的基本使用的功能，而且还包含了Strve Router，适用于跳转多页面以及稍微复杂的应用。
+
 ## create-strve
 <a href="https://npmjs.com/package/create-strve"><img src="https://badgen.net/npm/v/create-strve" alt="npm package"></a>
 
 在前面我们也简单介绍过，Create Strve是基于Strve.js的项目构建工具，您可以使用它更方便灵活地搭建页面。Create Strve同样是用[Vite](https://vitejs.dev/)来构建的。
+
+不过，在这里推荐使用Create Strve App，它相对安装更加灵活以及快速。
 
 ### 安装
 
