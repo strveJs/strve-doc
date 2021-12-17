@@ -77,7 +77,7 @@ function useChange() {
 
 ## 插值
 
-Strve.js 使用了基于 JavaScript 的模板字符串语法，允许开发者声明式地将 DOM 绑定至底层实例的数据。所有 `Strve.js` 的模板字符串都是合法的 HTML，所以能被遵循规范的浏览器和 HTML 解析器解析。
+Strve.js 使用了基于 JavaScript 的模板字符串语法，允许开发者声明式地将 DOM 绑定至底层实例的数据。所有 Strve.js 的模板字符串都是合法的 HTML，所以能被遵循规范的浏览器和 HTML 解析器解析。
 
 在底层的实现上，Strve.js 将模板字符串编译成虚拟 DOM 渲染函数，并把 DOM 操作次数减到最少。
 

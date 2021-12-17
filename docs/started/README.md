@@ -50,3 +50,5 @@ The easiest way to try Strve.js is to use the direct import CDN link. You can op
 
 </html>
 ```
+
+If you want to learn more about Strve.js in depth, you can continue reading.
