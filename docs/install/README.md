@@ -17,9 +17,34 @@ npm i strvejs
 ```
 
 ## CLI
+
+### create-strve-app
+<a href="https://npmjs.com/package/create-strve-app"><img src="https://badgen.net/npm/v/create-strve-app" alt="npm package"></a>
+
+A set of command line tools to quickly build Strve.js projects. Compared with the early scaffolding Create Strve, Create Strve App is better, you can directly enter commands to quickly create Strve projects. Create Strve App is built with [Vite](https://vitejs.dev/), which is a new front-end construction tool that can significantly improve the front-end development experience.
+
+**npm**
+
+```bash
+npm init strve-app@latest
+```
+
+**yarn**
+
+```bash
+yarn create strve-app
+```
+
+**pnpm**
+
+```bash
+pnpm create strve-app
+```
+### create-strve
+
 <a href="https://npmjs.com/package/create-strve"><img src="https://badgen.net/npm/v/create-strve" alt="npm package"></a>
 
-`create-strve` is a project building tool based on `Strve.js`, you can use it to build pages more conveniently and flexibly.
+Create Strve is a project building tool based on Strve.js, you can use it to build pages more conveniently and flexibly.
 
 **Global installation**
 

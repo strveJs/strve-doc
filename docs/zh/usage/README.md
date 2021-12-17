@@ -2,7 +2,7 @@
 
 ## API
 
-`Strve.js`目前仅仅有三个API。
+Strve.js目前仅仅有三个API。
 
 - Strve
 - render
@@ -18,7 +18,7 @@
 
 - 详细：
 
-初始化`Strve.js`。第一个参数传入需要挂载到HTML页面的节点选择器名称。第二个参数传入一个对象，第一个属性`data`表示的意思是状态对象，第二个属性`template`表示模板函数。
+初始化Strve.js。第一个参数传入需要挂载到HTML页面的节点选择器名称。第二个参数传入一个对象，第一个属性`data`表示的意思是状态对象，第二个属性`template`表示模板函数。
 
 ```js
 Strve('#app', {
@@ -77,11 +77,11 @@ function useChange() {
 
 ## 插值
 
-`Strve.js` 使用了基于 JavaScript 的模板字符串语法，允许开发者声明式地将 DOM 绑定至底层实例的数据。所有 `Strve.js` 的模板字符串都是合法的 HTML，所以能被遵循规范的浏览器和 HTML 解析器解析。
+Strve.js 使用了基于 JavaScript 的模板字符串语法，允许开发者声明式地将 DOM 绑定至底层实例的数据。所有 `Strve.js` 的模板字符串都是合法的 HTML，所以能被遵循规范的浏览器和 HTML 解析器解析。
 
-在底层的实现上，`Strve.js` 将模板字符串编译成虚拟 DOM 渲染函数，并把 DOM 操作次数减到最少。
+在底层的实现上，Strve.js 将模板字符串编译成虚拟 DOM 渲染函数，并把 DOM 操作次数减到最少。
 
-在`Strve.js`中，你可以尽情的使用JavaScript 的模板字符串，感受它独特的魅力吧！
+在Strve.js中，你可以尽情的使用JavaScript 的模板字符串，感受它独特的魅力吧！
 
 ### 文本
 
@@ -266,7 +266,7 @@ function useClick() {
 ```
 
 ## 与Vue.js搭配
-`Strve.js`不仅可以单独使用，也可以与[Vue.js]('https://v3.vuejs.org/')搭配使用。你需要在Vue实例挂载完成后被调用`Strve()`注册方法，并且第一个参数已经在`template`标签中存在。
+Strve.js不仅可以单独使用，也可以与[Vue.js]('https://v3.vuejs.org/')搭配使用。你需要在Vue实例挂载完成后被调用`Strve()`注册方法，并且第一个参数已经在`template`标签中存在。
 
 **App.vue**
 ```html
@@ -331,7 +331,7 @@ export default {
 </script>
 
 ```
-如果，你想在Vue组件中完全使用`Strve.js`，当然也可以。不过最后，推荐使用`export default`导出组件名。
+如果，你想在Vue组件中完全使用Strve.js，当然也可以。不过最后，推荐使用`export default`导出组件名。
 
 **About.vue**
 ```html
@@ -362,7 +362,7 @@ export default {
 ```
 
 ## 与React.js搭配
-`Strve.js`与[Vue.js]('https://v3.vuejs.org/')搭配相比，与[React.js]('https://reactjs.org/')搭配使用更为灵活。同样需要在组件第一次渲染完成后调用`Strve()`方法注册方法。
+Strve.js与[Vue.js]('https://v3.vuejs.org/')搭配相比，与[React.js]('https://reactjs.org/')搭配使用更为灵活。同样需要在组件第一次渲染完成后调用`Strve()`方法注册方法。
 
 **App.js**
 ```js

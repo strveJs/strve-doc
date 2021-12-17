@@ -5,9 +5,6 @@ module.exports = {
     head: [
         ['link', { rel: 'icon', href: '/logo.png' }],
     ],
-    markdown: {
-        lineNumbers: true
-    },
     locales: {
         '/': {
             lang: 'en-US',

@@ -2,7 +2,7 @@
 
 ## API
 
-`Strve.js` currently only has three APIs.
+Strve.js currently only has three APIs.
 
 - Strve
 - render
@@ -18,7 +18,7 @@ Is not it simple! Come and see what these three APIs mean? How to use them?
 
 - Detailed:
 
-Initialize `Strve.js`. The first parameter is the name of the node selector that needs to be mounted to the HTML page. The second parameter is passed in an object, the first attribute `data` means the state object, and the second attribute `template` means the template function.
+Initialize Strve.js. The first parameter is the name of the node selector that needs to be mounted to the HTML page. The second parameter is passed in an object, the first attribute `data` means the state object, and the second attribute `template` means the template function.
 
 ```js
 Strve('#app', {
@@ -77,11 +77,11 @@ function useChange() {
 
 ## Interpolation
 
-`Strve.js` uses JavaScript-based template string syntax, allowing developers to declaratively bind the DOM to the data of the underlying instance. All template strings of `Strve.js` are legal HTML, so they can be parsed by browsers and HTML parsers that follow the specification.
+Strve.js uses JavaScript-based template string syntax, allowing developers to declaratively bind the DOM to the data of the underlying instance. All template strings of Strve.js are legal HTML, so they can be parsed by browsers and HTML parsers that follow the specification.
 
-In the underlying implementation, `Strve.js` compiles the template string into a virtual DOM rendering function and minimizes the number of DOM operations.
+In the underlying implementation, Strve.js compiles the template string into a virtual DOM rendering function and minimizes the number of DOM operations.
 
-In `Strve.js`, you can use JavaScript template strings to your heart's content and feel its unique charm!
+In Strve.js, you can use JavaScript template strings to your heart's content and feel its unique charm!
 
 ### Text
 
@@ -265,7 +265,7 @@ function useClick() {
 }
 ```
 ## Pair with Vue.js
-`Strve.js` can be used not only alone, but also with [Vue.js]('https://v3.vuejs.org/'). You need to call the `Strve()` registration method after the Vue instance is mounted, and the first parameter already exists in the `template` tag.
+Strve.js can be used not only alone, but also with [Vue.js]('https://v3.vuejs.org/'). You need to call the `Strve()` registration method after the Vue instance is mounted, and the first parameter already exists in the `template` tag.
 
 **App.vue**
 ```html
@@ -330,7 +330,7 @@ export default {
 </script>
 
 ```
-If you want to fully use `Strve.js` in Vue components, of course you can. But in the end, it is recommended to use `export default` to export component names.
+If you want to fully use Strve.js in Vue components, of course you can. But in the end, it is recommended to use `export default` to export component names.
 
 **About.vue**
 ```html
@@ -361,7 +361,7 @@ export default {
 ```
 
 ## Pair with React.js
-Compared with the combination of `Strve.js` and [Vue.js]('https://v3.vuejs.org/'), it is better to use it with [React.js]('https://reactjs.org/') For flexibility. It is also necessary to call the `Strve()` method registration method after the first rendering of the component is completed.
+Compared with the combination of Strve.js and [Vue.js]('https://v3.vuejs.org/'), it is better to use it with [React.js]('https://reactjs.org/') For flexibility. It is also necessary to call the `Strve()` method registration method after the first rendering of the component is completed.
 
 **App.js**
 ```js
