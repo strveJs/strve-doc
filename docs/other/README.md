@@ -1,6 +1,6 @@
 # Other
 
-## IDE支持
+## IDE support
 
 ### Visual Studio Code 
 
