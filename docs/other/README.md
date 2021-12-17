@@ -1,5 +1,22 @@
 # Other
 
+## IDE支持
+
+### Visual Studio Code 
+
+- template string auto-completion tags
+
+Open Settings.json under Settings and add the following code:
+
+```json
+"emmet.triggerExpansionOnTab": true,
+"emmet.showAbbreviationSuggestions": true,
+"emmet.showExpandedAbbreviation": "always",
+"emmet.includeLanguages": {
+    "javascript": "html"
+}
+```
+
 ## About the author
 
 - Name:**Vam**
