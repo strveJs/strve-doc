@@ -9,7 +9,7 @@ features:
 - title: ⚡️ Fast
   details: Blazing Fast Virtual DOM.
 - title: 📦 Petty
-  details: The size of the source code file is only 4KB.
+  details: Source code file size takes up less space.
 - title: 🗂 Flexible
   details: Easy to flexibly disassemble and assemble different code blocks.
 footer: MIT Licensed | Copyright © 2021-present maomincoding
