@@ -3,8 +3,10 @@ home: true
 heroImage: /logo.png
 heroText: Strve.js
 tagline: A JS library that can convert strings into view
-actionText: Getting Started →
-actionLink: /started/
+actions:
+  - text: Getting Started →
+    link: /started/
+    type: primary
 features:
 - title: ⚡️ Fast
   details: Blazing Fast Virtual DOM.

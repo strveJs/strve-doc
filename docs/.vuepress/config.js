@@ -1,10 +1,26 @@
 module.exports = {
-    base: '/site/strvejs/', // /site/strvejs/|/strvejs-doc/
+    base: '/strvejs-doc/', // /site/strvejs/|/strvejs-doc/
     title: 'Strve.js',
     description: 'A JS library that can convert strings into view',
     head: [
         ['link', { rel: 'icon', href: '/logo.png' }],
     ],
+    plugins: [
+        [
+          '@vuepress/plugin-search',
+          {
+            locales: {
+              '/': {
+                placeholder: 'Search',
+              },
+              '/zh/': {
+                placeholder: '搜索',
+              },
+            },
+            maxSuggestions:8,
+          },
+        ],
+      ],
     locales: {
         '/': {
             lang: 'en-US',
@@ -18,71 +34,76 @@ module.exports = {
         }
     },
     themeConfig: {
+        contributors:false,
+        lastUpdated:false,
+        darkMode:true,
+        logo: '/logo.png',
         displayAllHeaders: true,
         sidebar: 'auto',
         sidebarDepth:4,
-        nav: [
+        navbar: [
             { text: 'GitHub', link: 'https://github.com/maomincoding/strve' }
         ],
         locales: {
             '/': {
-                selectText: 'Languages',
-                label: 'English',
-                ariaLabel: 'Languages',
+                selectLanguageText:'Languages',
+                selectLanguageName: 'English',
+                selectLanguageAriaLabel:'English',
                 sidebar: [
                     {
-                        title: 'Introduce',
-                        path: '/introduce/',
+                        text: 'Introduce',
+                        link: '/introduce/',
                     },
                     {
-                        title: 'Install',
-                        path: '/install/',
+                        text: 'Install',
+                        link: '/install/',
                     },
                     {
-                        title: 'Started',
-                        path: '/started/',
+                        text: 'Started',
+                        link: '/started/',
                     },
                     {
-                        title: 'Usage',
-                        path: '/usage/',
+                        text: 'Usage',
+                        link: '/usage/',
                     },
                     {
-                        title: 'Tool',
-                        path: '/tool/',
+                        text: 'Tool',
+                        link: '/tool/',
                     },
                     {
-                        title: 'Other',
-                        path: '/other/',
+                        text: 'Other',
+                        link: '/other/',
                     }
                 ],
             },
             '/zh/': {
-                selectText: '选择语言',
-                label: '简体中文',
+                selectLanguageText:'选择语言',
+                selectLanguageAriaLabel:'简体中文',
+                selectLanguageName: '简体中文',
                 sidebar: [
                     {
-                        title: '介绍',
-                        path: '/zh/introduce/',
+                        text: '介绍',
+                        link: '/zh/introduce/',
                     },
                     {
-                        title: '安装',
-                        path: '/zh/install/',
+                        text: '安装',
+                        link: '/zh/install/',
                     },
                     {
-                        title: '快速上手',
-                        path: '/zh/started/',
+                        text: '快速上手',
+                        link: '/zh/started/',
                     },
                     {
-                        title: '使用',
-                        path: '/zh/usage/',
+                        text: '使用',
+                        link: '/zh/usage/',
                     },
                     {
-                        title: '工具',
-                        path: '/zh/tool/',
+                        text: '工具',
+                        link: '/zh/tool/',
                     },
                     {
-                        title: '其它',
-                        path: '/zh/other/',
+                        text: '其它',
+                        link: '/zh/other/',
                     }
                 ],
             }
