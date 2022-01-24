@@ -1,15 +1,6 @@
 # 使用
 
 ## API
-
-Strve.js目前仅仅有三个API。
-
-- Strve
-- render
-- updateView
-
-是不是很简单！快来看看这三个API是什么意思？怎么使用它们？
-
 ### Strve
 
 - 参数：
@@ -28,7 +19,7 @@ Strve('#app', {
 ```
 ### render
 
-- 类型：`Function`
+- 类型：`function`
 - 详细：
 
 ` render`` ` 是一个标签函数，标签函数的语法是函数名后面直接带一个模板字符串，并从模板字符串中的插值表达式中获取参数。比如说，你可以在模板字符串中直接可以写HTML标签。
@@ -43,13 +34,27 @@ function App() {
 }
 ```
 
+如果你使用的是VSCode编辑器，你可以去商店里下载`comment-tagged-templates`插件，然后，在` render`` ` 中间加上`/*html*/` 。
+
+就像这样，它可以使HTML标签字符高亮显示。
+
+```js
+function App() {
+    return render/*html*/`
+        <div class='inner'>
+            <h1>Hello</h1>
+        </div >
+    `;
+}
+```
 ### updateView
 
 - 参数：
-    - `Function`
+    - `function`
+    - `string`(可选)
 - 详细：
   
-它仅仅有一个参数，这个参数是一个函数。函数体中需要执行将改变页面状态的值，例如以下示例中的`state.msg`。
+第一个参数是一个函数。函数体中需要执行将改变页面状态的值，例如以下示例中的`state.msg`。
 
 ```js
 const state = {
@@ -59,9 +64,8 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <button onclick=${useChange}>change</button>
+            <button onClick=${useChange}>change</button>
             <p>{state.msg}</p>
-        }
         </div >
     `;
 }
@@ -72,8 +76,80 @@ function useChange() {
     });
 }
 ```
+第二个参数是字符串类型，在当你使用列表渲染页面时，在列表头部插入数据需要绑定`useFkey`字段，以避免`DOM`节点重复渲染。
 
+```js
+const state = {
+    arr: [1, 2]
+};
 
+function Home() {
+    return render`
+        <div class='inner'>
+            <button onClick=${useUnshift}>unshift</button>
+            <ul>
+                ${state.arr.map((item) => render`<li>${item}</li>`)}
+            </ul>
+        </div>
+    `
+}
+
+function useUnshift() {
+    updateView(() => {
+        state.arr.unshift('2');
+    }, 'useFkey')
+}
+```
+
+### emitEvent
+
+- 参数：
+    - `string`
+    - `dictionary`
+    - `string`
+
+- 详细：
+
+自定义事件，一般是用于子组件数据传入父组件。第一个参数是表示 `event` 名字的字符串。
+第二个参数一个字典类型参数。
+- "detail"，可选的默认值是 null 的任意类型数据，是一个与 event 相关的值。
+- bubbles 一个布尔值，表示该事件能否冒泡。 来自 EventInit。注意：测试chrome默认为不冒泡。
+- cancelable 一个布尔值，表示该事件是否可以取消。
+
+第三个参数是一个字符串类型，主要是节点选择器的名称，这里的节点指的是子组件在父组件中外层包裹的DOM节点。
+
+例如：
+
+```js
+function Component1(v) {
+    return render`
+        <h1 onClick=${emitData}>${v}</h1>
+    `
+}
+
+function emitData() {
+    emitEvent('getTit', {
+        detail: { title: 'This is title!' },
+    }, '.component1')
+}
+
+function App() {
+    return render`
+        <div class='inner'>
+            <div onGetTit=${getTit} class="component1">
+            ${Component1(state.msg)}
+            </div>
+        </div >
+    `;
+}
+
+function getTit(event) {
+    updateView(() => {
+        console.log(event.detail.title);
+        state.msg = event.detail.title;
+    })
+}
+```
 
 ## 插值
 
@@ -111,7 +187,7 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <p>{state.msg}</p>
+            <p>{state.msg}world</p>
         </div >
     `;
 }
@@ -124,7 +200,6 @@ function App() {
     return render`
         <div class='inner'>
             <input type="text" value={state.msg}/>
-        }
         </div >
     `;
 }
@@ -134,7 +209,6 @@ function App() {
     return render`
         <div class='inner'>
             <input type="text" value=${state.msg}/>
-        }
         </div >
     `;
 }
@@ -142,7 +216,9 @@ function App() {
 
 ### 表达式
 
-目前仅支持在符号`${}`中使用表达式。例如，
+目前仅支持在符号`${}`中使用表达式。
+
+例如：
 
 ```js
 const state = {
@@ -153,8 +229,7 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <p>${String(state.a + state.b)}</p>
-        }
+            <p>${state.a + state.b}</p>
         </div >
     `;
 }
@@ -169,7 +244,6 @@ function App() {
     return render`
         <div class='inner'>
             <input type="text" value=${state.msg}/>
-        }
         </div >
     `;
 }
@@ -191,6 +265,25 @@ function App() {
 }
 ```
 
+如果你想绑定`style`属性，同样也可以。
+
+```js
+const state = {
+    msg: 'hello',
+    style: {
+        color: 'red',
+        fontSize: "40px"
+    }
+};
+function App() {
+    return render`
+        <div class='inner'>
+            <p style="${state.style}">{state.msg}</p>
+        </div >
+    `;
+}
+```
+
 ## 条件渲染
 
 我们也可以使用符号`${}`，这块内容只会在指令的表达式返回 `true` 值的时候被渲染。
@@ -203,7 +296,7 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <button onclick=${useShow}>show</button>
+            <button onClick=${useShow}>show</button>
             ${state.isShow ? render`<p>Strve.js</p>` : ''
         }
         </div >
@@ -229,9 +322,9 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <button onclick=${usePush}>push</button>
+            <button onClick=${usePush}>push</button>
             <ul>
-            ${state.arr.map((todo) => render`<li key=${todo}>${todo}</li>`)}
+            ${state.arr.map((todo) => render`<li>${todo}</li>`)}
             </ul>
         }
         </div >
@@ -246,15 +339,42 @@ function usePush() {
 
 ```
 
+上面我们提到`updateView()`可以传入第二个参数，它是字符串类型，在使用列表渲染页面时，如果在列表头部插入数据则需要绑定`useFkey`字段，以避免`DOM`节点重复渲染，这是必须要做的。任何在列表头部操作的动作，如`unshift`、`pop`数组方法都需要加上这个`useFkey`字段。其他操作则不需要这样，内部已经进行了优化。
+
+```js
+const state = {
+    arr: [1, 2]
+};
+
+function Home() {
+    return render`
+        <div class='inner'>
+            <button onClick=${useUnshift}>unshift</button>
+            <ul>
+                ${state.arr.map((item) => render`<li>${item}</li>`)}
+            </ul>
+        </div>
+    `
+}
+
+function useUnshift() {
+    updateView(() => {
+        state.arr.unshift('2');
+    }, 'useFkey')
+}
+```
+
 ## 事件处理
 
-我们可以使用原生`onclick`指令来监听 DOM 事件，并在触发事件时执行一些 JavaScript。需要使用符号`${}`来绑定事件。
+我们可以使用`on`指令来监听 DOM 事件，并在触发事件时执行一些 JavaScript。我们推荐使用这种`onClick`驼峰式命名方法，当然，直接使用`onclick`这种全小写方式也可以。
+
+需要使用符号`${}`来绑定事件。
 
 ```js
 function App() {
     return render`
         <div class='inner'>
-            <button onclick=${useClick}>sayHello</button>
+            <button onClick=${useClick}>sayHello</button>
         }
         </div >
     `;
@@ -314,7 +434,7 @@ import { render } from "strvejs";
 import styles from '../assets/hello/hello.module.css';
 
 export const hello = ()=>render`
-<h2 class="${styles.color}" onclick=${useCliimg}>hello</h2>
+<h2 class="${styles.color}" onClick=${useCliimg}>hello</h2>
 `
 function useCliimg(){
     console.log(1);
@@ -342,7 +462,7 @@ import styles from '../assets/about/about.module.css';
 export const about = ()=>render`
 <div>
     <p>{state.msg}</p>
-   <h2 class="${styles.color}" onclick=${useClick}>about</h2>
+   <h2 class="${styles.color}" onClick=${useClick}>about</h2>
 </div>
 `
 export const state = {
@@ -375,7 +495,7 @@ const state = {
 }
 
 function Home(){
-  return render`<h1 onclick=${useClick}>{state.msg}</h1>`
+  return render`<h1 onClick=${useClick}>{state.msg}</h1>`
 }
 
 function useClick(){

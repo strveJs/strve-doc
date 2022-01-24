@@ -1,15 +1,6 @@
 # Usage
 
 ## API
-
-Strve.js currently only has three APIs.
-
-- Strve
-- render
-- updateView
-
-Is not it simple! Come and see what these three APIs mean? How to use them?
-
 ### Strve
 
 - Parameter:
@@ -28,7 +19,7 @@ Strve('#app', {
 ```
 ### render
 
-- Type:`Function`
+- Type:`function`
 - Detailed:
 
 `render`` ` is a label function. The syntax of the label function is to directly follow the function name with a template string and get the parameters from the interpolation expression in the template string. For example, you can write HTML tags directly in the template string.
@@ -43,13 +34,27 @@ function App() {
 }
 ```
 
+If you are using the VSCode editor, you can go to the store and download the `comment-tagged-templates` plugin, then add `/*html*/` in the middle of `render` .
+
+Just like that, it can make HTML tag characters highlighted.
+
+```js
+function App() {
+    return render/*html*/`
+        <div class='inner'>
+            <h1>Hello</h1>
+        </div >
+    `;
+}
+```
 ### updateView
 
 - Parameter:
-    - `Function`
+    - `function`
+    - `string` (optional)
 - Detailed:
   
-It has only one parameter, and this parameter is a function. The function body needs to be executed to change the value of the page state, such as `state.msg` in the following example.
+The first parameter is a function. The function body needs to execute values that will change the state of the page, such as `state.msg` in the following example.
 
 ```js
 const state = {
@@ -59,9 +64,8 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <button onclick=${useChange}>change</button>
+            <button onClick=${useChange}>change</button>
             <p>{state.msg}</p>
-        }
         </div >
     `;
 }
@@ -72,9 +76,80 @@ function useChange() {
     });
 }
 ```
+The second parameter is a string type. When you use a list to render the page, inserting data at the head of the list needs to bind the `useFkey` field to avoid repeated rendering of the `DOM` node.
 
+```js
+const state = {
+    arr: [1, 2]
+};
 
+function Home() {
+    return render`
+        <div class='inner'>
+            <button onClick=${useUnshift}>unshift</button>
+            <ul>
+                ${state.arr.map((item) => render`<li>${item}</li>`)}
+            </ul>
+        </div>
+    `
+}
 
+function useUnshift() {
+    updateView(() => {
+        state.arr.unshift('2');
+    }, 'useFkey')
+}
+```
+
+### emitEvent
+
+- Parameter:
+    - `string`
+    - `dictionary`
+    - `string`
+
+- Details:
+
+Custom events are generally used to transfer data from child components to parent components. The first argument is a string representing the name of the `event`.
+The second parameter is a dictionary type parameter.
+- "detail", an optional default value of null for any type of data, an event-related value.
+- bubbles A boolean indicating whether the event can bubble. from EventInit. Note: Test chrome is not bubbling by default.
+- cancelable A boolean indicating whether the event can be canceled.
+
+The third parameter is a string type, mainly the name of the node selector, where the node refers to the DOM node wrapped by the child component in the parent component.
+
+For example:
+
+```js
+function Component1(v) {
+    return render`
+        <h1 onClick=${emitData}>${v}</h1>
+    `
+}
+
+function emitData() {
+    emitEvent('getTit', {
+        detail: { title: 'This is title!' },
+    }, '.component1')
+}
+
+function App() {
+    return render`
+        <div class='inner'>
+            <div onGetTit=${getTit} class="component1">
+            ${Component1(state.msg)}
+            </div>
+        </div >
+    `;
+}
+
+function getTit(event) {
+    updateView(() => {
+        console.log(event.detail.title);
+        state.msg = event.detail.title;
+    })
+}
+```
 ## Interpolation
 
 Strve.js uses JavaScript-based template string syntax, allowing developers to declaratively bind the DOM to the data of the underlying instance. All template strings of Strve.js are legal HTML, so they can be parsed by browsers and HTML parsers that follow the specification.
@@ -111,7 +186,7 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <p>{state.msg}</p>
+            <p>{state.msg}world</p>
         </div >
     `;
 }
@@ -124,7 +199,6 @@ function App() {
     return render`
         <div class='inner'>
             <input type="text" value={state.msg}/>
-        }
         </div >
     `;
 }
@@ -134,7 +208,6 @@ function App() {
     return render`
         <div class='inner'>
             <input type="text" value=${state.msg}/>
-        }
         </div >
     `;
 }
@@ -142,7 +215,9 @@ function App() {
 
 ### Expression
 
-Currently, only expressions in the symbol `${}` are supported. E.g,
+Currently, only expressions in the symbol `${}` are supported. 
+
+E.g:
 
 ```js
 const state = {
@@ -153,8 +228,7 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <p>${String(state.a + state.b)}</p>
-        }
+            <p>${state.a + state.b}</p>
         </div >
     `;
 }
@@ -169,7 +243,6 @@ function App() {
     return render`
         <div class='inner'>
             <input type="text" value=${state.msg}/>
-        }
         </div >
     `;
 }
@@ -190,7 +263,24 @@ function App() {
 `;
 }
 ```
+If you want to bind the `style` property, you can too.
 
+```js
+const state = {
+    msg: 'hello',
+    style: {
+        color: 'red',
+        fontSize: "40px"
+    }
+};
+function App() {
+    return render`
+        <div class='inner'>
+            <p style="${state.style}">{state.msg}</p>
+        </div >
+    `;
+}
+```
 ## Conditional rendering
 
 We can also use the symbol `${}`, this piece of content will only be rendered when the expression of the instruction returns a value of `true`.
@@ -203,9 +293,8 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <button onclick=${useShow}>show</button>
-            ${state.isShow ? render`<p>Strve.js</p>` : ''
-        }
+            <button onClick=${useShow}>show</button>
+            ${state.isShow ? render`<p>Strve.js</p>` : ''}
         </div >
     `;
 }
@@ -229,11 +318,10 @@ const state = {
 function App() {
     return render`
         <div class='inner'>
-            <button onclick=${usePush}>push</button>
+            <button onClick=${usePush}>push</button>
             <ul>
             ${state.arr.map((todo) => render`<li key=${todo}>${todo}</li>`)}
             </ul>
-        }
         </div >
     `;
 }
@@ -246,16 +334,42 @@ function usePush() {
 
 ```
 
+We mentioned above that `updateView()` can pass in the second parameter, which is a string type. When using a list to render a page, if you insert data at the head of the list, you need to bind the `useFkey` field to avoid `DOM `Nodes are rendered repeatedly, which is a must. Any actions that operate on the head of the list, such as `unshift`, `pop` array methods, need to add this `useFkey` field. This is not required for other operations and has been optimized internally.
+
+```js
+const state = {
+    arr: [1, 2]
+};
+
+function Home() {
+    return render`
+        <div class='inner'>
+            <button onClick=${useUnshift}>unshift</button>
+            <ul>
+                ${state.arr.map((item) => render`<li>${item}</li>`)}
+            </ul>
+        </div>
+    `
+}
+
+function useUnshift() {
+    updateView(() => {
+        state.arr.unshift('2');
+    }, 'useFkey')
+}
+```
+
 ## Event handling
 
-We can use the native `onclick` instruction to listen to DOM events and execute some JavaScript when the event is triggered. Need to use the symbol `${}` to bind events.
+We can use the `on` directive to listen to DOM events and execute some JavaScript when the event is fired. We recommend using this `onClick` camel case naming method, of course, you can also use `onclick` directly in all lowercase.
+
+You need to use the notation `${}` to bind events.
 
 ```js
 function App() {
     return render`
         <div class='inner'>
             <button onclick=${useClick}>sayHello</button>
-        }
         </div >
     `;
 }
@@ -313,7 +427,7 @@ import { render } from "strvejs";
 import styles from '../assets/hello/hello.module.css';
 
 export const hello = ()=>render`
-<h2 class="${styles.color}" onclick=${useCliimg}>hello</h2>
+<h2 class="${styles.color}" onClick=${useCliimg}>hello</h2>
 `
 function useCliimg(){
     console.log(1);
@@ -341,7 +455,7 @@ import styles from '../assets/about/about.module.css';
 export const about = ()=>render`
 <div>
     <p>{state.msg}</p>
-   <h2 class="${styles.color}" onclick=${useClick}>about</h2>
+   <h2 class="${styles.color}" onClick=${useClick}>about</h2>
 </div>
 `
 export const state = {
@@ -374,7 +488,7 @@ const state = {
 }
 
 function Home(){
-  return render`<h1 onclick=${useClick}>{state.msg}</h1>`
+  return render`<h1 onClick=${useClick}>{state.msg}</h1>`
 }
 
 function useClick(){

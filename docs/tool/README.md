@@ -104,7 +104,7 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
         function Home() {
             return render`
                 <div class='innter'>
-                    <button onclick="${goAbout}">goAbout</button>
+                    <button onClick="${goAbout}">goAbout</button>
                     <h1>Home</h1>
                 </div>
             `
@@ -113,8 +113,8 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
         function About() {
             return render`
                 <div class="innter">
-                    <button onclick="${goback}">goback</button>
-                    <button onclick="${goHome}">goHome</button>
+                    <button onClick="${goback}">goback</button>
+                    <button onClick="${goHome}">goHome</button>
                     <h2>About</h2>
                 </div>
             `
@@ -234,7 +234,7 @@ import strveRouter from '../router/index.js'
 function Home(){
     return render`
         <div>
-            <button onclick="${goAbout}">goAbout</button>
+            <button onClick="${goAbout}">goAbout</button>
             <h1>Home</h1>
         </div>
     `
@@ -253,8 +253,12 @@ function goAbout(){
 export default Home
 ```
 
-Finally, if you need to implement back and forward jump pages, several methods are also provided.
+If you need to implement back and forward jump pages, several methods are also provided.
 
 - `strveRouter.forward()`: Jump forward 1 page
 - `strveRouter.back()`: Jump backward 1 page
 - `strveRouter.go(n)`: Jump forward n pages
+
+In addition, if you perform the operation of routing parameters, you want to get the parameter object. The object information can be obtained by directly executing the `strveRouter.param2Obj()` method.
+
+Finally, we have pre-installed the project configuration for you, you can use Create Strve App to select the `strve-apps` template.

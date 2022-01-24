@@ -106,7 +106,7 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
         function Home() {
             return render`
                 <div class='innter'>
-                    <button onclick="${goAbout}">goAbout</button>
+                    <button onClick="${goAbout}">goAbout</button>
                     <h1>Home</h1>
                 </div>
             `
@@ -115,8 +115,8 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
         function About() {
             return render`
                 <div class="innter">
-                    <button onclick="${goback}">goback</button>
-                    <button onclick="${goHome}">goHome</button>
+                    <button onClick="${goback}">goback</button>
+                    <button onClick="${goHome}">goHome</button>
                     <h2>About</h2>
                 </div>
             `
@@ -236,7 +236,7 @@ import strveRouter from '../router/index.js'
 function Home(){
     return render`
         <div>
-            <button onclick="${goAbout}">goAbout</button>
+            <button onClick="${goAbout}">goAbout</button>
             <h1>Home</h1>
         </div>
     `
@@ -255,8 +255,13 @@ function goAbout(){
 export default Home
 ```
 
-最后，如果你需要实现后退、前进跳转页面这样操作时，同样提供了几个方法。
+如果你需要实现后退、前进跳转页面这样操作时，同样提供了几个方法。
 
 - `strveRouter.forward()`: 向前跳转1个页面
 - `strveRouter.back()`: 向后跳转1个页面
 - `strveRouter.go(n)`: 向前跳转n个页面
+
+另外，如果你执行了路由传参的操作，想获取参数对象。直接执行`strveRouter.param2Obj()`方法就可以获取对象信息。
+
+最后，我们已经给你预装了项目配置，你可以使用Create Strve App选择`strve-apps`模板即可。
+
