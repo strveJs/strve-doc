@@ -43,6 +43,10 @@ function App() {
 
 ## Change Log
 
+### v2.1.0
+
+- Fixed the problem that the DOM attribute property could not be assigned;
+- Improve the logical problem of converting strings to virtual DOM;
 ### v2.0.0
 
 - Inserting data into the head of the list needs to bind the `useFkey` field to avoid repeated rendering of the `DOM` node;
