@@ -43,6 +43,11 @@ function App() {
 
 ## Change Log
 
+### v2.2.0
+
+- Support SVG elements;
+- Optimize internal diff algorithm;
+- Add necessary error prompt;
 ### v2.1.0
 
 - Fixed the problem that the DOM attribute property could not be assigned;
