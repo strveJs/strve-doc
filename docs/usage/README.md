@@ -24,6 +24,8 @@ Strve('#app', {
 
 `render`` ` is a label function. The syntax of the label function is to directly follow the function name with a template string and get the parameters from the interpolation expression in the template string. For example, you can write HTML tags directly in the template string.
 
+However, it is important to note that each view template must have only one root node.
+
 ```js
 function App() {
     return render`
@@ -150,6 +152,12 @@ function getTit(event) {
     })
 }
 ```
+
+### strveVersion
+
+- Details:
+  
+No parameters, directly get the version number of Strve.js.
 ## Interpolation
 
 Strve.js uses JavaScript-based template string syntax, allowing developers to declaratively bind the DOM to the data of the underlying instance. All template strings of Strve.js are legal HTML, so they can be parsed by browsers and HTML parsers that follow the specification.

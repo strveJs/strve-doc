@@ -85,13 +85,13 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
     <div id="app"></div>
     <script type="module">
         import { Strve, render, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js';
-        import StrveRouter from 'https://cdn.jsdelivr.net/npm/strve-router/dist/strve-router.esm.js';
+        import { StrveRouter, routerHashUpdate, param2Obj, back, routerLink } from 'https://cdn.jsdelivr.net/npm/strve-router/dist/strve-router.esm.js';
 
         const state = {
             msg: 'Hello!'
         };
 
-        const strveRouter = new StrveRouter([{
+        const router = StrveRouter([{
             path: '/',
             template: Home
         }, {
@@ -99,8 +99,8 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
             template: About
         }]);
 
-        strveRouter.routerHashUpdate(updateView, () => {
-            console.log(strveRouter.param2Obj());
+        routerHashUpdate(updateView, () => {
+            console.log(param2Obj());
         });
 
         function Home() {
@@ -126,18 +126,18 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
             return render`
               <div class='inner'>
                 <p>{state.msg}</p>
-                ${strveRouter.routerView()}
+                ${router.routerView()}
               </div >
           `;
         }
 
         function goback() {
-            strveRouter.back();
+            back();
         }
 
         function goAbout() {
             console.log('goAbout');
-            strveRouter.routerLink({
+            routerLink({
                 path: '/about',
                 query: {
                     id: 1,
@@ -148,7 +148,7 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
 
         function goHome() {
             console.log('goHome');
-            strveRouter.routerLink('/');
+            routerLink('/');
         }
 
         Strve('#app', {
@@ -183,20 +183,20 @@ pnpm add strve-router
 
 ### 使用
 
-如果在一个模块化工程中使用它，可以引入StrveRouter对象，然后实例化。参数是需要注册的路由组件，`path`属性代表路径，`template`属性代表引入的组件。
+如果在一个项目工程中使用它，可以引入StrveRouter方法。参数是是一个数组对象，它是需要注册的路由组件，`path`属性代表组件的路径，`template`属性代表引入的组件。
 
-匹配到相应的路径页面会相应的更新，所以这里必须注册一个`routerHashUpdate()`方法，然后第一个参数传入`updateView`API，第二个参数则是一个自定义方法。最后导出strveRouter实例。
+匹配到相应的路径页面会相应的更新，所以这里必须注册一个`routerHashUpdate()`方法，然后第一个参数传入`updateView`API，第二个参数则是一个自定义方法。
 
 比如这里在一个router文件夹下创建一个`index.js`文件。
 
 ```js
-import StrveRouter from 'strve-router';
-import {updateView} from 'strvejs';
+import { updateView } from 'strvejs';
+import {StrveRouter,routerHashUpdate} from 'strve-router';
 
-import Home from '../template/homepage.js';
-import About from '../template/aboutpage.js';
+import Home from '../template/home';
+import About from '../template/about';
 
-const strveRouter = new StrveRouter([{
+const router = StrveRouter([{
     path: '/',
     template: Home
 }, {
@@ -204,37 +204,36 @@ const strveRouter = new StrveRouter([{
     template: About
 }]);
 
-strveRouter.routerHashUpdate(updateView,()=>{
-    console.log('router');
+routerHashUpdate(updateView,()=>{
+    console.log('router change');
 });
 
-export default strveRouter
+export default router
 ```
 
  路由匹配到的组件将渲染到`routerView()`方法所在的地方，一般会放在主页面入口文件下（例如`App.js`）。
 
 ```js
 import { render } from 'strvejs';
-import strveRouter from './router/index';
-function template() {
+import router from './router/index';
+
+export default function Template() {
   return render`
         <div class='inner'>
-        ${strveRouter.routerView()}
+          ${router.routerView()}
         </div>
     `;
 }
-
-export default template;
 ```
 
-如果需要跳转到对应页面，使用`strveRouter.routerLink()`方法，可以传对应的路径和需要传的参数，也可以直接传一个路径字符串。
+如果需要跳转到对应页面，使用`routerLink()`方法，可以传对应的路径和需要传的参数，也可以直接传一个路径字符串。
 
 ```js
-import { render } from 'strvejs'
-import strveRouter from '../router/index.js'
+import { render, updateView } from 'strvejs'
+import {routerLink} from 'strve-router'
 
-function Home(){
-    return render`
+export default function Home() {
+    return render/*html*/`
         <div>
             <button onClick="${goAbout}">goAbout</button>
             <h1>Home</h1>
@@ -242,8 +241,8 @@ function Home(){
     `
 }
 
-function goAbout(){
-    strveRouter.routerLink({
+function goAbout() {
+    routerLink({
         path: '/about',
         query: {
             id: 1,
@@ -251,17 +250,15 @@ function goAbout(){
         }
     });
 }
-
-export default Home
 ```
 
 如果你需要实现后退、前进跳转页面这样操作时，同样提供了几个方法。
 
-- `strveRouter.forward()`: 向前跳转1个页面
-- `strveRouter.back()`: 向后跳转1个页面
-- `strveRouter.go(n)`: 向前跳转n个页面
+- `forward()`: 向前跳转1个页面
+- `back()`: 向后跳转1个页面
+- `go(n)`: 向前跳转n个页面
 
-另外，如果你执行了路由传参的操作，想获取参数对象。直接执行`strveRouter.param2Obj()`方法就可以获取对象信息。
+另外，如果你执行了路由传参的操作，想获取参数对象。直接执行`param2Obj()`方法就可以获取对象信息。
 
 最后，我们已经给你预装了项目配置，你可以使用Create Strve App选择`strve-apps`模板即可。
 

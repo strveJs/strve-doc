@@ -83,13 +83,13 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
     <div id="app"></div>
     <script type="module">
         import { Strve, render, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js';
-        import StrveRouter from 'https://cdn.jsdelivr.net/npm/strve-router/dist/strve-router.esm.js';
+        import { StrveRouter, routerHashUpdate, param2Obj, back, routerLink } from 'https://cdn.jsdelivr.net/npm/strve-router/dist/strve-router.esm.js';
 
         const state = {
             msg: 'Hello!'
         };
 
-        const strveRouter = new StrveRouter([{
+        const router = StrveRouter([{
             path: '/',
             template: Home
         }, {
@@ -97,8 +97,8 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
             template: About
         }]);
 
-        strveRouter.routerHashUpdate(updateView, () => {
-            console.log(strveRouter.param2Obj());
+        routerHashUpdate(updateView, () => {
+            console.log(param2Obj());
         });
 
         function Home() {
@@ -124,18 +124,18 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
             return render`
               <div class='inner'>
                 <p>{state.msg}</p>
-                ${strveRouter.routerView()}
+                ${router.routerView()}
               </div >
           `;
         }
 
         function goback() {
-            strveRouter.back();
+            back();
         }
 
         function goAbout() {
             console.log('goAbout');
-            strveRouter.routerLink({
+            routerLink({
                 path: '/about',
                 query: {
                     id: 1,
@@ -146,7 +146,7 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
 
         function goHome() {
             console.log('goHome');
-            strveRouter.routerLink('/');
+            routerLink('/');
         }
 
         Strve('#app', {
@@ -181,20 +181,20 @@ pnpm add strve-router
 
 ### Use
 
-If you use it in a modular project, you can introduce the StrveRouter object and then instantiate it. The parameter is the routing component that needs to be registered, the `path` attribute represents the path, and the `template` attribute represents the imported component.
+If you use it in a project, you can introduce the StrveRouter method. The parameter is an array object, which is the routing component to be registered. The `path` property represents the path of the component, and the `template` property represents the imported component.
 
-The page that matches the corresponding path will be updated accordingly, so a `routerHashUpdate()` method must be registered here, and then the first parameter is passed to the `updateView` API, and the second parameter is a custom method. Finally, export the strveRouter instance.
+The page that matches the corresponding route will be updated accordingly, so a `routerHashUpdate()` method must be registered here, and then the first parameter is passed to the `updateView` API, and the second parameter is a custom method.
 
-For example, here is an `index.js` file created in a router folder.
+For example, create an `index.js` file in a router folder here.
 
 ```js
-import StrveRouter from 'strve-router';
-import {updateView} from 'strvejs';
+import { updateView } from 'strvejs';
+import {StrveRouter,routerHashUpdate} from 'strve-router';
 
-import Home from '../template/homepage.js';
-import About from '../template/aboutpage.js';
+import Home from '../template/home';
+import About from '../template/about';
 
-const strveRouter = new StrveRouter([{
+const router = StrveRouter([{
     path: '/',
     template: Home
 }, {
@@ -202,37 +202,36 @@ const strveRouter = new StrveRouter([{
     template: About
 }]);
 
-strveRouter.routerHashUpdate(updateView,()=>{
-    console.log('router');
+routerHashUpdate(updateView,()=>{
+    console.log('router change');
 });
 
-export default strveRouter
+export default router
 ```
 
 The components matched by the route will be rendered to the place where the `routerView()` method is located, usually under the main page entry file (for example, `App.js`).
 
 ```js
 import { render } from 'strvejs';
-import strveRouter from './router/index';
-function template() {
+import router from './router/index';
+
+export default function Template() {
   return render`
         <div class='inner'>
-        ${strveRouter.routerView()}
+          ${router.routerView()}
         </div>
     `;
 }
-
-export default template;
 ```
 
-If you need to jump to the corresponding page, use the `strveRouter.routerLink()` method to pass the corresponding path and the parameters that need to be passed, or you can pass a path string directly.
+If you need to jump to the corresponding page, use the `routerLink()` method, you can pass the corresponding path and parameters to be passed, or you can directly pass a path string.
 
 ```js
-import { render } from 'strvejs'
-import strveRouter from '../router/index.js'
+import { render, updateView } from 'strvejs'
+import {routerLink} from 'strve-router'
 
-function Home(){
-    return render`
+export default function Home() {
+    return render/*html*/`
         <div>
             <button onClick="${goAbout}">goAbout</button>
             <h1>Home</h1>
@@ -240,8 +239,8 @@ function Home(){
     `
 }
 
-function goAbout(){
-    strveRouter.routerLink({
+function goAbout() {
+    routerLink({
         path: '/about',
         query: {
             id: 1,
@@ -249,16 +248,14 @@ function goAbout(){
         }
     });
 }
-
-export default Home
 ```
 
 If you need to implement back and forward jump pages, several methods are also provided.
 
-- `strveRouter.forward()`: Jump forward 1 page
-- `strveRouter.back()`: Jump backward 1 page
-- `strveRouter.go(n)`: Jump forward n pages
+- `forward()`: Jump forward 1 page
+- `back()`: Jump backward 1 page
+- `go(n)`: Jump forward n pages
 
-In addition, if you perform the operation of routing parameters, you want to get the parameter object. The object information can be obtained by directly executing the `strveRouter.param2Obj()` method.
+In addition, if you perform the operation of routing parameters, you want to get the parameter object. The object information can be obtained by directly executing the `param2Obj()` method.
 
 Finally, we have pre-installed the project configuration for you, you can use Create Strve App to select the `strve-apps` template.

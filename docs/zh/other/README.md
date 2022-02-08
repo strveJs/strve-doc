@@ -42,8 +42,40 @@ function App() {
 [https://www.tailwindcss.cn/](https://www.tailwindcss.cn/)
 
 
+## 浏览器兼容性
+
+因为Strve.js项目构建工具默认采用[Vite](https://vitejs.dev/)来搭建的，所以默认的构建目标浏览器是能 在 script 标签上支持原生 ESM 和 原生 ESM 动态导入。传统浏览器可以通过官方插件`@vitejs/plugin-legacy`支持。
+
+例如：
+```js
+import { defineConfig } from 'vite';
+import legacy from '@vitejs/plugin-legacy'
+
+export default defineConfig({
+  // options
+  server: {
+    strictPort:true,
+    port: 3001
+  },
+  plugins: [
+    legacy({
+      targets: ['ie >= 9'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime']
+    })
+  ]
+});
+```
+
 ## 更新日志
 
+### v2.3.1
+
+- 修改部分错误提示；
+
+### v2.3.0
+
+- 加入版本号`strveVersion`API；
+- 修改`updateView`API内部逻辑；
 ### v2.2.0
 
 - 支持SVG元素；

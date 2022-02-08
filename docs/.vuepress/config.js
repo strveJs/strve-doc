@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/site/strvejs/', // /site/strvejs/|/strvejs-doc/
+    base: '/strvejs-doc/', // /site/strvejs/|/strvejs-doc/
     title: 'Strve.js',
     description: 'A JS library that can convert strings into view',
     head: [
@@ -90,7 +90,7 @@ module.exports = {
                         link: '/zh/install/',
                     },
                     {
-                        text: '快速上手',
+                        text: '开始',
                         link: '/zh/started/',
                     },
                     {
