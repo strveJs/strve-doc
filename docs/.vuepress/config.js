@@ -8,7 +8,7 @@ module.exports = {
     title: 'Strve.js',
     description: 'A JS library that can convert strings into view',
     head: [
-        ['link', { rel: 'icon', href: `logo.png` }],
+        ['link', { rel: 'icon', href: 'logo.png' }],
     ],
     plugins: [
         [
