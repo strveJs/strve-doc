@@ -1,9 +1,14 @@
+const url = {
+    a:'/strvejs-doc/',
+    b:'/site/strvejs/'
+};
+
 module.exports = {
-    base: '/strvejs-doc/', // /site/strvejs/|/strvejs-doc/
+    base: url.a,
     title: 'Strve.js',
     description: 'A JS library that can convert strings into view',
     head: [
-        ['link', { rel: 'icon', href: '/site/strvejs/logo.png' }],
+        ['link', { rel: 'icon', href: `logo.png` }],
     ],
     plugins: [
         [
