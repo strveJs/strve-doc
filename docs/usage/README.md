@@ -22,7 +22,7 @@ Strve('#app', {
 - Type:`function`
 - Detailed:
 
-`render`` ` is a label function. The syntax of the label function is to directly follow the function name with a template string and get the parameters from the interpolation expression in the template string. For example, you can write HTML tags directly in the template string.
+` render`` ` is a label function, the syntax of the label function is a template string directly after the function name. For example, you can write HTML tags directly in the template string.
 
 However, it is important to note that each view template must have only one root node.
 
@@ -158,7 +158,7 @@ function getTit(event) {
 - Details:
   
 No parameters, directly get the version number of Strve.js.
-## Interpolation
+## Data binding
 
 Strve.js uses JavaScript-based template string syntax, allowing developers to declaratively bind the DOM to the data of the underlying instance. All template strings of Strve.js are legal HTML, so they can be parsed by browsers and HTML parsers that follow the specification.
 
@@ -168,7 +168,7 @@ In Strve.js, you can use JavaScript template strings to your heart's content and
 
 ### Text
 
-The most common form of data binding is text interpolation using the symbol `${}`:
+The most common form of data binding is to use the notation `${}`:
 
 ```js
 const state = {
@@ -199,7 +199,7 @@ function App() {
     `;
 }
 ```
-However, the use of this symbol `{}` needs to be noted that it is only suitable for text interpolation within the label. For example, in the following situation, it does not work, but you can use the powerful symbol `${}`.
+However, the caveat with this notation `{}` is that it only applies to text within tags. For example, in the following cases, it does not work, but you can use the powerful notation `${}`.
 
 ```js
 // Bad
