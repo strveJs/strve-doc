@@ -19,17 +19,21 @@
 
 - 支持HTML模板字符串高亮显示
 
-下载**comment-tagged-templates**插件。在` render`` `方法中间加上`/* html */`。
+下载[es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html)插件后，在` render`` `方法中间加上`/*html*/`。
 
 ```js
 function App() {
-    return render/* html */`
+    return render/*html*/`
         <div class='inner'>
             <p>${state.msg}</p>
         </div >
     `;
 }
 ```
+
+就像这样，在VSCode编辑器中，这个插件可以使HTML模板字符高亮显示。
+
+![](../../.vuepress/public/img/code1.png)
 
 ## UI框架
 
@@ -67,7 +71,21 @@ export default defineConfig({
 ```
 
 ## 更新日志
+### v2.3.3
 
+- `Strve`API的参数调整；
+
+### v2.3.2
+
+- HTML标签内容支持显示非字符串类型；
+- 数据绑定统一使用`${}`符号绑定，不再支持`{}`符号；
+- 视图模板支持多个根节点；
+- 视图模板支持Text节点；
+- 修复条件渲染时切换状态，无法正确渲染节点；
+- 增加`watchDOMChange`API，用于监视DOM树变化；
+- 增加支持HTML模板字符串高亮显示（VSCode编辑器需安装 `es6-string-html` 插件）；
+- 删除`Strve`API的`data`属性参数；
+- 视图模板支持Class类写法；
 ### v2.3.1
 
 - 修改部分错误提示；

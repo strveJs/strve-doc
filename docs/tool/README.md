@@ -62,13 +62,15 @@ create-strve init <projectName>
 ## strve-router
 <a href="https://npmjs.com/package/strve-router"><img src="https://badgen.net/npm/v/strve-router" alt="npm package"></a>
 
-Strve Router is the official route manager of Strve.js. It is deeply integrated with the core of Strve.js, making it easy to build single-page applications.
+Strve Router is the official route manager for Strve.js. It is deeply integrated with the core of Strve.js, making it easy to build single-page applications.
 
-Currently only supports Hash mode.
+Currently only Hash mode is supported.
 
-### Start
+### Started
 
-The easiest way to try strve-router is to use the direct import CDN link. You can open it in your browser and follow the examples to learn some basic usage.
+The easiest way to try Strve Router is to use a direct import CDN link. You can open it in your browser and follow the example to learn some basic usage.
+
+If you use Strve Router directly in your local browser, you need to enable the local server. Please note that when the server is opened, the default trailing address is `/index.html`, please delete the `index.html` field, that is, change it to `/`.
 
 ```html
 <!DOCTYPE html>
@@ -82,7 +84,7 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
 <body>
     <div id="app"></div>
     <script type="module">
-        import { Strve, render, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js';
+        import { Strve, render, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs@2.3.3/dist/strve.esm.min.js';
         import { StrveRouter, routerHashUpdate, param2Obj, back, routerLink } from 'https://cdn.jsdelivr.net/npm/strve-router/dist/strve-router.esm.js';
 
         const state = {
@@ -103,29 +105,27 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
 
         function Home() {
             return render`
-                <div class='innter'>
-                    <button onClick="${goAbout}">goAbout</button>
-                    <h1>Home</h1>
-                </div>
+                <button onClick="${goAbout}">goAbout</button>
+                <h1>Home</h1>
             `
         }
 
         function About() {
             return render`
-                <div class="innter">
-                    <button onClick="${goback}">goback</button>
-                    <button onClick="${goHome}">goHome</button>
-                    <h2>About</h2>
-                </div>
+                <button onClick="${goback}">goback</button>
+                <button onClick="${goHome}">goHome</button>
+                <h2>About</h2>
             `
         }
 
         function App() {
             return render`
-              <div class='inner'>
-                <p>{state.msg}</p>
-                ${router.routerView()}
-              </div >
+                <div class="inner">
+                    <p>${state.msg}</p>
+                    <div>
+                        ${router.routerView()}
+                    </div>
+                </div>
           `;
         }
 
@@ -149,10 +149,7 @@ The easiest way to try strve-router is to use the direct import CDN link. You ca
             routerLink('/');
         }
 
-        Strve('#app', {
-            data: { state },
-            template: App
-        });
+        Strve('#app', App);
     </script>
 </body>
 
@@ -181,7 +178,7 @@ pnpm add strve-router
 
 ### Use
 
-If you use it in a project, you can introduce the StrveRouter method. The parameter is an array object, which is the routing component to be registered. The `path` property represents the path of the component, and the `template` property represents the imported component.
+If you use it in a project, you can introduce the `StrveRouter` method. The parameter is an array object, which is the routing component to be registered. The `path` property represents the path of the component, and the `template` property represents the imported component.
 
 The page that matches the corresponding route will be updated accordingly, so a `routerHashUpdate()` method must be registered here, and then the first parameter is passed to the `updateView` API, and the second parameter is a custom method.
 
@@ -209,7 +206,7 @@ routerHashUpdate(updateView,()=>{
 export default router
 ```
 
-The components matched by the route will be rendered to the place where the `routerView()` method is located, usually under the main page entry file (for example, `App.js`).
+The components matched by the route will be rendered to the place where the `routerView()` method is located, which is usually placed under the main page entry file (such as `App.js`).
 
 ```js
 import { render } from 'strvejs';
@@ -250,12 +247,13 @@ function goAbout() {
 }
 ```
 
-If you need to implement back and forward jump pages, several methods are also provided.
+There are also several methods provided if you need to perform operations such as backward and forward jumping pages.
 
-- `forward()`: Jump forward 1 page
-- `back()`: Jump backward 1 page
-- `go(n)`: Jump forward n pages
+- `forward()`: jump forward 1 page
+- `back()`: jump back 1 page
+- `go(n)`: jump forward n pages
 
-In addition, if you perform the operation of routing parameters, you want to get the parameter object. The object information can be obtained by directly executing the `param2Obj()` method.
+In addition, if you perform the operation of routing parameters, you want to get the parameter object. Object information can be obtained by directly executing the `param2Obj()` method.
 
 Finally, we have pre-installed the project configuration for you, you can use Create Strve App to select the `strve-apps` template.
+

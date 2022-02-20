@@ -72,6 +72,8 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
 
 尝试 Strve Router 最简单的方法是使用直接导入 CDN 链接。 您可以在浏览器中打开它并按照示例学习一些基本用法。
 
+如果在本地浏览器中直接使用Strve Router，则需要启用一下本地服务器。请注意，服务器打开时，默认尾部地址是`/index.html`，请删除`index.html`字段，即改成`/`。
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +86,7 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
 <body>
     <div id="app"></div>
     <script type="module">
-        import { Strve, render, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.js';
+        import { Strve, render, updateView } from 'https://cdn.jsdelivr.net/npm/strvejs@2.3.3/dist/strve.esm.min.js';
         import { StrveRouter, routerHashUpdate, param2Obj, back, routerLink } from 'https://cdn.jsdelivr.net/npm/strve-router/dist/strve-router.esm.js';
 
         const state = {
@@ -105,29 +107,27 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
 
         function Home() {
             return render`
-                <div class='innter'>
-                    <button onClick="${goAbout}">goAbout</button>
-                    <h1>Home</h1>
-                </div>
+                <button onClick="${goAbout}">goAbout</button>
+                <h1>Home</h1>
             `
         }
 
         function About() {
             return render`
-                <div class="innter">
-                    <button onClick="${goback}">goback</button>
-                    <button onClick="${goHome}">goHome</button>
-                    <h2>About</h2>
-                </div>
+                <button onClick="${goback}">goback</button>
+                <button onClick="${goHome}">goHome</button>
+                <h2>About</h2>
             `
         }
 
         function App() {
             return render`
-              <div class='inner'>
-                <p>{state.msg}</p>
-                ${router.routerView()}
-              </div >
+                <div class="inner">
+                    <p>${state.msg}</p>
+                    <div>
+                        ${router.routerView()}
+                    </div>
+                </div>
           `;
         }
 
@@ -151,10 +151,7 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
             routerLink('/');
         }
 
-        Strve('#app', {
-            data: { state },
-            template: App
-        });
+        Strve('#app', App);
     </script>
 </body>
 
@@ -183,7 +180,7 @@ pnpm add strve-router
 
 ### 使用
 
-如果在一个项目工程中使用它，可以引入StrveRouter方法。参数是是一个数组对象，它是需要注册的路由组件，`path`属性代表组件的路径，`template`属性代表引入的组件。
+如果在一个项目工程中使用它，可以引入`StrveRouter`方法。参数是是一个数组对象，它是需要注册的路由组件，`path`属性代表组件的路径，`template`属性代表引入的组件。
 
 匹配到相应的路径页面会相应的更新，所以这里必须注册一个`routerHashUpdate()`方法，然后第一个参数传入`updateView`API，第二个参数则是一个自定义方法。
 

@@ -6,7 +6,7 @@ If you use native ES Modules.
 
 ```html
 <script type="module">
-  import { Strve, render} from 'https://cdn.jsdelivr.net/npm/strvejs/dist/strve.esm.min.js';
+  import { Strve, render} from 'https://cdn.jsdelivr.net/npm/strvejs@2.3.3/dist/strve.esm.min.js';
 </script>
 ```
 ## NPM

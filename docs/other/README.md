@@ -19,7 +19,7 @@ Open `settings.json` under Settings and add the following code:
 
 - Support HTML template string highlighting
 
-Download the **comment-tagged-templates** plugin. Put `/* html */` in the middle of the ` render`` ` method.
+After downloading the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plugin, add `/*html*/ in the middle of the `render``` method `.
 
 ```js
 function App() {
@@ -30,6 +30,9 @@ function App() {
     `;
 }
 ```
+Just like that, in the VSCode editor, this plugin can make HTML template characters highlighted.
+
+![](./../.vuepress/public/img/code1.png)
 
 ## UI framework
 
@@ -66,6 +69,22 @@ export default defineConfig({
 ```
 
 ## Change Log
+
+### v2.3.3
+
+- Parameter adjustment of `Strve` API;
+
+### v2.3.2
+
+- HTML tag content supports displaying non-string types;
+- The `${}` symbol is used for data binding, and the `{}` symbol is no longer supported;
+- View templates support multiple root nodes;
+- View template supports Text node;
+- Fixed switching states during conditional rendering, and nodes could not be rendered correctly;
+- Added `watchDOMChange` API for monitoring DOM tree changes;
+- Added support for HTML template string highlighting (VSCode editor needs to install `es6-string-html` plugin);
+- Remove the `data` attribute parameter of the `Strve` API;
+- View templates support Class writing;
 
 ### v2.3.1
 

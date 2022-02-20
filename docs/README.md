@@ -11,11 +11,11 @@ actions:
     link: /introduce/
     type: secondary
 features:
-  - title: ⚡️ Fast
-    details: Blazing Fast Virtual DOM.
-  - title: 📦 Petty
-    details: Source code file size takes up less space.
-  - title: 🗂 Flexible
-    details: Easy to flexibly disassemble and assemble different code blocks.
+  - title: Approachable
+    details: Easier to get started
+  - title: Fast
+    details: Blazing Fast Virtual DOM
+  - title: Flexible
+    details: Flexible manipulation of code blocks
 footer: MIT Licensed | Copyright © 2021-present maomincoding
 ---
