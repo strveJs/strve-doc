@@ -46,14 +46,15 @@ module.exports = {
         displayAllHeaders: true,
         sidebar: 'auto',
         sidebarDepth:4,
-        navbar: [
-            { text: 'GitHub', link: 'https://github.com/maomincoding/strve' }
-        ],
         locales: {
             '/': {
                 selectLanguageText:'Languages',
                 selectLanguageName: 'English',
                 selectLanguageAriaLabel:'English',
+                navbar: [
+                    { text: 'GitHub', link: 'https://github.com/maomincoding/strve' },
+                    { text: 'Change log', link: '/changeLog/' },
+                ],
                 sidebar: [
                     {
                         text: 'Introduce',
@@ -85,6 +86,10 @@ module.exports = {
                 selectLanguageText:'选择语言',
                 selectLanguageAriaLabel:'简体中文',
                 selectLanguageName: '简体中文',
+                navbar: [
+                    { text: 'GitHub', link: 'https://github.com/maomincoding/strve' },
+                    { text: '更改日志', link: '/zh/changeLog/' },
+                ],
                 sidebar: [
                     {
                         text: '介绍',

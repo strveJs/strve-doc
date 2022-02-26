@@ -23,7 +23,7 @@ If you want to learn more about Strve.js in depth, you can read on.
             updateView,
             render,
             emitEvent
-        } from "https://cdn.jsdelivr.net/npm/strvejs@2.3.3/dist/strve.esm.min.js";
+        } from "https://cdn.jsdelivr.net/npm/strvejs@2.3.4/dist/strve.esm.min.js";
         const state = {
             arr: [
                 {
