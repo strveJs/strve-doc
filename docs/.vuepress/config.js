@@ -88,7 +88,7 @@ module.exports = {
                 selectLanguageName: '简体中文',
                 navbar: [
                     { text: 'GitHub', link: 'https://github.com/maomincoding/strve' },
-                    { text: '更改日志', link: '/zh/changeLog/' },
+                    { text: '更新日志', link: '/zh/changeLog/' },
                 ],
                 sidebar: [
                     {

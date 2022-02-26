@@ -70,8 +70,6 @@ Currently only Hash mode is supported.
 
 The easiest way to try Strve Router is to use a direct import CDN link. You can open it in your browser and follow the example to learn some basic usage.
 
-If you use Strve Router directly in your local browser, you need to enable the local server. Please note that when the server is opened, the default trailing address is `/index.html`, please delete the `index.html` field, that is, change it to `/`.
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -244,6 +242,44 @@ function goAbout() {
             name: "maomin"
         }
     });
+}
+```
+In addition, it should be noted that when using the `routerLink()` method to switch pages, the caching mechanism is enabled by default. For example, if you modify a value in the state object under page A, then switch to page B, and then return to page A, page A displays the value you modified.
+
+If you don't want to use this caching mechanism, you can pass a second parameter to the `routerLink()` method, which is a callback function. When leaving the page, use the `deepCloneData()` method in the callback function to initialize the modified data.
+
+```js
+function About() {
+
+    const sourceData = {
+        msg: 'About'
+    }
+
+    let state = deepCloneData(sourceData);
+
+    function template() {
+        console.log('About page display');
+        return render/*html*/`
+            <button onClick=${goHome}>go Home</button>
+            <button onClick=${useChange}>Change</button>
+            <p>${state.msg}</p>
+    `
+    }
+
+    function useChange() {
+        updateView(() => {
+            state.msg = 'Hello';
+        })
+    }
+
+    function goHome() {
+        routerLink('/', () => {
+            state = deepCloneData(sourceData);// Data initialization
+            console.log('leave the About page');
+        });
+    }
+
+    return { template }
 }
 ```
 

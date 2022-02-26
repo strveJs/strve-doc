@@ -22,7 +22,7 @@ Strve('#app', App);
 ```
 ### render
 
-- type：`function`
+- parameter：`function`
 - detailed：
 
 ` render`` ` is a label function, the syntax of the label function is a template string directly after the function name. For example, you can write HTML tags directly in the template string.
@@ -181,7 +181,42 @@ const domChange = watchDOMChange('.watch-dom', config, (v) => console.log(v, 'ch
 domChange.start();
 domChange.stop();
 ```
+### deepCloneData
 
+- parameter：
+    - `object`
+
+- detailed：
+
+Creates a new object to accept the object value to be recopied or referenced.
+
+The original object is completely copied from the memory to the new object, and a new space is opened up from the heap memory to store the new object, and the modification of the new object will not change the original object, and the two achieve real separation.
+
+```js
+function App() {
+
+    const sourceData = {
+        msg: 'App'
+    }
+
+    let state = deepCloneData(sourceData);
+
+    function template() {
+        return render`
+            <button onClick=${useChange}>Change</button>
+            <p>${state.msg}</p>
+    `
+    }
+
+    function useChange() {
+        updateView(() => {
+            state.msg = 'Hello';
+        })
+    }
+
+    return { template }
+}
+```
 ## Data binding
 
 Strve.js uses a JavaScript-based template string syntax that allows developers to declaratively bind the DOM to the underlying instance data. All Strve.js template strings are valid HTML, so can be parsed by spec-compliant browsers and HTML parsers.

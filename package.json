@@ -1,6 +1,6 @@
 {
   "name": "strvejsdoc",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Strve.js document address",
   "main": "index.js",
   "repository": "https://github.com/maomincoding/strvejs-doc.git",

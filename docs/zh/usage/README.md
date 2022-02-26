@@ -22,7 +22,7 @@ Strve('#app', App);
 ```
 ### render
 
-- 类型：`function`
+- 参数：`function`
 - 详细：
 
 ` render`` ` 是一个标签函数，标签函数的语法是函数名后面直接带一个模板字符串。比如说，你可以在模板字符串中直接可以写HTML标签。
@@ -180,6 +180,42 @@ const domChange = watchDOMChange('.watch-dom', config, (v) => console.log(v, 'ch
 
 domChange.start();
 domChange.stop();
+```
+### deepCloneData
+
+- 参数：
+    - `object`
+
+- 详细：
+
+创建一个新的对象，来接受要重新复制或引用的对象值。
+
+将原对象从内存中完整地拷贝出来一份给新对象，并从堆内存中开辟一个全新的空间存放新对象，且新对象的修改并不会改变原对象，二者实现真正的分离。
+
+```js
+function App() {
+
+    const sourceData = {
+        msg: 'App'
+    }
+
+    let state = deepCloneData(sourceData);
+
+    function template() {
+        return render`
+            <button onClick=${useChange}>Change</button>
+            <p>${state.msg}</p>
+    `
+    }
+
+    function useChange() {
+        updateView(() => {
+            state.msg = 'Hello';
+        })
+    }
+
+    return { template }
+}
 ```
 
 ## 数据绑定

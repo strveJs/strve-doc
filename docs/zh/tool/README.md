@@ -72,8 +72,6 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
 
 尝试 Strve Router 最简单的方法是使用直接导入 CDN 链接。 您可以在浏览器中打开它并按照示例学习一些基本用法。
 
-如果在本地浏览器中直接使用Strve Router，则需要启用一下本地服务器。请注意，服务器打开时，默认尾部地址是`/index.html`，请删除`index.html`字段，即改成`/`。
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -246,6 +244,45 @@ function goAbout() {
             name: "maomin"
         }
     });
+}
+```
+
+另外，需要注意的是，使用`routerLink()`方法切换页面时，默认会启用缓存机制。比如你在A页面下修改了状态对象中某个值，然后切换到B页面，这时又返回A页面，A页面显示的是你修改后的值。
+
+如果你不想使用这种缓存机制，可以在`routerLink()`方法中传入第二个参数，这个参数是一个回调函数。在离开页面时，在回调函数中使用`deepCloneData()`方法将修改后的数据初始化。
+
+```js
+function About() {
+
+    const sourceData = {
+        msg: 'About'
+    }
+
+    let state = deepCloneData(sourceData);
+
+    function template() {
+        console.log('About页显示');
+        return render/*html*/`
+            <button onClick=${goHome}>go Home</button>
+            <button onClick=${useChange}>Change</button>
+            <p>${state.msg}</p>
+    `
+    }
+
+    function useChange() {
+        updateView(() => {
+            state.msg = 'Hello';
+        })
+    }
+
+    function goHome() {
+        routerLink('/', () => {
+            state = deepCloneData(sourceData);// 数据初始化
+            console.log('离开About页');
+        });
+    }
+
+    return { template }
 }
 ```
 
