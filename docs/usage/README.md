@@ -530,7 +530,7 @@ function App() {
         <h2>txt1</h2>
         <div>
             <p>txt2</p>
-            <component $name="Component1">
+            <component $name=${Component1.name}>
                 ${Component1()}
             </component>
         </div>
@@ -595,7 +595,7 @@ function Component1() {
 
 function App() {
 	return h`
-        <component $name="Component1">
+        <component $name=${Component1.name}>
             ${Component1()}
         </component>
         `;
@@ -628,7 +628,7 @@ function Component1() {
 
 function App() {
 	return h`
-        <component $name="Component1">
+        <component $name=${Component1.name}>
             ${Component1()}
         </component>
         `;
