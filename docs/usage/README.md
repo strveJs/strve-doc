@@ -1,11 +1,13 @@
 # Usage
 
 ## API
+
 ### Strve
 
 - parameter：
-    - `string`
-    - `function`
+
+  - `string`
+  - `function`
 
 - detailed：
 
@@ -13,13 +15,14 @@ Initialize Strve.js. The first parameter passes in the name of the node selector
 
 ```js
 function App() {
-    return render`
+	return render`
         <h1>Hello</h1>
-    `
+    `;
 }
 
 Strve('#app', App);
 ```
+
 ### render
 
 - parameter：`function`
@@ -29,7 +32,7 @@ Strve('#app', App);
 
 ```js
 function App() {
-    return render`
+	return render`
         <div class='inner'>
             <h1>Hello</h1>
         </div >
@@ -37,7 +40,7 @@ function App() {
 }
 ```
 
-If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plugin, then, in Add `/*html*/` in the middle of `render`` `.
+If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plugin, then, in Add `/*html*/` in the middle of ` render``  `.
 
 Just like that, in the VSCode editor, this plugin can make HTML template characters highlighted.
 
@@ -46,19 +49,19 @@ Just like that, in the VSCode editor, this plugin can make HTML template charact
 ### updateView
 
 - parameter：
-    - `function`
-    - `string`(optional)
+  - `function`
+  - `string`(optional)
 - detailed：
-  
+
 The first parameter is a function. The function body needs to execute values that will change the state of the page, such as `state.msg` in the following example.
 
 ```js
 const state = {
-    msg:'1'
+	msg: '1',
 };
 
 function App() {
-    return render`
+	return render`
         <div class='inner'>
             <button onClick=${useChange}>change</button>
             <p>${state.msg}</p>
@@ -67,47 +70,50 @@ function App() {
 }
 
 function useChange() {
-    updateView(() => {
-        state.msg = '2';
-    });
+	updateView(() => {
+		state.msg = '2';
+	});
 }
 ```
+
 The second parameter is a string type. When you use a list to render the page, inserting data at the head of the list needs to bind the `useFkey` field to avoid repeated rendering of the `DOM` node.
 
 ```js
 const state = {
-    arr: [1, 2]
+	arr: [1, 2],
 };
 
 function Home() {
-    return render`
+	return render`
         <div class='inner'>
             <button onClick=${useUnshift}>unshift</button>
             <ul>
                 ${state.arr.map((item) => render`<li>${item}</li>`)}
             </ul>
         </div>
-    `
+    `;
 }
 
 function useUnshift() {
-    updateView(() => {
-        state.arr.unshift('2');
-    }, 'useFkey')
+	updateView(() => {
+		state.arr.unshift('2');
+	}, 'useFkey');
 }
 ```
 
 ### emitEvent
 
 - parameter：
-    - `string`
-    - `dictionary`
-    - `string`
+
+  - `string`
+  - `dictionary`
+  - `string`
 
 - detailed：
 
 Custom events are generally used to transfer data from child components to parent components. The first argument is a string representing the name of the `event`.
 The second parameter is a dictionary type parameter.
+
 - "detail": The optional default value is `null` for any type of data, which is a value associated with `event`.
 - "bubbles": A boolean value indicating whether the event can bubble. from `EventInit`. Note: Test chrome is not bubbling by default.
 - "cancelable": A boolean value indicating whether the event can be canceled.
@@ -118,19 +124,23 @@ E.g:
 
 ```js
 function Component1(v) {
-    return render`
+	return render`
         <h1 onClick=${emitData}>${v}</h1>
-    `
+    `;
 }
 
 function emitData() {
-    emitEvent('getTit', {
-        detail: { title: 'This is title!' },
-    }, '.component1')
+	emitEvent(
+		'getTit',
+		{
+			detail: { title: 'This is title!' },
+		},
+		'.component1'
+	);
 }
 
 function App() {
-    return render`
+	return render`
         <div class='inner'>
             <div onGetTit=${getTit} class="component1">
             ${Component1(state.msg)}
@@ -140,25 +150,26 @@ function App() {
 }
 
 function getTit(event) {
-    updateView(() => {
-        console.log(event.detail.title);
-        state.msg = event.detail.title;
-    })
+	updateView(() => {
+		console.log(event.detail.title);
+		state.msg = event.detail.title;
+	});
 }
 ```
 
 ### strveVersion
 
 - detailed：
-  
+
 No parameters, directly get the version number of Strve.js.
 
 ### watchDOMChange
 
 - parameter：
-    - `string`
-    - `object`
-    - `function`
+
+  - `string`
+  - `object`
+  - `function`
 
 - detailed：
 
@@ -168,23 +179,27 @@ In addition, two methods are provided, namely the start monitoring method `start
 
 ```js
 const config = {
-    attributes: true, 
-    childList: true, 
-    subtree: true, 
-    childList: true, 
-    characterDataOldValue: true, 
-    characterData: true
-}
+	attributes: true,
+	childList: true,
+	subtree: true,
+	childList: true,
+	characterDataOldValue: true,
+	characterData: true,
+};
 
-const domChange = watchDOMChange('.watch-dom', config, (v) => console.log(v, 'changed'));
+const domChange = watchDOMChange('.watch-dom', config, (v) =>
+	console.log(v, 'changed')
+);
 
 domChange.start();
 domChange.stop();
 ```
+
 ### deepCloneData
 
 - parameter：
-    - `object`
+
+  - `object`
 
 - detailed：
 
@@ -194,29 +209,29 @@ The original object is completely copied from the memory to the new object, and 
 
 ```js
 function App() {
+	const sourceData = {
+		msg: 'App',
+	};
 
-    const sourceData = {
-        msg: 'App'
-    }
+	let state = deepCloneData(sourceData);
 
-    let state = deepCloneData(sourceData);
-
-    function template() {
-        return render`
+	function template() {
+		return render`
             <button onClick=${useChange}>Change</button>
             <p>${state.msg}</p>
-    `
-    }
+    `;
+	}
 
-    function useChange() {
-        updateView(() => {
-            state.msg = 'Hello';
-        })
-    }
+	function useChange() {
+		updateView(() => {
+			state.msg = 'Hello';
+		});
+	}
 
-    return { template }
+	return { template };
 }
 ```
+
 ## Data binding
 
 Strve.js uses a JavaScript-based template string syntax that allows developers to declaratively bind the DOM to the underlying instance data. All Strve.js template strings are valid HTML, so can be parsed by spec-compliant browsers and HTML parsers.
@@ -231,15 +246,16 @@ The form of text binding in data binding is to use the notation `${}`.
 
 ```js
 const state = {
-    msg: 'hello'
+	msg: 'hello',
 };
 
 function App() {
-    return render`
+	return render`
         <h1>${state.msg}</h1>
     `;
 }
 ```
+
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="podPpXZ" data-preview="true" data-editable="true" data-user="maomincoding" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/maomincoding/pen/podPpXZ">
   Strve.js-数据绑定(文本)</a> by Vam (<a href="https://codepen.io/maomincoding">@maomincoding</a>)
@@ -253,16 +269,17 @@ Use expressions in the notation `${}`.
 
 ```js
 const state = {
-    a: 1,
-    b: 2
+	a: 1,
+	b: 2,
 };
 
 function App() {
-    return render`
+	return render`
         <h1>${state.a + state.b}</h1>
     `;
 }
 ```
+
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="MWOmMRJ" data-preview="true" data-editable="true" data-user="maomincoding" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/maomincoding/pen/MWOmMRJ">
   Strve.js-数据绑定(表达式)</a> by Vam (<a href="https://codepen.io/maomincoding">@maomincoding</a>)
@@ -276,11 +293,11 @@ Use the notation `${}` to bind a value to the property `value`.
 
 ```js
 const state = {
-  msg:'Hello'
+	msg: 'Hello',
 };
 
 function App() {
-    return render`
+	return render`
         <input type="text" value=${state.msg}/>
     `;
 }
@@ -297,12 +314,12 @@ In addition, you can also bind other properties, such as `class`.
 
 ```js
 const state = {
-   isRed: true,
-   msg:'Hello'
+	isRed: true,
+	msg: 'Hello',
 };
 
 function App() {
-    return render`
+	return render`
         <h1 class=${state.isRed ? 'red' : ''}>${state.msg}</h1>
 `;
 }
@@ -319,14 +336,14 @@ If you want to bind the `style` property, you can too.
 
 ```js
 const state = {
-    msg: 'Hello',
-    style: {
-        color: 'red',
-        fontSize: "40px"
-    }
+	msg: 'Hello',
+	style: {
+		color: 'red',
+		fontSize: '40px',
+	},
 };
 function App() {
-    return render`
+	return render`
         <p style="${state.style}">${state.msg}</p>
     `;
 }
@@ -345,20 +362,20 @@ Using the notation `${}`, the block will only be rendered if the directive's exp
 
 ```js
 const state = {
-    isShow: false
+	isShow: false,
 };
 
 function App() {
-    return render`
+	return render`
         <button onClick=${useShow}>show</button>
         ${state.isShow ? render`<p>Strve.js</p>` : ''}
     `;
 }
 
 function useShow() {
-    updateView(() => {
-        state.isShow = !state.isShow;
-    });
+	updateView(() => {
+		state.isShow = !state.isShow;
+	});
 }
 ```
 
@@ -375,11 +392,11 @@ We can render a list based on an array using the notation `${}`. For example, we
 
 ```js
 const state = {
-    arr: [1, 2]
+	arr: [1, 2],
 };
 
 function App() {
-    return render`
+	return render`
         <button onClick=${usePush}>push</button>
         <ul>
           ${state.arr.map((todo) => render`<li>${todo}</li>`)}
@@ -388,11 +405,10 @@ function App() {
 }
 
 function usePush() {
-    updateView(() => {
-        state.arr.push(3);
-    });
+	updateView(() => {
+		state.arr.push(3);
+	});
 }
-
 ```
 
 <p class="codepen" data-height="300" data-theme-id="dark" data-default-tab="html,result" data-slug-hash="NWwYWYp" data-preview="true" data-editable="true" data-user="maomincoding" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
@@ -406,22 +422,22 @@ We mentioned above that `updateView()` can pass in the second parameter, which i
 
 ```js
 const state = {
-    arr: [1, 2]
+	arr: [1, 2],
 };
 
 function Home() {
-    return render`
+	return render`
             <button onClick=${useUnshift}>unshift</button>
             <ul>
                 ${state.arr.map((item) => render`<li>${item}</li>`)}
             </ul>
-    `
+    `;
 }
 
 function useUnshift() {
-    updateView(() => {
-        state.arr.unshift(2);
-    }, 'useFkey')
+	updateView(() => {
+		state.arr.unshift(2);
+	}, 'useFkey');
 }
 ```
 
@@ -433,13 +449,13 @@ Also, you need to use the notation `${}` to bind events.
 
 ```js
 function App() {
-    return render`
+	return render`
         <button onClick=${useClick}>${state.msg}</button>
     `;
 }
 
 function useClick() {
-    alert('hello');
+	alert('hello');
 }
 ```
 
@@ -449,128 +465,3 @@ function useClick() {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <component :is="'script'" async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></component>
-
-## Paired with Vue.js
-Strve.js can be used not only alone, but also with [Vue.js]('https://v3.vuejs.org/'). You need to call the `Strve()` registration method after the Vue instance is mounted, and the first parameter already exists in the `template` tag.
-
-**App.vue**
-```html
-<template>
-  <div id="container">
-    <HelloWorld/>
-  </div>
-</template>
-
-<script>
-import HelloWorld ,{ hello } from './components/HelloWorld.vue';
-import { about } from './components/About.vue';
-import { render, Strve } from "strvejs";
-const AppTm = () => render`
-      <div>
-        ${hello()}
-        ${about()}
-      </div>
-`;
-export default {
-  name: "App",
-  components:{
-    HelloWorld
-  },
-  mounted() {
-    Strve("#container", AppTm);
-  },
-};
-</script>
-```
-If you need to share a method with Vue, it is recommended to use it in the `setup` method.
-
-**HelloWorld.vue**
-```html
-<template>
-  <div>
-    <img src="../assets/logo.png" alt="" @click="useCliimg">
-  </div>
-</template>
-<script>
-import { render } from "strvejs";
-import styles from '../assets/hello/hello.module.css';
-
-export const hello = ()=>render`
-    <h2 class="${styles.color}" onClick=${useCliimg}>hello</h2>
-`
-function useCliimg(){
-    console.log('hello');
-}
-
-export default {
-  name:'HelloWorld',
-  setup(){
-    return {
-      useCliimg
-    }
-  }
-}
-</script>
-
-```
-If you want to use Strve.js entirely in your Vue components, of course you can. But in the end, it is recommended to use `export default` to export the component name.
-
-**About.vue**
-```html
-<script>
-import { render, updateView } from "strvejs";
-import styles from '../assets/about/about.module.css';
-
-const state = {
-    msg:"hello"
-}
-
-export const about = ()=>render`
-   <p>${state.msg}</p>
-   <h2 class="${styles.color}" onClick=${useClick}>about</h2>
-`
-
-function useClick() {
-    updateView(()=>{
-        state.msg = 'world';
-    })
-}
-export default {
-    name:"About"
-}
-</script>
-
-```
-
-## Paired with React.js
-Strve.js is more flexible to use with [React.js]('https://reactjs.org/') than [Vue.js]('https://v3.vuejs.org/') . It is also necessary to call the `Strve()` method registration method after the first rendering of the component is completed.
-
-**App.js**
-```js
-import {useEffect} from 'react'
-import {Strve,render,updateView} from 'strvejs';
-import './App.css';
-
-const state = {
-  msg:"Hello"
-}
-
-function Home(){
-  return render`<h1 onClick=${useClick}>${state.msg}</h1>`
-}
-
-function useClick(){
-  updateView(()=>{
-    state.msg = "World";
-  })
-}
-
-function App() {
-  useEffect(()=>{
-    Strve(".App", Home)
-  })
-  return (<div className="App"></div>);
-}
-
-export default App;
-```
