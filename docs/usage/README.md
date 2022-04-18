@@ -58,7 +58,7 @@ If you are using the VSCode editor, you can go to the store to download the [es6
 
 Just like that, in the VSCode editor, this plugin can make HTML template characters highlighted.
 
-![](../../.vuepress/public/img/code1.png)
+![](./../img/code1.png)
 
 ### setData
 

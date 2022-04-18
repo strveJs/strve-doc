@@ -35,7 +35,7 @@ function App() {
 
 就像这样，在 VSCode 编辑器中，这个插件可以使 HTML 模板字符高亮显示。
 
-![](../../.vuepress/public/img/code1.png)
+![](./../../img/code1.png)
 
 - 普通字符串转换为模板字符串
 

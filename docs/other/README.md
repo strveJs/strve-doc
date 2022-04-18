@@ -35,7 +35,7 @@ function App() {
 
 Just like that, in the VSCode editor, this plugin can make HTML template characters highlighted.
 
-![](./../.vuepress/public/img/code1.png)
+![](./../img/code1.png)
 
 - Convert normal strings to template strings
 
