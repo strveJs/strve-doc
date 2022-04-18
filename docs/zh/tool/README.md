@@ -206,45 +206,7 @@ pnpm add strve-router
 
 #### initRouter()
 
-第一个参数是是一个数组对象，它是需要注册的路由组件，`path`属性表示组件的路径，`template`属性是一个数组，第一项则是引入的组件，第二项则是渲染的组件函数名称。
-
-组件可以是 Class 类 定义，也可以是构造函数定义。
-
-**Class 类**
-
-```js
-class About {
-	goHome = () => {
-		linkTo({
-			path: '/',
-		});
-	};
-
-	render = () => {
-		return h/*html*/ `
-            <button onClick="${this.goHome}">goHome</button>
-    `;
-	};
-}
-```
-
-**构造函数**
-
-```js
-function About() {
-	function goHome() {
-		linkTo('/');
-	}
-
-	function render() {
-		return h/*html*/ ` <button onClick="${goHome}">goHome</button>`;
-	}
-
-	return {
-		render,
-	};
-}
-```
+第一个参数是是一个数组对象，它是需要注册的路由组件，`path`属性表示组件的路径，`template`属性是一个数组，第一项则是引入的组件（符合[组件模式](/strvejs-doc/zh/usage/#组件模式)），第二项则是渲染的组件函数名称，如下面的`render`。
 
 第二个参数需要传入`setData`API，匹配到相应的路径页面会相应的更新。比如这里在一个 router 文件夹下创建一个`index.js`文件。
 

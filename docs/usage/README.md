@@ -2,58 +2,74 @@
 
 ## API
 
-### Strve
+### createApp
 
-- parameter：
+- Parameters:
 
-  - `string`
-  - `function`
+  - `Function`
 
-- detailed：
+- Details:
 
-Initialize Strve.js. The first parameter passes in the name of the node selector that needs to be mounted on the HTML page. The second parameter passes in a function, which is the template function that needs to be rendered.
-
-```js
-function App() {
-	return render`
-        <h1>Hello</h1>
-    `;
-}
-
-Strve('#app', App);
-```
-
-### render
-
-- parameter：`function`
-- detailed：
-
-` render`` ` is a label function, the syntax of the label function is a template string directly after the function name. For example, you can write HTML tags directly in the template string.
+Pass in a function, which is the template function that needs to be rendered. You can chain other application APIs after `createApp`.
 
 ```js
 function App() {
-	return render`
-        <div class='inner'>
-            <h1>Hello</h1>
-        </div >
-    `;
+	return h`
+         <h1>Hello</h1>
+     `;
+}
+
+createApp(App).mount('#app');
+```
+
+#### Application API
+
+##### mount
+
+- Parameters:
+
+  - `HTMLElement | String`
+
+- Details:
+
+Mount the root component. The innerHTML of the provided DOM element will be replaced with the template rendering of the root component of the application.
+
+### h
+
+- Parameters:
+
+  - `Function`
+
+- Details:
+
+` h`` ` is a label function, the syntax of label function is to directly follow the function name with a template string. For example, you can write HTML tags directly in template strings.
+
+```js
+function App() {
+	return h`
+         <div class='inner'>
+             <h1>Hello</h1>
+         </div>
+     `;
 }
 ```
 
-If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plugin, then, in Add `/*html*/` in the middle of ` render``  `.
+If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plugin, then, in Add `/*html*/` between ` h`` `.
 
 Just like that, in the VSCode editor, this plugin can make HTML template characters highlighted.
 
-![](./../.vuepress/public/img/code1.png)
+![](../../.vuepress/public/img/code1.png)
 
-### updateView
+### setData
 
-- parameter：
-  - `function`
-  - `string`(optional)
-- detailed：
+- Parameters:
 
-The first parameter is a function. The function body needs to execute values that will change the state of the page, such as `state.msg` in the following example.
+  - `Function`
+  - `Object` (optional)
+
+- Details:
+
+The first parameter is a function. The function body needs to execute values ​​that will change the state of the page, such as `state.msg` in the following example.
 
 ```js
 const state = {
@@ -61,76 +77,60 @@ const state = {
 };
 
 function App() {
-	return render`
-        <div class='inner'>
-            <button onClick=${useChange}>change</button>
-            <p>${state.msg}</p>
-        </div >
+	return h`
+        <button onClick=${useChange}>change</button>
+        <p $key>${state.msg}</p>
     `;
 }
 
 function useChange() {
-	updateView(() => {
+	setData(() => {
 		state.msg = '2';
 	});
 }
 ```
 
-The second parameter is a string type. When you use a list to render the page, inserting data at the head of the list needs to bind the `useFkey` field to avoid repeated rendering of the `DOM` node.
+The second parameter is the object type, and the optional properties are as follows:
 
-```js
-const state = {
-	arr: [1, 2],
-};
+| Properties | Functions                                                                                                                                                                                 |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| status     | Identifies a special status field, of type String. For specific attribute values, please refer to [status](/strvejs-doc/usage/#status)                                                    |
+| name       | The name of the function component, the type is Function. Directly pass in a function component, please refer to [Named-function-component](/strvejs-doc/usage/#named-function-component) |
 
-function Home() {
-	return render`
-        <div class='inner'>
-            <button onClick=${useUnshift}>unshift</button>
-            <ul>
-                ${state.arr.map((item) => render`<li>${item}</li>`)}
-            </ul>
-        </div>
-    `;
-}
+### emit
 
-function useUnshift() {
-	updateView(() => {
-		state.arr.unshift('2');
-	}, 'useFkey');
-}
-```
+- Parameters:
 
-### emitEvent
+  - `String`
+  - `Dictionary`
+  - `String`
 
-- parameter：
+- Details:
 
-  - `string`
-  - `dictionary`
-  - `string`
+Custom events are generally used to transfer data from child components to parent components.
 
-- detailed：
+The first parameter is a string representing the `event` name. When used in a parent component, you need to add `on` before the custom event name.
 
-Custom events are generally used to transfer data from child components to parent components. The first argument is a string representing the name of the `event`.
-The second parameter is a dictionary type parameter.
+The second parameter is a dictionary type parameter:
 
-- "detail": The optional default value is `null` for any type of data, which is a value associated with `event`.
-- "bubbles": A boolean value indicating whether the event can bubble. from `EventInit`. Note: Test chrome is not bubbling by default.
-- "cancelable": A boolean value indicating whether the event can be canceled.
+- **detail**: The optional default value is `null` for any type of data, which is a value associated with `event`.
+- **bubbles**: A boolean value indicating whether the event can bubble. from `EventInit`. Note: Test chrome defaults to not bubbling.
+- **cancelable**: A boolean value indicating whether the event can be cancelled.
 
 The third parameter is a string type, mainly the name of the node selector, where the node refers to the DOM node wrapped by the child component in the parent component.
 
 E.g:
 
 ```js
-function Component1(v) {
-	return render`
-        <h1 onClick=${emitData}>${v}</h1>
+// Son
+function Component1() {
+	return h`
+        <h1 onClick=${emitData}>Son</h1>
     `;
 }
 
 function emitData() {
-	emitEvent(
+	emit(
 		'getTit',
 		{
 			detail: { title: 'This is title!' },
@@ -139,41 +139,39 @@ function emitData() {
 	);
 }
 
+// Father
 function App() {
-	return render`
-        <div class='inner'>
-            <div onGetTit=${getTit} class="component1">
-            ${Component1(state.msg)}
-            </div>
-        </div >
+	return h`
+        <div onGetTit=${useGetTit} class="component1">
+            ${Component1()}
+        </div>
     `;
 }
 
-function getTit(event) {
-	updateView(() => {
-		console.log(event.detail.title);
-		state.msg = event.detail.title;
+function useGetTit(event) {
+	setData(() => {
+		console.log(event.detail.title); // This is title!
 	});
 }
 ```
 
-### strveVersion
+### version
 
-- detailed：
+- Details:
 
-No parameters, directly get the version number of Strve.js.
+No parameter, directly get the version number of Strve.js.
 
-### watchDOMChange
+### watchDom
 
-- parameter：
+- Parameters:
 
-  - `string`
-  - `object`
-  - `function`
+  - `String`
+  - `Object`
+  - `Function`
 
-- detailed：
+- Details:
 
-Has the ability to monitor changes made to the DOM tree. The first parameter is a string type, which is the name of the node used for monitoring; the second parameter is a configuration object, the specific configuration is the same as [MutationObserver](https://developer.mozilla.org/en-US/docs/Web /API/MutationObserver); the third parameter is a callback function.
+Has the ability to monitor changes made to the DOM tree. The first parameter is a string type, which is the name of the node used for monitoring; the second parameter is a configuration object, the specific configuration is the same as [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver); the third parameter is a callback function.
 
 In addition, two methods are provided, namely the start monitoring method `start()` and the stop monitoring method `stop()`.
 
@@ -195,64 +193,60 @@ domChange.start();
 domChange.stop();
 ```
 
-### deepCloneData
+### clone
 
-- parameter：
+- Parameters:
 
-  - `object`
+  - `Object`
 
-- detailed：
+- Details:
 
 Creates a new object to accept the object value to be recopied or referenced.
 
 The original object is completely copied from the memory to the new object, and a new space is opened up from the heap memory to store the new object, and the modification of the new object will not change the original object, and the two achieve real separation.
 
 ```js
+const sourceData = {
+	msg: 'App',
+};
+
+let state = clone(sourceData);
+
 function App() {
-	const sourceData = {
-		msg: 'App',
-	};
+	return h`
+         <button onClick=${useChange}>Change</button>
+         <p $key>${state.msg}</p>
+     `;
+}
 
-	let state = deepCloneData(sourceData);
-
-	function template() {
-		return render`
-            <button onClick=${useChange}>Change</button>
-            <p>${state.msg}</p>
-    `;
-	}
-
-	function useChange() {
-		updateView(() => {
-			state.msg = 'Hello';
-		});
-	}
-
-	return { template };
+function useChange() {
+	setData(() => {
+		state.msg = 'Hello';
+	});
 }
 ```
 
-## Data binding
+## Data-binding
 
-Strve.js uses a JavaScript-based template string syntax that allows developers to declaratively bind the DOM to the underlying instance data. All Strve.js template strings are valid HTML, so can be parsed by spec-compliant browsers and HTML parsers.
+Strve.js uses a JavaScript-based template string syntax that allows developers to declaratively bind the DOM to the underlying instance's data. All Strve.js template strings are valid HTML, so can be parsed by spec-compliant browsers and HTML parsers.
 
-Under the hood, Strve.js compiles template strings into virtual DOM rendering functions and minimizes the number of DOM manipulations.
+Under the hood, Strve.js compiles template strings into virtual DOM rendering functions and minimizes DOM manipulation.
 
 In Strve.js, you can use JavaScript template strings to your heart's content and feel its unique charm!
 
-### Text
+### text
 
 The form of text binding in data binding is to use the notation `${}`.
 
 ```js
 const state = {
-	msg: 'hello',
+	msg: 'Hello',
 };
 
 function App() {
-	return render`
-        <h1>${state.msg}</h1>
-    `;
+	return h`
+        <h1 $key>${state.msg}</h1>
+     `;
 }
 ```
 
@@ -263,7 +257,7 @@ function App() {
 </p>
 <component :is="'script'" async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></component>
 
-### Expression
+### expressions
 
 Use expressions in the notation `${}`.
 
@@ -274,9 +268,9 @@ const state = {
 };
 
 function App() {
-	return render`
-        <h1>${state.a + state.b}</h1>
-    `;
+	return h`
+         <h1 $key>${state.a + state.b}</h1>
+     `;
 }
 ```
 
@@ -287,7 +281,7 @@ function App() {
 </p>
 <component :is="'script'" async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></component>
 
-## Property binding
+## Property-binding
 
 Use the notation `${}` to bind a value to the property `value`.
 
@@ -297,9 +291,9 @@ const state = {
 };
 
 function App() {
-	return render`
-        <input type="text" value=${state.msg}/>
-    `;
+	return h`
+         <input type="text" value=${state.msg} $key/>
+     `;
 }
 ```
 
@@ -319,9 +313,9 @@ const state = {
 };
 
 function App() {
-	return render`
-        <h1 class=${state.isRed ? 'red' : ''}>${state.msg}</h1>
-`;
+	return h`
+        <h1 class=${state.isRed ? 'red' : ''} $key>${state.msg}</h1>
+    `;
 }
 ```
 
@@ -342,8 +336,9 @@ const state = {
 		fontSize: '40px',
 	},
 };
+
 function App() {
-	return render`
+	return h`
         <p style="${state.style}">${state.msg}</p>
     `;
 }
@@ -356,24 +351,26 @@ function App() {
 </p>
 <component :is="'script'" async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></component>
 
-## Conditional rendering
+## Conditional-rendering
 
 Using the notation `${}`, the block will only be rendered if the directive's expression returns a `true` value.
 
 ```js
 const state = {
-	isShow: false,
+	isShow: true,
 };
 
 function App() {
-	return render`
-        <button onClick=${useShow}>show</button>
-        ${state.isShow ? render`<p>Strve.js</p>` : ''}
-    `;
+	return h`
+         <button onClick=${useShow}>show</button>
+         <div $key>
+              ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+         </div>
+     `;
 }
 
 function useShow() {
-	updateView(() => {
+	setData(() => {
 		state.isShow = !state.isShow;
 	});
 }
@@ -386,7 +383,7 @@ function useShow() {
 </p>
 <component :is="'script'" async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></component>
 
-## List rendering
+## List-rendering
 
 We can render a list based on an array using the notation `${}`. For example, we use the `map` method of arrays to render lists, and we can dynamically add array items.
 
@@ -396,16 +393,16 @@ const state = {
 };
 
 function App() {
-	return render`
-        <button onClick=${usePush}>push</button>
-        <ul>
-          ${state.arr.map((todo) => render`<li>${todo}</li>`)}
-        </ul>
-    `;
+	return h`
+         <button onClick=${usePush}>push</button>
+         <ul $key>
+           ${state.arr.map((todo) => h`<li>${todo}</li>`)}
+         </ul>
+     `;
 }
 
 function usePush() {
-	updateView(() => {
+	setData(() => {
 		state.arr.push(3);
 	});
 }
@@ -418,7 +415,9 @@ function usePush() {
 </p>
 <component :is="'script'" async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></component>
 
-We mentioned above that `updateView()` can pass in the second parameter, which is a string type. When using a list to render a page, if you insert data at the head of the list, you need to bind the `useFkey` field to avoid `DOM `Nodes are rendered repeatedly, which is a must. Any actions that operate on the head of the list, such as `unshift`, `pop` array methods, need to add this `useFkey` field. This is not required for other operations and has been optimized internally.
+When using a list to render a page, if you insert data at the head of the list, you need to pass in the value of `useFirstKey` to avoid repeated rendering of `DOM` nodes, which is a must.
+
+Any actions that operate on the head of the list, such as `unshift`, `pop` array methods, need to add this `useFirstKey` value. This is not required for other operations and has been optimized internally.
 
 ```js
 const state = {
@@ -427,31 +426,40 @@ const state = {
 
 function Home() {
 	return render`
-            <button onClick=${useUnshift}>unshift</button>
-            <ul>
-                ${state.arr.map((item) => render`<li>${item}</li>`)}
-            </ul>
+        <button onClick=${useUnshift}>unshift</button>
+        <ul $key>
+            ${state.arr.map((item) => render`<li>${item}</li>`)}
+        </ul>
     `;
 }
 
 function useUnshift() {
-	updateView(() => {
-		state.arr.unshift(2);
-	}, 'useFkey');
+	updateView(
+		() => {
+			state.arr.unshift('2');
+		},
+		{
+			status: 'useFirstKey',
+		}
+	);
 }
 ```
 
-## Event handling
+## Event-handling
 
 We can use the `on` directive to listen to DOM events and execute some JavaScript when the event is fired. We recommend using this camelCase `onClick` method.
 
 Also, you need to use the notation `${}` to bind events.
 
 ```js
+const state = {
+	msg: 'sayHello',
+};
+
 function App() {
-	return render`
-        <button onClick=${useClick}>${state.msg}</button>
-    `;
+	return h`
+         <button onClick=${useClick}>${state.msg}</button>
+     `;
 }
 
 function useClick() {
@@ -465,3 +473,282 @@ function useClick() {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <component :is="'script'" async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></component>
+
+## Status
+
+### useFirstKey
+
+When you use list rendering, inserting data at the head of the list needs to bind the `useFirstKey` field to avoid repeated rendering of `DOM` nodes.
+
+```js
+const state = {
+	arr: [1, 2],
+};
+
+function Home() {
+	return render`
+        <button onClick=${useUnshift}>unshift</button>
+        <ul $key>
+            ${state.arr.map((item) => render`<li>${item}</li>`)}
+        </ul>
+    `;
+}
+
+function useUnshift() {
+	updateView(
+		() => {
+			state.arr.unshift('2');
+		},
+		{
+			status: 'useFirstKey',
+		}
+	);
+}
+```
+
+## Named-function-component
+
+When we update component data, we do not need full comparison (such as the following h2, p tags, which do not belong to the content of Component1, so they do not need Diff comparison), just update the data in the component.
+
+At this time, you need to pass an object in the second parameter of the `setData()` method, the object key is `name`, and the value is the function component that needs to be updated. In addition, what you also need to do is to wrap a `component` tag outside the function component in the parent component, and use the `$name` tag (for more information about tags, please see [Static-tags](/strvejs-doc/usage/#static-tags)), the value is the name of the function component.
+
+```js
+const state1 = {
+	count: 0,
+};
+
+function Component1() {
+	return h`
+        <h1>Component1</h1>
+        <h1 $key>${state1.count}</h1>
+        <button onClick=${add1}>add1</button> 
+        `;
+}
+
+function App() {
+	return h`
+        <h2>txt1</h2>
+        <div>
+            <p>txt2</p>
+            <component $name="Component1">
+                ${Component1()}
+            </component>
+        </div>
+        `;
+}
+
+function add1() {
+	setData(
+		() => {
+			state1.count++;
+		},
+		{
+			name: Component1,
+		}
+	);
+}
+```
+
+## Static-tags
+
+### $key
+
+When we change the data, a Diff comparison is performed internally to find the differences, and then the page is updated accordingly. However, some nodes that do not need to be updated, such as the button and h1 tags below, do not need to be compared. Only dynamic data nodes such as the p tag need to be updated, so we explicitly add the static tag `$key` to the tag.
+
+```js
+const state = {
+	count: 0,
+};
+
+function App() {
+	return h`
+        <button onClick=${add}>add</button>
+        <p $key>${state.count}</p>
+        <h1>Hello Strve.js</h1>
+`;
+}
+
+function add() {
+	setData(() => {
+		state.count++;
+	});
+}
+```
+
+In addition, in addition to adding tags to dynamic data nodes, you also need to pay attention to adding `$key` tags in some special scenarios, such as dynamically adding nodes and dynamically displaying and hiding nodes. Because, only nodes marked with `$key` will have the ability to be manipulated with their own DOM.
+
+### $name
+
+This tag needs to be used on the built-in tag `component` to indicate the internal component name, which must be the same as the function component name.
+
+```js
+const state1 = {
+	count: 0,
+};
+
+function Component1() {
+	return h`
+        <h1 $key>${state1.count}</h1>
+        <button onClick=${add1}>add1</button> 
+        `;
+}
+
+function App() {
+	return h`
+        <component $name="Component1">
+            ${Component1()}
+        </component>
+        `;
+}
+
+function add1() {
+	setData(
+		() => {
+			state1.count++;
+		},
+		{
+			name: Component1,
+		}
+	);
+}
+```
+
+## Built-in-tags
+
+### component
+
+A component label, which wraps a function component inside the label.
+
+```js
+function Component1() {
+	return h`
+        <h1>Hello</h1>
+        `;
+}
+
+function App() {
+	return h`
+        <component $name="Component1">
+            ${Component1()}
+        </component>
+        `;
+}
+```
+
+### null
+
+Empty label. It can be understood as a placeholder tag and will not be rendered into the page.
+
+Typically used for conditional rendering.
+
+```js
+const state = {
+	isShow: true,
+};
+
+function App() {
+	return h`
+        <button onClick=${useShow}>show</button>
+        <div $key>
+             ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+        </div>
+    `;
+}
+
+function useShow() {
+	setData(() => {
+		state.isShow = !state.isShow;
+	});
+}
+```
+
+## Component mode
+
+Components can be defined in three modes, namely:
+
+- Class mode;
+- Constructor mode;
+- Prototype mode;
+
+**Class mode**
+
+```js
+class About {
+	constructor() {
+		this.state = {
+			msg: 'About',
+		};
+	}
+
+	render = () => {
+		return h`
+            <button onClick=${this.goHome}>goHome</button>
+            <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
+    `;
+	};
+
+	useChange = () => {
+		setData(() => {
+			this.state.msg = 'Changed';
+		});
+	};
+
+	goHome = () => {
+		linkTo('/');
+	};
+}
+```
+
+**Constructor mode**
+
+```js
+function About() {
+	const state = {
+		msg: 'About',
+	};
+
+	function goHome() {
+		linkTo('/');
+	}
+
+	function render() {
+		return h`<h1 onClick=${goHome} $key>${state.msg}</h1>`;
+	}
+
+	return {
+		render,
+	};
+}
+```
+
+**Prototype mode**
+
+This mode has a caching mechanism.
+
+```js
+const Home = function () {};
+const home = Home.prototype;
+
+home.state = {
+	msg: 'Home',
+	count: 0,
+};
+
+home.useAdd = function () {
+	setData(() => {
+		home.state.count++;
+	});
+};
+
+home.goAbout = function () {
+	linkTo('/about');
+};
+
+home.render = function () {
+	return h`
+		<button onClick=${home.goAbout}>GoAbout</button>
+		<h1 onClick=${home.useAdd} $key>${home.state.count}</h1>
+		<h2 $key>${home.state.msg}</h2>
+    `;
+};
+```

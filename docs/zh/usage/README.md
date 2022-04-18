@@ -661,3 +661,94 @@ function useShow() {
 	});
 }
 ```
+
+## 组件模式
+
+组件可以有三种模式来定义，分别是：
+
+- Class 类模式；
+- 构造函数模式；
+- 原型模式；
+
+**Class 类模式**
+
+```js
+class About {
+	constructor() {
+		this.state = {
+			msg: 'About',
+		};
+	}
+
+	render = () => {
+		return h`
+            <button onClick=${this.goHome}>goHome</button>
+            <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
+    `;
+	};
+
+	useChange = () => {
+		setData(() => {
+			this.state.msg = 'Changed';
+		});
+	};
+
+	goHome = () => {
+		linkTo('/');
+	};
+}
+```
+
+**构造函数模式**
+
+```js
+function About() {
+	const state = {
+		msg: 'About',
+	};
+
+	function goHome() {
+		linkTo('/');
+	}
+
+	function render() {
+		return h`<h1 onClick=${goHome} $key>${state.msg}</h1>`;
+	}
+
+	return {
+		render,
+	};
+}
+```
+
+**原型模式**
+
+此模式具有缓存机制。
+
+```js
+const Home = function () {};
+const home = Home.prototype;
+
+home.state = {
+	msg: 'Home',
+	count: 0,
+};
+
+home.useAdd = function () {
+	setData(() => {
+		home.state.count++;
+	});
+};
+
+home.goAbout = function () {
+	linkTo('/about');
+};
+
+home.render = function () {
+	return h`
+		<button onClick=${home.goAbout}>GoAbout</button>
+		<h1 onClick=${home.useAdd} $key>${home.state.count}</h1>
+		<h2 $key>${home.state.msg}</h2>
+    `;
+};
+```
