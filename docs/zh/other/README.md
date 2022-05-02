@@ -21,11 +21,11 @@
 
 - 支持 HTML 模板字符串高亮显示
 
-下载[es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html)插件后，在` render`` `方法中间加上`/*html*/`。
+下载[es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html)插件后，在` h`` `方法中间加上`/*html*/`。
 
 ```js
 function App() {
-	return render/*html*/ `
+	return h/*html*/ `
         <div class='inner'>
             <p>${state.msg}</p>
         </div >

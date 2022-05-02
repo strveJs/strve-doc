@@ -425,16 +425,16 @@ const state = {
 };
 
 function Home() {
-	return render`
+	return h`
         <button onClick=${useUnshift}>unshift</button>
         <ul $key>
-            ${state.arr.map((item) => render`<li>${item}</li>`)}
+            ${state.arr.map((item) => h`<li $key>${item}</li>`)}
         </ul>
     `;
 }
 
 function useUnshift() {
-	updateView(
+	setData(
 		() => {
 			state.arr.unshift('2');
 		},
@@ -486,16 +486,16 @@ const state = {
 };
 
 function Home() {
-	return render`
+	return h`
         <button onClick=${useUnshift}>unshift</button>
         <ul $key>
-            ${state.arr.map((item) => render`<li>${item}</li>`)}
+            ${state.arr.map((item) => h`<li $key>${item}</li>`)}
         </ul>
     `;
 }
 
 function useUnshift() {
-	updateView(
+	setData(
 		() => {
 			state.arr.unshift('2');
 		},

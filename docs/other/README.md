@@ -21,11 +21,11 @@ Note: If used within `<script>`, specify `type`, such as `type="module"; type="t
 
 - Support HTML template string highlighting
 
-After downloading the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plugin, add `/*html*/ in the middle of the `render```method`.
+After downloading the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plugin, add `/*html*/ in the middle of the `h```method`.
 
 ```js
 function App() {
-	return render/* html */ `
+	return h/* html */ `
         <div class='inner'>
             <p>${state.msg}</p>
         </div >
