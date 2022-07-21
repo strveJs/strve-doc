@@ -9,7 +9,7 @@
 	import {
 		h,
 		createApp,
-	} from 'https://cdn.jsdelivr.net/npm/strvejs@3.1.0/dist/strve.esm.min.js';
+	} from 'https://cdn.jsdelivr.net/npm/strvejs@3.2.0/dist/strve.esm.min.js';
 </script>
 ```
 

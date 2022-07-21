@@ -93,7 +93,7 @@ The easiest way to try Strve Router is to use a direct import CDN link. You can 
 				h,
 				createApp,
 				setData,
-			} from 'https://cdn.jsdelivr.net/npm/strvejs@3.1.0/dist/strve.esm.min.js';
+			} from 'https://cdn.jsdelivr.net/npm/strvejs@3.2.0/dist/strve.esm.min.js';
 			import {
 				initRouter,
 				linkTo,
