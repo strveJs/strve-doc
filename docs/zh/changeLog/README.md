@@ -1,5 +1,13 @@
 # 更新日志
 
+## v3.2.0
+
+- 添加 `domInfo`、`propsData` API；
+- 添加了`onMounted`、`onUnmounted`、`nextTick`Hook；
+- 移除 `emit` API；
+- 添加了`$props`标签；
+- 添加 iife 文件格式，自动功能，适合作为`<script>`标签；
+
 ## v3.1.0
 
 - 修改 API:
