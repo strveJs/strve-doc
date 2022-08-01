@@ -56,6 +56,7 @@ Of course, you may also use the scene introduced directly in the script, so that
 	</head>
 
 	<body>
+		<div id="app"></div>
 		<script src="https://cdn.jsdelivr.net/npm/strvejs@4.3.0/dist/strve.iife.min.js"></script>
 		<script>
 			const state = {
