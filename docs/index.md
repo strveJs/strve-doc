@@ -6,7 +6,7 @@ hero:
   text: A JS library that can convert strings into view.
   tagline: A lightweight MVVM framework.
   image:
-    src: /logo.svg
+    src: /logo.png
     alt: Strve.js
   actions:
     - theme: brand
