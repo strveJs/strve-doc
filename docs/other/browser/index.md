@@ -1,7 +1,5 @@
 # Browser Compatibility
 
-## Browser Compatibility
-
 Because the Strve.js project build tool is built with [Vite](https://vitejs.dev/) by default, the default build target browser can support native ESM and native ESM dynamic import on the script tag. Legacy browsers can be supported through the official plugin `@vitejs/plugin-legacy`.
 
 For example:

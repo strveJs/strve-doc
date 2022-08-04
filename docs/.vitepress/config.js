@@ -12,6 +12,11 @@ export default {
 	},
 	themeConfig: {
 		logo: '/logo.png',
+		algolia: {
+			apiKey: 'bfcdc868c58895106c405a8d1a765c09',
+			indexName: 'strvejs',
+			appId: 'OO7L0TPJ7C',
+		},
 		socialLinks: [
 			{ icon: 'github', link: 'https://github.com/maomincoding/strve' },
 		],

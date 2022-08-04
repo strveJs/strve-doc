@@ -4,7 +4,7 @@
 
 - Template string auto-completion tags
 
-Open `settings.json` under Settings and add the following code:
+Open `settings.json` under **Settings** and add the following code:
 
 ```json
 "emmet.triggerExpansionOnTab": true,

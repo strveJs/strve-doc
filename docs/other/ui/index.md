@@ -1,7 +1,5 @@
 # UI framework
 
-## UI framework
-
 - Bootstrap5
 
 [https://getbootstrap.com/](https://getbootstrap.com/)
