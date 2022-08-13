@@ -102,7 +102,7 @@ export default {
 		},
 		footer: {
 			message: 'Released under the MIT License.',
-			copyright: 'Copyright © 2021-present maomincoding',
+			copyright: `Copyright © 2021-${new Date().getFullYear()} maomincoding`,
 		},
 	},
 };
