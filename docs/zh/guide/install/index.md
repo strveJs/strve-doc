@@ -15,13 +15,13 @@
 </script>
 ```
 
-或者您可以直接在`script`标签中导入。
+或者您可以直接在 `<script>` 标签中导入。
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/strvejs@4.3.0/dist/strve.iife.min.js"></script>
 ```
 
-需要注意的是，此方法需要在 API 前加上一个`$` 符号，如下所示：
+需要注意的是，此方法需要在 API 前加上一个 `$` 符号，如下所示：
 
 ```html
 <script>
@@ -29,17 +29,17 @@
 		count: 0,
 	};
 
-	function App() {
-		return $h`
-            <h1 $key>${state.count}</h1>
-            <button onClick=${add}>Add</button> 
-        `;
-	}
-
 	function add() {
 		$setData(() => {
 			state.count++;
 		});
+	}
+
+	function App() {
+		return $h`
+			<h1 $key>${state.count}</h1>
+			<button onClick=${add}>Add</button> 
+		`;
 	}
 
 	const app = $createApp(App);

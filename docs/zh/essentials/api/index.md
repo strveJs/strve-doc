@@ -13,8 +13,8 @@
 ```js
 function App() {
 	return h`
-         <h1>Hello</h1>
-     `;
+		<h1>Hello</h1>
+	`;
 }
 
 createApp(App).mount('#app');
