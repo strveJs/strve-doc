@@ -35,7 +35,7 @@
 				return h`
 					<h1 $key>${state.count}</h1>
 					<button onClick=${add}>Add</button> 
-        		`;
+				`;
 			}
 
 			const app = createApp(App);
