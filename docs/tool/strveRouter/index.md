@@ -50,9 +50,9 @@ The easiest way to try Strve Router is to use a direct import CDN link. You can 
 
 				render = () => {
 					return h`
-                    <button onClick=${this.goAbout}>goAbout</button>
-                    <h1 onClick=${this.useAdd} $key>${this.state.count}</h1>
-                `;
+                            <button onClick=${this.goAbout}>goAbout</button>
+                            <h1 onClick=${this.useAdd} $key>${this.state.count}</h1>
+                    `;
 				};
 			}
 
@@ -62,14 +62,7 @@ The easiest way to try Strve Router is to use a direct import CDN link. You can 
 						msg: 'About',
 					};
 				}
-
-				render = () => {
-					return h`
-                    <button onClick=${this.goHome}>goHome</button>
-                    <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
-                `;
-				};
-
+                
 				useChange = () => {
 					setData(() => {
 						this.state.msg = 'Changed';
@@ -79,6 +72,13 @@ The easiest way to try Strve Router is to use a direct import CDN link. You can 
 				goHome = () => {
 					linkTo('/');
 				};
+                
+                render = () => {
+                    return h`
+                            <button onClick=${this.goHome}>goHome</button>
+                            <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
+                    `;
+                };
 			}
 
 			const router = initRouter(
@@ -97,10 +97,10 @@ The easiest way to try Strve Router is to use a direct import CDN link. You can 
 
 			function App() {
 				return h`
-            <div class="main">
-                ${router.view()}
-            </div>
-            `;
+                        <div class="main">
+                            ${router.view()}
+                        </div>
+                `;
 			}
 
 			const app = createApp(App);
@@ -176,9 +176,9 @@ import router from './router/index';
 
 export default function App() {
 	return h`
-        <div class='inner'>
-          ${router.view()}
-        </div>
+            <div class='inner'>
+              ${router.view()}
+            </div>
     `;
 }
 ```
@@ -204,7 +204,7 @@ export default class Home {
 
 	render = () => {
 		return h`
-            <button onClick=${this.goAbout}>goAbout</button>
+                <button onClick=${this.goAbout}>goAbout</button>
         `;
 	};
 }
@@ -243,9 +243,9 @@ export default class About {
 
 	render = () => {
 		return h`
-            <button onClick="${this.goHome}">goHome</button>
-            <h1 onClick=${this.getOption}>About</h1>
-    `;
+                <button onClick="${this.goHome}">goHome</button>
+                <h1 onClick=${this.getOption}>About</h1>
+        `;
 	};
 }
 ```

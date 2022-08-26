@@ -19,8 +19,8 @@ const state = {
 
 function App() {
 	return h`
-        <h1 $key>${state.msg}</h1>
-     `;
+            <h1 $key>${state.msg}</h1>
+    `;
 }
 ```
 
@@ -36,8 +36,8 @@ const state = {
 
 function App() {
 	return h`
-         <h1 $key>${state.a + state.b}</h1>
-     `;
+            <h1 $key>${state.a + state.b}</h1>
+    `;
 }
 ```
 
@@ -52,8 +52,8 @@ const state = {
 
 function App() {
 	return h`
-         <input type="text" value=${state.msg} $key/>
-     `;
+            <input type="text" value=${state.msg} $key/>
+    `;
 }
 ```
 
@@ -67,7 +67,7 @@ const state = {
 
 function App() {
 	return h`
-        <h1 class=${state.isRed ? 'red' : ''} $key>${state.msg}</h1>
+            <h1 class=${state.isRed ? 'red' : ''} $key>${state.msg}</h1>
     `;
 }
 ```
@@ -85,7 +85,7 @@ const state = {
 
 function App() {
 	return h`
-        <p style="${state.style}">${state.msg}</p>
+            <p style="${state.style}">${state.msg}</p>
     `;
 }
 ```
@@ -99,19 +99,19 @@ const state = {
 	isShow: true,
 };
 
-function App() {
-	return h`
-         <button onClick=${useShow}>show</button>
-         <div $key>
-              ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
-         </div>
-     `;
+function useShow() {
+  setData(() => {
+    state.isShow = !state.isShow;
+  });
 }
 
-function useShow() {
-	setData(() => {
-		state.isShow = !state.isShow;
-	});
+function App() {
+	return h`
+             <button onClick=${useShow}>show</button>
+             <div $key>
+                  ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+             </div>
+    `;
 }
 ```
 
@@ -124,19 +124,19 @@ const state = {
 	arr: [1, 2],
 };
 
-function App() {
-	return h`
-         <button onClick=${usePush}>push</button>
-         <ul $key>
-           ${state.arr.map((todo) => h`<li>${todo}</li>`)}
-         </ul>
-     `;
+function usePush() {
+  setData(() => {
+    state.arr.push(3);
+  });
 }
 
-function usePush() {
-	setData(() => {
-		state.arr.push(3);
-	});
+function App() {
+	return h`
+             <button onClick=${usePush}>push</button>
+             <ul $key>
+               ${state.arr.map((todo) => h`<li>${todo}</li>`)}
+             </ul>
+    `;
 }
 ```
 
@@ -149,24 +149,24 @@ const state = {
 	arr: [1, 2],
 };
 
-function Home() {
-	return h`
-        <button onClick=${useUnshift}>unshift</button>
-        <ul $key>
-            ${state.arr.map((item) => h`<li $key>${item}</li>`)}
-        </ul>
-    `;
+function useUnshift() {
+  setData(
+    () => {
+      state.arr.unshift('2');
+    },
+    {
+      status: 'useFirstKey',
+    }
+  );
 }
 
-function useUnshift() {
-	setData(
-		() => {
-			state.arr.unshift('2');
-		},
-		{
-			status: 'useFirstKey',
-		}
-	);
+function Home() {
+	return h`
+            <button onClick=${useUnshift}>unshift</button>
+            <ul $key>
+                ${state.arr.map((item) => h`<li $key>${item}</li>`)}
+            </ul>
+    `;
 }
 ```
 
@@ -181,14 +181,14 @@ const state = {
 	msg: 'sayHello',
 };
 
-function App() {
-	return h`
-         <button onClick=${useClick}>${state.msg}</button>
-     `;
+function useClick() {
+  alert('hello');
 }
 
-function useClick() {
-	alert('hello');
+function App() {
+	return h`
+            <button onClick=${useClick}>${state.msg}</button>
+    `;
 }
 ```
 
@@ -203,24 +203,24 @@ const state = {
 	arr: [1, 2],
 };
 
-function Home() {
-	return h`
-        <button onClick=${useUnshift}>unshift</button>
-        <ul $key>
-            ${state.arr.map((item) => h`<li $key>${item}</li>`)}
-        </ul>
-    `;
+function useUnshift() {
+  setData(
+    () => {
+      state.arr.unshift('2');
+    },
+    {
+      status: 'useFirstKey',
+    }
+  );
 }
 
-function useUnshift() {
-	setData(
-		() => {
-			state.arr.unshift('2');
-		},
-		{
-			status: 'useFirstKey',
-		}
-	);
+function Home() {
+	return h`
+            <button onClick=${useUnshift}>unshift</button>
+            <ul $key>
+                ${state.arr.map((item) => h`<li $key>${item}</li>`)}
+            </ul>
+    `;
 }
 ```
 
@@ -235,35 +235,35 @@ const state1 = {
 	count: 0,
 };
 
+function add1() {
+  setData(
+    () => {
+      state1.count++;
+    },
+    {
+      name: Component1,
+    }
+  );
+}
+
 function Component1() {
 	return h`
-        <h1>Component1</h1>
-        <h1 $key>${state1.count}</h1>
-        <button onClick=${add1}>add1</button> 
-        `;
+            <h1>Component1</h1>
+            <h1 $key>${state1.count}</h1>
+            <button onClick=${add1}>add1</button> 
+    `;
 }
 
 function App() {
 	return h`
-        <h2>txt1</h2>
-        <div>
-            <p>txt2</p>
-            <component $name=${Component1.name}>
-                ${Component1()}
-            </component>
-        </div>
-        `;
-}
-
-function add1() {
-	setData(
-		() => {
-			state1.count++;
-		},
-		{
-			name: Component1,
-		}
-	);
+            <h2>txt1</h2>
+            <div>
+                <p>txt2</p>
+                <component $name=${Component1.name}>
+                    ${Component1()}
+                </component>
+            </div>
+    `;
 }
 ```
 
@@ -278,18 +278,18 @@ const state = {
 	count: 0,
 };
 
-function App() {
-	return h`
-        <button onClick=${add}>add</button>
-        <p $key>${state.count}</p>
-        <h1>Hello Strve.js</h1>
-`;
+function add() {
+  setData(() => {
+    state.count++;
+  });
 }
 
-function add() {
-	setData(() => {
-		state.count++;
-	});
+function App() {
+	return h`
+            <button onClick=${add}>add</button>
+            <p $key>${state.count}</p>
+            <h1>Hello Strve.js</h1>
+    `;
 }
 ```
 
@@ -304,30 +304,30 @@ const state1 = {
 	count: 0,
 };
 
+function add1() {
+  setData(
+    () => {
+      state1.count++;
+    },
+    {
+      name: Component1,
+    }
+  );
+}
+
 function Component1() {
 	return h`
-        <h1 $key>${state1.count}</h1>
-        <button onClick=${add1}>add1</button> 
-        `;
+            <h1 $key>${state1.count}</h1>
+            <button onClick=${add1}>add1</button> 
+    `;
 }
 
 function App() {
 	return h`
-        <component $name=${Component1.name}>
-            ${Component1()}
-        </component>
-        `;
-}
-
-function add1() {
-	setData(
-		() => {
-			state1.count++;
-		},
-		{
-			name: Component1,
-		}
-	);
+            <component $name=${Component1.name}>
+                ${Component1()}
+            </component>
+    `;
 }
 ```
 
@@ -340,31 +340,31 @@ This tag is used in conjunction with [propsData](/essentials/api/#propsdata), fo
 
 let isShow = true;
 
-function Component1() {
-	return h`
-        <h1 onClick=${emitData}>Son</h1>
-    `;
+function emitData() {
+  isShow = !isShow;
+  propsData.Component1(isShow);
 }
 
-function emitData() {
-	isShow = !isShow;
-	propsData.Component1(isShow);
+function Component1() {
+	return h`
+            <h1 onClick=${emitData}>Son</h1>
+    `;
 }
 ```
 
 ```js
 // Father
 
-function App() {
-	return h/*html*/ `
-        <component $name=${Component1.name} $props=${useGetTit}>
-            ${Component1()}   
-        </component>
-    `;
+function useGetTit(v) {
+  console.log(v); // false
 }
 
-function useGetTit(v) {
-	console.log(v); // false
+function App() {
+	return h`
+            <component $name=${Component1.name} $props=${useGetTit}>
+                ${Component1()}   
+            </component>
+    `;
 }
 ```
 
@@ -377,16 +377,16 @@ A component label, which wraps a function component inside the label.
 ```js
 function Component1() {
 	return h`
-        <h1>Hello</h1>
-        `;
+            <h1>Hello</h1>
+    `;
 }
 
 function App() {
 	return h`
-        <component $name=${Component1.name}>
-            ${Component1()}
-        </component>
-        `;
+            <component $name=${Component1.name}>
+                ${Component1()}
+            </component>
+    `;
 }
 ```
 
@@ -401,19 +401,19 @@ const state = {
 	isShow: true,
 };
 
-function App() {
-	return h`
-        <button onClick=${useShow}>show</button>
-        <div $key>
-             ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
-        </div>
-    `;
+function useShow() {
+  setData(() => {
+    state.isShow = !state.isShow;
+  });
 }
 
-function useShow() {
-	setData(() => {
-		state.isShow = !state.isShow;
-	});
+function App() {
+	return h`
+            <button onClick=${useShow}>show</button>
+            <div $key>
+                 ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+            </div>
+    `;
 }
 ```
 
@@ -434,14 +434,7 @@ class About {
 			msg: 'About',
 		};
 	}
-
-	render = () => {
-		return h`
-            <button onClick=${this.goHome}>goHome</button>
-            <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
-    `;
-	};
-
+		
 	useChange = () => {
 		setData(() => {
 			this.state.msg = 'Changed';
@@ -450,6 +443,13 @@ class About {
 
 	goHome = () => {
 		linkTo('/');
+	};
+  
+	render = () => {
+        return h`
+                <button onClick=${this.goHome}>goHome</button>
+                <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
+        `;
 	};
 }
 ```
@@ -501,9 +501,9 @@ home.goAbout = function () {
 
 home.render = function () {
 	return h`
-		<button onClick=${home.goAbout}>GoAbout</button>
-		<h1 onClick=${home.useAdd} $key>${home.state.count}</h1>
-		<h2 $key>${home.state.msg}</h2>
+            <button onClick=${home.goAbout}>GoAbout</button>
+            <h1 onClick=${home.useAdd} $key>${home.state.count}</h1>
+            <h2 $key>${home.state.msg}</h2>
     `;
 };
 ```

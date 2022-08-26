@@ -1,11 +1,6 @@
 export default {
 	base: '/strvejs-doc/',
-	// title: 'Strve.js',
-	// titleTemplate: 'A JS library that can convert strings into view',
-	// description: 'A JS library that can convert strings into view',
 	head: [['link', { rel: 'icon', href: '/strvejs-doc/' + 'logo.png' }]],
-	// ignoreDeadLinks: true,
-	// lang: 'en-US',
 	markdown: {
 		theme: 'material-palenight',
 		lineNumbers: true,
@@ -32,7 +27,7 @@ export default {
 			appId: 'OO7L0TPJ7C',
 		},
 		socialLinks: [
-			{ icon: 'github', link: 'https://github.com/maomincoding/strve' },
+			{ icon: 'github', link: 'https://github.com/maomincoding/strve' }
 		],
 		locales: {
 			'/': {

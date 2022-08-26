@@ -2,7 +2,7 @@
 
 <a href="https://npmjs.com/package/strve-router"><img src="https://badgen.net/npm/v/strve-router" alt="npm package"></a>
 
-Steve Router 是 Steve.js 的官方路由管理器。 它与 Strve.js 的核心深度集成，轻松构建单页应用程序。
+Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心深度集成，轻松构建单页应用程序。
 
 目前仅支持 Hash 模式。
 
@@ -50,9 +50,9 @@ Steve Router 是 Steve.js 的官方路由管理器。 它与 Strve.js 的核心�
 
 				render = () => {
 					return h`
-                    <button onClick=${this.goAbout}>goAbout</button>
-                    <h1 onClick=${this.useAdd} $key>${this.state.count}</h1>
-                `;
+                            <button onClick=${this.goAbout}>goAbout</button>
+                            <h1 onClick=${this.useAdd} $key>${this.state.count}</h1>
+                    `;
 				};
 			}
 
@@ -62,14 +62,7 @@ Steve Router 是 Steve.js 的官方路由管理器。 它与 Strve.js 的核心�
 						msg: 'About',
 					};
 				}
-
-				render = () => {
-					return h`
-                    <button onClick=${this.goHome}>goHome</button>
-                    <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
-                `;
-				};
-
+                
 				useChange = () => {
 					setData(() => {
 						this.state.msg = 'Changed';
@@ -79,6 +72,13 @@ Steve Router 是 Steve.js 的官方路由管理器。 它与 Strve.js 的核心�
 				goHome = () => {
 					linkTo('/');
 				};
+                
+                render = () => {
+                    return h`
+                            <button onClick=${this.goHome}>goHome</button>
+                            <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
+                    `;
+                };
 			}
 
 			const router = initRouter(
@@ -97,10 +97,10 @@ Steve Router 是 Steve.js 的官方路由管理器。 它与 Strve.js 的核心�
 
 			function App() {
 				return h`
-            <div class="main">
-                ${router.view()}
-            </div>
-            `;
+                    <div class="main">
+                        ${router.view()}
+                    </div>
+                `;
 			}
 
 			const app = createApp(App);
@@ -204,7 +204,7 @@ export default class Home {
 
 	render = () => {
 		return h`
-            <button onClick=${this.goAbout}>goAbout</button>
+                <button onClick=${this.goAbout}>goAbout</button>
         `;
 	};
 }
@@ -243,9 +243,9 @@ export default class About {
 
 	render = () => {
 		return h`
-            <button onClick="${this.goHome}">goHome</button>
-            <h1 onClick=${this.getOption}>About</h1>
-    `;
+                <button onClick="${this.goHome}">goHome</button>
+                <h1 onClick=${this.getOption}>About</h1>
+        `;
 	};
 }
 ```

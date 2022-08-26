@@ -13,8 +13,8 @@ Pass in a function, which is the template function that needs to be rendered. Yo
 ```js
 function App() {
 	return h`
-         <h1>Hello</h1>
-     `;
+            <h1>Hello</h1>
+    `;
 }
 
 createApp(App).mount('#app');
@@ -43,10 +43,10 @@ Mount the root component. The innerHTML of the provided DOM element will be repl
 ```js
 function App() {
 	return h`
-         <div class='inner'>
-             <h1>Hello</h1>
-         </div>
-     `;
+             <div class='inner'>
+                 <h1>Hello</h1>
+             </div>
+    `;
 }
 ```
 
@@ -72,17 +72,17 @@ const state = {
 	msg: '1',
 };
 
-function App() {
-	return h`
-        <button onClick=${useChange}>change</button>
-        <p $key>${state.msg}</p>
-    `;
+function useChange() {
+  setData(() => {
+    state.msg = '2';
+  });
 }
 
-function useChange() {
-	setData(() => {
-		state.msg = '2';
-	});
+function App() {
+	return h`
+            <button onClick=${useChange}>change</button>
+            <p $key>${state.msg}</p>
+    `;
 }
 ```
 
@@ -114,22 +114,22 @@ const state = {
 	count: 0,
 };
 
+function add() {
+  setData(() => {
+    state.count++;
+  });
+}
+
 function App() {
 	return h`
             <h1 $key="h1">${state.count}</h1>
             <button onClick=${add}>Add</button> 
-        `;
+    `;
 }
 
 onMounted(() => {
 	console.log(domInfo.h1); // <button>Add</button>
 });
-
-function add() {
-	setData(() => {
-		state.count++;
-	});
-}
 ```
 
 ## onUnmounted
@@ -156,7 +156,7 @@ class Home {
 
 	render = () => h`
             <button onClick=${this.goAbout}>goAbout</button>
-        `;
+    `;
 }
 
 class About {
@@ -172,7 +172,7 @@ class About {
 
 	render = () => h`
             <button onClick=${this.goHome}>goHome</button>
-        `;
+    `;
 }
 ```
 
@@ -192,21 +192,22 @@ const state = {
 };
 
 let styleColor = 'color:red';
+
+function add() {
+  setData(() => {
+    styleColor = 'color:green';
+    state.count++;
+    nextTick(() => {
+      console.log(domInfo.h1); // <h1 style="color:green">1</h1>
+    });
+  });
+}
+
 function App() {
 	return h`
             <h1 $key="h1" style=${styleColor}>${state.count}</h1>
             <button onClick=${add}>Add</button> 
-        `;
-}
-
-function add() {
-	setData(() => {
-		styleColor = 'color:green';
-		state.count++;
-		nextTick(() => {
-			console.log(domInfo.h1); // <h1 style="color:green">1</h1>
-		});
-	});
+    `;
 }
 ```
 
@@ -217,15 +218,15 @@ function add() {
 It is a DOM information object, you can define a property in `$key` in the DOM.
 
 ```js
+function add() {
+  console.log(domInfo.h1); // <h1>Strve.js</h1>
+}
+
 function App() {
 	return h`
             <h1 $key="h1">Strve.js</h1>
             <button onClick=${add}>Add</button> 
-        `;
-}
-
-function add() {
-	console.log(domInfo.h1); // <h1>Strve.js</h1>
+    `;
 }
 ```
 
@@ -238,27 +239,27 @@ It needs to be used when passing a value from a component.
 ```js
 // Father
 
-function App() {
-	return h`
-        <component $name=${Component1.name} $props=${useGetTit}>
-            ${Component1()}   
-        </component>
-        <component $name=${Component2.name}>
-            ${Component2()}   
-        </component>
-    `;
+function useGetTit(v) {
+  console.log(v);
+  setData(
+          () => {
+            propsData.Component2 = v;
+          },
+          {
+            name: Component2,
+          }
+  );
 }
 
-function useGetTit(v) {
-	console.log(v);
-	setData(
-		() => {
-			propsData.Component2 = v;
-		},
-		{
-			name: Component2,
-		}
-	);
+function App() {
+	return h`
+            <component $name=${Component1.name} $props=${useGetTit}>
+                ${Component1()}   
+            </component>
+            <component $name=${Component2.name}>
+                ${Component2()}   
+            </component>
+    `;
 }
 ```
 
@@ -267,15 +268,15 @@ function useGetTit(v) {
 
 let isShow = true;
 
-function Component1() {
-	return h`
-        <h1 onClick=${emitData}>Son</h1>
-    `;
+function emitData() {
+  isShow = !isShow;
+  propsData.Component1(isShow);
 }
 
-function emitData() {
-	isShow = !isShow;
-	propsData.Component1(isShow);
+function Component1() {
+	return h`
+            <h1 onClick=${emitData}>Son</h1>
+    `;
 }
 ```
 
@@ -284,24 +285,24 @@ function emitData() {
 
 let v = true;
 
-function Component2() {
-	return h`
-        <div $key>
-		${v ? h`<p $key>${v}</p>` : h`<null></null>`}
-		</div>
-		<button onClick=${f}>btn</button>
-    `;
+function f() {
+  setData(
+          () => {
+            v = propsData.Component2;
+            console.log(v);
+          },
+          {
+            name: Component2,
+          }
+  );
 }
 
-function f() {
-	setData(
-		() => {
-			v = propsData.Component2;
-			console.log(v);
-		},
-		{
-			name: Component2,
-		}
-	);
+function Component2() {
+	return h`
+            <div $key>
+            ${v ? h`<p $key>${v}</p>` : h`<null></null>`}
+            </div>
+            <button onClick=${f}>btn</button>
+    `;
 }
 ```

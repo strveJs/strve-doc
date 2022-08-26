@@ -19,8 +19,8 @@ const state = {
 
 function App() {
 	return h`
-        <h1 $key>${state.msg}</h1>
-     `;
+           <h1 $key>${state.msg}</h1>
+    `;
 }
 ```
 
@@ -36,8 +36,8 @@ const state = {
 
 function App() {
 	return h`
-         <h1 $key>${state.a + state.b}</h1>
-     `;
+          <h1 $key>${state.a + state.b}</h1>
+    `;
 }
 ```
 
@@ -52,8 +52,8 @@ const state = {
 
 function App() {
 	return h`
-         <input type="text" value=${state.msg} $key/>
-     `;
+          <input type="text" value=${state.msg} $key/>
+    `;
 }
 ```
 
@@ -67,7 +67,7 @@ const state = {
 
 function App() {
 	return h`
-        <h1 class=${state.isRed ? 'red' : ''} $key>${state.msg}</h1>
+          <h1 class=${state.isRed ? 'red' : ''} $key>${state.msg}</h1>
     `;
 }
 ```
@@ -85,7 +85,7 @@ const state = {
 
 function App() {
 	return h`
-        <p style="${state.style}">${state.msg}</p>
+          <p style="${state.style}">${state.msg}</p>
     `;
 }
 ```
@@ -99,19 +99,19 @@ const state = {
 	isShow: true,
 };
 
-function App() {
-	return h`
-         <button onClick=${useShow}>show</button>
-         <div $key>
-              ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
-         </div>
-     `;
+function useShow() {
+  setData(() => {
+    state.isShow = !state.isShow;
+  });
 }
 
-function useShow() {
-	setData(() => {
-		state.isShow = !state.isShow;
-	});
+function App() {
+	return h`
+             <button onClick=${useShow}>show</button>
+             <div $key>
+                  ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+             </div>
+    `;
 }
 ```
 
@@ -124,19 +124,19 @@ const state = {
 	arr: [1, 2],
 };
 
-function App() {
-	return h`
-         <button onClick=${usePush}>push</button>
-         <ul $key>
-           ${state.arr.map((todo) => h`<li>${todo}</li>`)}
-         </ul>
-     `;
+function usePush() {
+  setData(() => {
+    state.arr.push(3);
+  });
 }
 
-function usePush() {
-	setData(() => {
-		state.arr.push(3);
-	});
+function App() {
+	return h`
+             <button onClick=${usePush}>push</button>
+             <ul $key>
+               ${state.arr.map((todo) => h`<li>${todo}</li>`)}
+             </ul>
+    `;
 }
 ```
 
@@ -149,24 +149,24 @@ const state = {
 	arr: [1, 2],
 };
 
-function Home() {
-	return h`
-        <button onClick=${useUnshift}>unshift</button>
-        <ul $key>
-            ${state.arr.map((item) => h`<li $key>${item}</li>`)}
-        </ul>
-    `;
+function useUnshift() {
+  setData(
+    () => {
+      state.arr.unshift('2');
+    },
+    {
+      status: 'useFirstKey',
+    }
+  );
 }
 
-function useUnshift() {
-	setData(
-		() => {
-			state.arr.unshift('2');
-		},
-		{
-			status: 'useFirstKey',
-		}
-	);
+function Home() {
+	return h`
+            <button onClick=${useUnshift}>unshift</button>
+            <ul $key>
+                ${state.arr.map((item) => h`<li $key>${item}</li>`)}
+            </ul>
+    `;
 }
 ```
 
@@ -181,14 +181,14 @@ const state = {
 	msg: 'sayHello',
 };
 
-function App() {
-	return h`
-         <button onClick=${useClick}>${state.msg}</button>
-     `;
+function useClick() {
+  alert('hello');
 }
 
-function useClick() {
-	alert('hello');
+function App() {
+	return h`
+            <button onClick=${useClick}>${state.msg}</button>
+    `;
 }
 ```
 
@@ -203,30 +203,30 @@ const state = {
 	arr: [1, 2],
 };
 
-function Home() {
-	return h`
-        <button onClick=${useUnshift}>unshift</button>
-        <ul $key>
-            ${state.arr.map((item) => h`<li $key>${item}</li>`)}
-        </ul>
-    `;
+function useUnshift() {
+  setData(
+    () => {
+      state.arr.unshift('2');
+    },
+    {
+      status: 'useFirstKey',
+    }
+  );
 }
 
-function useUnshift() {
-	setData(
-		() => {
-			state.arr.unshift('2');
-		},
-		{
-			status: 'useFirstKey',
-		}
-	);
+function Home() {
+	return h`
+            <button onClick=${useUnshift}>unshift</button>
+            <ul $key>
+                ${state.arr.map((item) => h`<li $key>${item}</li>`)}
+            </ul>
+    `;
 }
 ```
 
 ## 命名功能组件
 
-我们更新组件数据时，不需要全量比较（比如下面的h2、p标签，它们不属于Component1的内容，所以不需要Diff比较），只需要更新组件中的数据即可。
+我们更新组件数据时，不需要全量比较（比如下面的 h2、p 标签，它们不属于 Component1 的内容，所以不需要 Diff 比较），只需要更新组件中的数据即可。
 
 这时候需要在`setData()`方法的第二个参数中传入一个对象，对象键为`name`，值为需要更新的函数组件。 另外，你还需要在父组件中，在函数组件外包裹一个`component`标签，并使用`$name`标签（静态标签的更多信息请看[静态标签](/essentials/usage/#静态标签)），该值为功能组件的名称。
 ```js
@@ -234,35 +234,35 @@ const state1 = {
 	count: 0,
 };
 
+function add1() {
+  setData(
+    () => {
+      state1.count++;
+    },
+    {
+      name: Component1,
+    }
+  );
+}
+
 function Component1() {
 	return h`
-        <h1>Component1</h1>
-        <h1 $key>${state1.count}</h1>
-        <button onClick=${add1}>add1</button> 
-        `;
+            <h1>Component1</h1>
+            <h1 $key>${state1.count}</h1>
+            <button onClick=${add1}>add1</button> 
+    `;
 }
 
 function App() {
 	return h`
-        <h2>txt1</h2>
-        <div>
-            <p>txt2</p>
-            <component $name=${Component1.name}>
-                ${Component1()}
-            </component>
-        </div>
-        `;
-}
-
-function add1() {
-	setData(
-		() => {
-			state1.count++;
-		},
-		{
-			name: Component1,
-		}
-	);
+            <h2>txt1</h2>
+            <div>
+                <p>txt2</p>
+                <component $name=${Component1.name}>
+                    ${Component1()}
+                </component>
+            </div>
+    `;
 }
 ```
 
@@ -270,28 +270,29 @@ function add1() {
 
 ### $key
 
-当我们更改数据时，内部会进行一次 Diff 比较以找出差异，然后相应地更新页面。 但是有些不需要更新的节点，比如下面的button和h1标签，是不需要比较的。 只有 p 标签等动态数据节点需要更新，所以我们显式地在标签中添加静态标签 `$key`。
+当我们更改数据时，内部会进行一次 Diff 比较以找出差异，然后相应地更新页面。 但是有些不需要更新的节点，比如下面的 `<button>` 和 `<h1>` 标签，是不需要比较的。 只有 `<p>` 标签等动态数据节点需要更新，所以我们显式地在标签中添加静态标签 `$key`。
 ```js
 const state = {
 	count: 0,
 };
 
-function App() {
-	return h`
-        <button onClick=${add}>add</button>
-        <p $key>${state.count}</p>
-        <h1>Hello Strve.js</h1>
-`;
+function add() {
+  setData(() => {
+    state.count++;
+  });
 }
 
-function add() {
-	setData(() => {
-		state.count++;
-	});
+function App() {
+	return h`
+            <button onClick=${add}>add</button>
+            <p $key>${state.count}</p>
+            <h1>Hello Strve.js</h1>
+    `;
 }
 ```
 
 另外，动态数据节点除了添加标签外，还需要注意在一些特殊场景下添加`$key`标签，比如动态添加节点、动态显示和隐藏节点等。 因为，只有标有 `$key` 的节点才能使用自己的 DOM 进行操作。
+
 ### $name
 
 该标签需要用在内置标签`component`上，表示内部组件名称，必须与功能组件名称相同。
@@ -300,66 +301,66 @@ const state1 = {
 	count: 0,
 };
 
+function add1() {
+  setData(
+    () => {
+      state1.count++;
+    },
+    {
+      name: Component1,
+    }
+  );
+}
+
 function Component1() {
 	return h`
-        <h1 $key>${state1.count}</h1>
-        <button onClick=${add1}>add1</button> 
-        `;
+            <h1 $key>${state1.count}</h1>
+            <button onClick=${add1}>add1</button> 
+    `;
 }
 
 function App() {
 	return h`
-        <component $name=${Component1.name}>
-            ${Component1()}
-        </component>
-        `;
-}
-
-function add1() {
-	setData(
-		() => {
-			state1.count++;
-		},
-		{
-			name: Component1,
-		}
-	);
+            <component $name=${Component1.name}>
+                ${Component1()}
+            </component>
+    `;
 }
 ```
 
 ### $props
 
-该标签与[propsData](/essentials/api/#propsdata)配合使用，例如需要在子组件中向父组件传递数据。
+该标签与 [propsData](/essentials/api/#propsdata) 配合使用，例如需要在子组件中向父组件传递数据。
 ```js
 // Son
 
 let isShow = true;
 
-function Component1() {
-	return h`
-        <h1 onClick=${emitData}>Son</h1>
-    `;
+function emitData() {
+  isShow = !isShow;
+  propsData.Component1(isShow);
 }
 
-function emitData() {
-	isShow = !isShow;
-	propsData.Component1(isShow);
+function Component1() {
+	return h`
+            <h1 onClick=${emitData}>Son</h1>
+    `;
 }
 ```
 
 ```js
 // Father
 
-function App() {
-	return h/*html*/ `
-        <component $name=${Component1.name} $props=${useGetTit}>
-            ${Component1()}   
-        </component>
-    `;
+function useGetTit(v) {
+  console.log(v); // false
 }
 
-function useGetTit(v) {
-	console.log(v); // false
+function App() {
+	return h`
+            <component $name=${Component1.name} $props=${useGetTit}>
+                ${Component1()}   
+            </component>
+    `;
 }
 ```
 
@@ -373,15 +374,15 @@ function useGetTit(v) {
 function Component1() {
 	return h`
         <h1>Hello</h1>
-        `;
+    `;
 }
 
 function App() {
 	return h`
-        <component $name=${Component1.name}>
-            ${Component1()}
-        </component>
-        `;
+            <component $name=${Component1.name}>
+                ${Component1()}
+            </component>
+    `;
 }
 ```
 
@@ -396,19 +397,19 @@ const state = {
 	isShow: true,
 };
 
-function App() {
-	return h`
-        <button onClick=${useShow}>show</button>
-        <div $key>
-             ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
-        </div>
-    `;
+function useShow() {
+  setData(() => {
+    state.isShow = !state.isShow;
+  });
 }
 
-function useShow() {
-	setData(() => {
-		state.isShow = !state.isShow;
-	});
+function App() {
+	return h`
+            <button onClick=${useShow}>show</button>
+            <div $key>
+                 ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+            </div>
+    `;
 }
 ```
 
@@ -416,7 +417,7 @@ function useShow() {
 
 组件可以定义为三种模式，即：
 
-- Class模式；
+- Class 模式；
 - 构造函数模式；
 - 原型模式；
 
@@ -429,14 +430,7 @@ class About {
 			msg: 'About',
 		};
 	}
-
-	render = () => {
-		return h`
-            <button onClick=${this.goHome}>goHome</button>
-            <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
-    `;
-	};
-
+	
 	useChange = () => {
 		setData(() => {
 			this.state.msg = 'Changed';
@@ -446,6 +440,13 @@ class About {
 	goHome = () => {
 		linkTo('/');
 	};
+  
+    render = () => {
+        return h`
+                <button onClick=${this.goHome}>goHome</button>
+                <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
+        `;
+    };
 }
 ```
 
@@ -496,9 +497,9 @@ home.goAbout = function () {
 
 home.render = function () {
 	return h`
-		<button onClick=${home.goAbout}>GoAbout</button>
-		<h1 onClick=${home.useAdd} $key>${home.state.count}</h1>
-		<h2 $key>${home.state.msg}</h2>
+            <button onClick=${home.goAbout}>GoAbout</button>
+            <h1 onClick=${home.useAdd} $key>${home.state.count}</h1>
+            <h2 $key>${home.state.msg}</h2>
     `;
 };
 ```

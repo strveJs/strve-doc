@@ -15,7 +15,7 @@ If you use native ES Modules.
 </script>
 ```
 
-Or you can import directly in the script.
+Or you can import directly in the `<script>` tag .
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/strvejs@4.3.0/dist/strve.iife.min.js"></script>
@@ -28,20 +28,20 @@ It should be noted that this method requires a `$` sign before the API，like th
 	const state = {
 		count: 0,
 	};
-
+    
+    function add() {
+        $setData(() => {
+            state.count++;
+        });
+    }
+	
 	function App() {
 		return $h`
-            <h1 $key>${state.count}</h1>
-            <button onClick=${add}>Add</button> 
+                <h1 $key>${state.count}</h1>
+                <button onClick=${add}>Add</button> 
         `;
 	}
-
-	function add() {
-		$setData(() => {
-			state.count++;
-		});
-	}
-
+    
 	const app = $createApp(App);
 	app.mount('#app');
 </script>

@@ -13,7 +13,7 @@
 ```js
 function App() {
 	return h`
-		<h1>Hello</h1>
+            <h1>Hello</h1>
 	`;
 }
 
@@ -43,10 +43,10 @@ createApp(App).mount('#app');
 ```js
 function App() {
 	return h`
-         <div class='inner'>
-             <h1>Hello</h1>
-         </div>
-     `;
+             <div class='inner'>
+                 <h1>Hello</h1>
+             </div>
+    `;
 }
 ```
 
@@ -61,7 +61,7 @@ function App() {
 - 参数：
 
   - `Function`
-  - `Object` (optional)
+  - `Object` (可选)
 
 - 详情：
 
@@ -72,32 +72,33 @@ const state = {
 	msg: '1',
 };
 
+function useChange() {
+  setData(() => {
+    state.msg = '2';
+  });
+}
+
 function App() {
 	return h`
-        <button onClick=${useChange}>change</button>
-        <p $key>${state.msg}</p>
+            <button onClick=${useChange}>change</button>
+            <p $key>${state.msg}</p>
     `;
 }
 
-function useChange() {
-	setData(() => {
-		state.msg = '2';
-	});
-}
 ```
 
 第二个参数为对象类型，可选属性如下：
 
 | 特性 | 功能                                                                                                                                                                                |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| status     | 标识字符串类型的特殊状态字段。 具体属性值请参考[status](/essentials/usage/#status)                                                   |
-| name       | 函数组件的名称，类型为Function。 直接传入一个函数组件，请参考[命名功能组件](/essentials/usage/#named-function-component) |
+| status     | 标识字符串类型的特殊状态字段。 具体属性值请参考 [status](/essentials/usage/#status)                                                   |
+| name       | 函数组件的名称，类型为Function。 直接传入一个函数组件，请参考 [命名功能组件](/essentials/usage/#named-function-component) |
 
 ## version
 
 - 详情：
 
-直接获取Strve.js的版本号。
+直接获取 Strve.js 的版本号。
 
 ## onMounted
 
@@ -114,22 +115,23 @@ const state = {
 	count: 0,
 };
 
+function add() {
+  setData(() => {
+    state.count++;
+  });
+}
+
 function App() {
 	return h`
             <h1 $key="h1">${state.count}</h1>
             <button onClick=${add}>Add</button> 
-        `;
+    `;
 }
 
 onMounted(() => {
 	console.log(domInfo.h1); // <button>Add</button>
 });
 
-function add() {
-	setData(() => {
-		state.count++;
-	});
-}
 ```
 
 ## onUnmounted
@@ -156,7 +158,7 @@ class Home {
 
 	render = () => h`
             <button onClick=${this.goAbout}>goAbout</button>
-        `;
+    `;
 }
 
 class About {
@@ -172,7 +174,7 @@ class About {
 
 	render = () => h`
             <button onClick=${this.goHome}>goHome</button>
-        `;
+    `;
 }
 ```
 
@@ -192,22 +194,24 @@ const state = {
 };
 
 let styleColor = 'color:red';
-function App() {
-	return h`
-            <h1 $key="h1" style=${styleColor}>${state.count}</h1>
-            <button onClick=${add}>Add</button> 
-        `;
-}
 
 function add() {
-	setData(() => {
-		styleColor = 'color:green';
-		state.count++;
-		nextTick(() => {
-			console.log(domInfo.h1); // <h1 style="color:green">1</h1>
-		});
-	});
+  setData(() => {
+    styleColor = 'color:green';
+    state.count++;
+    nextTick(() => {
+      console.log(domInfo.h1); // <h1 style="color:green">1</h1>
+    });
+  });
 }
+
+function App() {
+	return h`
+              <h1 $key="h1" style=${styleColor}>${state.count}</h1>
+              <button onClick=${add}>Add</button> 
+    `;
+}
+
 ```
 
 ## domInfo
@@ -217,15 +221,15 @@ function add() {
 它是一个 DOM 信息对象，你可以在 DOM 中的 `$key` 中定义一个属性。
 
 ```js
+function add() {
+  console.log(domInfo.h1); // <h1>Strve.js</h1>
+}
+
 function App() {
 	return h`
             <h1 $key="h1">Strve.js</h1>
             <button onClick=${add}>Add</button> 
-        `;
-}
-
-function add() {
-	console.log(domInfo.h1); // <h1>Strve.js</h1>
+    `;
 }
 ```
 
@@ -238,27 +242,27 @@ function add() {
 ```js
 // Father
 
-function App() {
-	return h`
-        <component $name=${Component1.name} $props=${useGetTit}>
-            ${Component1()}   
-        </component>
-        <component $name=${Component2.name}>
-            ${Component2()}   
-        </component>
-    `;
+function useGetTit(v) {
+  console.log(v);
+  setData(
+          () => {
+            propsData.Component2 = v;
+          },
+          {
+            name: Component2,
+          }
+  );
 }
 
-function useGetTit(v) {
-	console.log(v);
-	setData(
-		() => {
-			propsData.Component2 = v;
-		},
-		{
-			name: Component2,
-		}
-	);
+function App() {
+	return h`
+            <component $name=${Component1.name} $props=${useGetTit}>
+                ${Component1()}   
+            </component>
+            <component $name=${Component2.name}>
+                ${Component2()}   
+            </component>
+    `;
 }
 ```
 
@@ -267,16 +271,17 @@ function useGetTit(v) {
 
 let isShow = true;
 
+function emitData() {
+  isShow = !isShow;
+  propsData.Component1(isShow);
+}
+
 function Component1() {
 	return h`
-        <h1 onClick=${emitData}>Son</h1>
+            <h1 onClick=${emitData}>Son</h1>
     `;
 }
 
-function emitData() {
-	isShow = !isShow;
-	propsData.Component1(isShow);
-}
 ```
 
 ```js
@@ -284,24 +289,24 @@ function emitData() {
 
 let v = true;
 
-function Component2() {
-	return h`
-        <div $key>
-		${v ? h`<p $key>${v}</p>` : h`<null></null>`}
-		</div>
-		<button onClick=${f}>btn</button>
-    `;
+function f() {
+  setData(
+          () => {
+            v = propsData.Component2;
+            console.log(v);
+          },
+          {
+            name: Component2,
+          }
+  );
 }
 
-function f() {
-	setData(
-		() => {
-			v = propsData.Component2;
-			console.log(v);
-		},
-		{
-			name: Component2,
-		}
-	);
+function Component2() {
+	return h`
+            <div $key>
+            ${v ? h`<p $key>${v}</p>` : h`<null></null>`}
+            </div>
+            <button onClick=${f}>btn</button>
+    `;
 }
 ```
