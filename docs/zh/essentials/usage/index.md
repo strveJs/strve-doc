@@ -100,16 +100,20 @@ const state = {
 };
 
 function useShow() {
-  setData(() => {
-    state.isShow = !state.isShow;
-  });
+	setData(() => {
+		state.isShow = !state.isShow;
+	});
 }
 
 function App() {
 	return h`
              <button onClick=${useShow}>show</button>
              <div $key>
-                  ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+                  ${
+										state.isShow
+											? h`<p $key>Strve.js</p>`
+											: h`<null $key></null>`
+									}
              </div>
     `;
 }
@@ -125,9 +129,9 @@ const state = {
 };
 
 function usePush() {
-  setData(() => {
-    state.arr.push(3);
-  });
+	setData(() => {
+		state.arr.push(3);
+	});
 }
 
 function App() {
@@ -150,14 +154,14 @@ const state = {
 };
 
 function useUnshift() {
-  setData(
-    () => {
-      state.arr.unshift('2');
-    },
-    {
-      status: 'useFirstKey',
-    }
-  );
+	setData(
+		() => {
+			state.arr.unshift('2');
+		},
+		{
+			status: 'useFirstKey',
+		}
+	);
 }
 
 function Home() {
@@ -182,7 +186,7 @@ const state = {
 };
 
 function useClick() {
-  alert('hello');
+	alert('hello');
 }
 
 function App() {
@@ -204,14 +208,14 @@ const state = {
 };
 
 function useUnshift() {
-  setData(
-    () => {
-      state.arr.unshift('2');
-    },
-    {
-      status: 'useFirstKey',
-    }
-  );
+	setData(
+		() => {
+			state.arr.unshift('2');
+		},
+		{
+			status: 'useFirstKey',
+		}
+	);
 }
 
 function Home() {
@@ -229,20 +233,21 @@ function Home() {
 我们更新组件数据时，不需要全量比较（比如下面的 h2、p 标签，它们不属于 Component1 的内容，所以不需要 Diff 比较），只需要更新组件中的数据即可。
 
 这时候需要在`setData()`方法的第二个参数中传入一个对象，对象键为`name`，值为需要更新的函数组件。 另外，你还需要在父组件中，在函数组件外包裹一个`component`标签，并使用`$name`标签（静态标签的更多信息请看[静态标签](/essentials/usage/#静态标签)），该值为功能组件的名称。
+
 ```js
 const state1 = {
 	count: 0,
 };
 
 function add1() {
-  setData(
-    () => {
-      state1.count++;
-    },
-    {
-      name: Component1,
-    }
-  );
+	setData(
+		() => {
+			state1.count++;
+		},
+		{
+			name: Component1,
+		}
+	);
 }
 
 function Component1() {
@@ -271,15 +276,16 @@ function App() {
 ### $key
 
 当我们更改数据时，内部会进行一次 Diff 比较以找出差异，然后相应地更新页面。 但是有些不需要更新的节点，比如下面的 `<button>` 和 `<h1>` 标签，是不需要比较的。 只有 `<p>` 标签等动态数据节点需要更新，所以我们显式地在标签中添加静态标签 `$key`。
+
 ```js
 const state = {
 	count: 0,
 };
 
 function add() {
-  setData(() => {
-    state.count++;
-  });
+	setData(() => {
+		state.count++;
+	});
 }
 
 function App() {
@@ -296,20 +302,21 @@ function App() {
 ### $name
 
 该标签需要用在内置标签`component`上，表示内部组件名称，必须与功能组件名称相同。
+
 ```js
 const state1 = {
 	count: 0,
 };
 
 function add1() {
-  setData(
-    () => {
-      state1.count++;
-    },
-    {
-      name: Component1,
-    }
-  );
+	setData(
+		() => {
+			state1.count++;
+		},
+		{
+			name: Component1,
+		}
+	);
 }
 
 function Component1() {
@@ -331,14 +338,15 @@ function App() {
 ### $props
 
 该标签与 [propsData](/essentials/api/#propsdata) 配合使用，例如需要在子组件中向父组件传递数据。
+
 ```js
 // Son
 
 let isShow = true;
 
 function emitData() {
-  isShow = !isShow;
-  propsData.Component1(isShow);
+	isShow = !isShow;
+	propsData.Component1(isShow);
 }
 
 function Component1() {
@@ -352,7 +360,7 @@ function Component1() {
 // Father
 
 function useGetTit(v) {
-  console.log(v); // false
+	console.log(v); // false
 }
 
 function App() {
@@ -398,17 +406,40 @@ const state = {
 };
 
 function useShow() {
-  setData(() => {
-    state.isShow = !state.isShow;
-  });
+	setData(() => {
+		state.isShow = !state.isShow;
+	});
 }
 
 function App() {
 	return h`
             <button onClick=${useShow}>show</button>
             <div $key>
-                 ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+                 ${
+										state.isShow
+											? h`<p $key>Strve.js</p>`
+											: h`<null $key></null>`
+									}
             </div>
+    `;
+}
+```
+
+### fragment
+
+创建一个文档片段标签。它不是真实 DOM 树的一部分，它的变化不会触发 DOM 树的重新渲染，且不会对性能产生影响。
+
+```js
+const state = {
+	x: 0,
+	y: 0,
+};
+
+function App() {
+	return $h`
+            <fragment>
+                <h1 $key>Mouse position is at: ${state.x}, ${state.y}</h1>
+            </fragment>
     `;
 }
 ```
@@ -430,7 +461,7 @@ class About {
 			msg: 'About',
 		};
 	}
-	
+
 	useChange = () => {
 		setData(() => {
 			this.state.msg = 'Changed';
@@ -440,13 +471,13 @@ class About {
 	goHome = () => {
 		linkTo('/');
 	};
-  
-    render = () => {
-        return h`
+
+	render = () => {
+		return h`
                 <button onClick=${this.goHome}>goHome</button>
                 <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
         `;
-    };
+	};
 }
 ```
 

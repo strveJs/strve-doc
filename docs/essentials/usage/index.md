@@ -100,16 +100,20 @@ const state = {
 };
 
 function useShow() {
-  setData(() => {
-    state.isShow = !state.isShow;
-  });
+	setData(() => {
+		state.isShow = !state.isShow;
+	});
 }
 
 function App() {
 	return h`
              <button onClick=${useShow}>show</button>
              <div $key>
-                  ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+                  ${
+										state.isShow
+											? h`<p $key>Strve.js</p>`
+											: h`<null $key></null>`
+									}
              </div>
     `;
 }
@@ -125,9 +129,9 @@ const state = {
 };
 
 function usePush() {
-  setData(() => {
-    state.arr.push(3);
-  });
+	setData(() => {
+		state.arr.push(3);
+	});
 }
 
 function App() {
@@ -150,14 +154,14 @@ const state = {
 };
 
 function useUnshift() {
-  setData(
-    () => {
-      state.arr.unshift('2');
-    },
-    {
-      status: 'useFirstKey',
-    }
-  );
+	setData(
+		() => {
+			state.arr.unshift('2');
+		},
+		{
+			status: 'useFirstKey',
+		}
+	);
 }
 
 function Home() {
@@ -182,7 +186,7 @@ const state = {
 };
 
 function useClick() {
-  alert('hello');
+	alert('hello');
 }
 
 function App() {
@@ -204,14 +208,14 @@ const state = {
 };
 
 function useUnshift() {
-  setData(
-    () => {
-      state.arr.unshift('2');
-    },
-    {
-      status: 'useFirstKey',
-    }
-  );
+	setData(
+		() => {
+			state.arr.unshift('2');
+		},
+		{
+			status: 'useFirstKey',
+		}
+	);
 }
 
 function Home() {
@@ -236,14 +240,14 @@ const state1 = {
 };
 
 function add1() {
-  setData(
-    () => {
-      state1.count++;
-    },
-    {
-      name: Component1,
-    }
-  );
+	setData(
+		() => {
+			state1.count++;
+		},
+		{
+			name: Component1,
+		}
+	);
 }
 
 function Component1() {
@@ -279,9 +283,9 @@ const state = {
 };
 
 function add() {
-  setData(() => {
-    state.count++;
-  });
+	setData(() => {
+		state.count++;
+	});
 }
 
 function App() {
@@ -305,14 +309,14 @@ const state1 = {
 };
 
 function add1() {
-  setData(
-    () => {
-      state1.count++;
-    },
-    {
-      name: Component1,
-    }
-  );
+	setData(
+		() => {
+			state1.count++;
+		},
+		{
+			name: Component1,
+		}
+	);
 }
 
 function Component1() {
@@ -341,8 +345,8 @@ This tag is used in conjunction with [propsData](/essentials/api/#propsdata), fo
 let isShow = true;
 
 function emitData() {
-  isShow = !isShow;
-  propsData.Component1(isShow);
+	isShow = !isShow;
+	propsData.Component1(isShow);
 }
 
 function Component1() {
@@ -356,7 +360,7 @@ function Component1() {
 // Father
 
 function useGetTit(v) {
-  console.log(v); // false
+	console.log(v); // false
 }
 
 function App() {
@@ -402,17 +406,40 @@ const state = {
 };
 
 function useShow() {
-  setData(() => {
-    state.isShow = !state.isShow;
-  });
+	setData(() => {
+		state.isShow = !state.isShow;
+	});
 }
 
 function App() {
 	return h`
             <button onClick=${useShow}>show</button>
             <div $key>
-                 ${state.isShow ? h`<p $key>Strve.js</p>` : h`<null $key></null>`}
+                 ${
+										state.isShow
+											? h`<p $key>Strve.js</p>`
+											: h`<null $key></null>`
+									}
             </div>
+    `;
+}
+```
+
+### fragment
+
+Create a document fragment tag. It is not part of the real DOM tree, its changes will not trigger a re-render of the DOM tree, and there will be no performance impact.
+
+```js
+const state = {
+	x: 0,
+	y: 0,
+};
+
+function App() {
+	return $h`
+            <fragment>
+                <h1 $key>Mouse position is at: ${state.x}, ${state.y}</h1>
+            </fragment>
     `;
 }
 ```
@@ -434,7 +461,7 @@ class About {
 			msg: 'About',
 		};
 	}
-		
+
 	useChange = () => {
 		setData(() => {
 			this.state.msg = 'Changed';
@@ -444,9 +471,9 @@ class About {
 	goHome = () => {
 		linkTo('/');
 	};
-  
+
 	render = () => {
-        return h`
+		return h`
                 <button onClick=${this.goHome}>goHome</button>
                 <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
         `;
