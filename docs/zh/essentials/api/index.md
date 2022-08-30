@@ -73,9 +73,9 @@ const state = {
 };
 
 function useChange() {
-  setData(() => {
-    state.msg = '2';
-  });
+	setData(() => {
+		state.msg = '2';
+	});
 }
 
 function App() {
@@ -84,15 +84,14 @@ function App() {
             <p $key>${state.msg}</p>
     `;
 }
-
 ```
 
 第二个参数为对象类型，可选属性如下：
 
-| 特性 | 功能                                                                                                                                                                                |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| status     | 标识字符串类型的特殊状态字段。 具体属性值请参考 [status](/essentials/usage/#status)                                                   |
-| name       | 函数组件的名称，类型为Function。 直接传入一个函数组件，请参考 [命名功能组件](/essentials/usage/#named-function-component) |
+| 特性   | 功能                                                                                                              |
+| ------ | ----------------------------------------------------------------------------------------------------------------- |
+| status | 标识字符串类型的特殊状态字段。 具体属性值请参考 [status](/zh/essentials/usage/#status)                            |
+| name   | 函数组件的名称，类型为 Function。 直接传入一个函数组件，请参考 [命名功能组件](/zh/essentials/usage/#命名功能组件) |
 
 ## version
 
@@ -116,9 +115,9 @@ const state = {
 };
 
 function add() {
-  setData(() => {
-    state.count++;
-  });
+	setData(() => {
+		state.count++;
+	});
 }
 
 function App() {
@@ -131,7 +130,6 @@ function App() {
 onMounted(() => {
 	console.log(domInfo.h1); // <button>Add</button>
 });
-
 ```
 
 ## onUnmounted
@@ -196,13 +194,13 @@ const state = {
 let styleColor = 'color:red';
 
 function add() {
-  setData(() => {
-    styleColor = 'color:green';
-    state.count++;
-    nextTick(() => {
-      console.log(domInfo.h1); // <h1 style="color:green">1</h1>
-    });
-  });
+	setData(() => {
+		styleColor = 'color:green';
+		state.count++;
+		nextTick(() => {
+			console.log(domInfo.h1); // <h1 style="color:green">1</h1>
+		});
+	});
 }
 
 function App() {
@@ -211,7 +209,6 @@ function App() {
               <button onClick=${add}>Add</button> 
     `;
 }
-
 ```
 
 ## domInfo
@@ -222,7 +219,7 @@ function App() {
 
 ```js
 function add() {
-  console.log(domInfo.h1); // <h1>Strve.js</h1>
+	console.log(domInfo.h1); // <h1>Strve.js</h1>
 }
 
 function App() {
@@ -243,15 +240,15 @@ function App() {
 // Father
 
 function useGetTit(v) {
-  console.log(v);
-  setData(
-          () => {
-            propsData.Component2 = v;
-          },
-          {
-            name: Component2,
-          }
-  );
+	console.log(v);
+	setData(
+		() => {
+			propsData.Component2 = v;
+		},
+		{
+			name: Component2,
+		}
+	);
 }
 
 function App() {
@@ -272,8 +269,8 @@ function App() {
 let isShow = true;
 
 function emitData() {
-  isShow = !isShow;
-  propsData.Component1(isShow);
+	isShow = !isShow;
+	propsData.Component1(isShow);
 }
 
 function Component1() {
@@ -281,7 +278,6 @@ function Component1() {
             <h1 onClick=${emitData}>Son</h1>
     `;
 }
-
 ```
 
 ```js
@@ -290,15 +286,15 @@ function Component1() {
 let v = true;
 
 function f() {
-  setData(
-          () => {
-            v = propsData.Component2;
-            console.log(v);
-          },
-          {
-            name: Component2,
-          }
-  );
+	setData(
+		() => {
+			v = propsData.Component2;
+			console.log(v);
+		},
+		{
+			name: Component2,
+		}
+	);
 }
 
 function Component2() {

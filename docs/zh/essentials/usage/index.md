@@ -232,7 +232,7 @@ function Home() {
 
 我们更新组件数据时，不需要全量比较（比如下面的 h2、p 标签，它们不属于 Component1 的内容，所以不需要 Diff 比较），只需要更新组件中的数据即可。
 
-这时候需要在`setData()`方法的第二个参数中传入一个对象，对象键为`name`，值为需要更新的函数组件。 另外，你还需要在父组件中，在函数组件外包裹一个`component`标签，并使用`$name`标签（静态标签的更多信息请看[静态标签](/essentials/usage/#静态标签)），该值为功能组件的名称。
+这时候需要在`setData()`方法的第二个参数中传入一个对象，对象键为`name`，值为需要更新的函数组件。 另外，你还需要在父组件中，在函数组件外包裹一个`component`标签，并使用`$name`标签（静态标签的更多信息请看[静态标签](/zh/essentials/usage/#静态标签)），该值为功能组件的名称。
 
 ```js
 const state1 = {
@@ -337,7 +337,7 @@ function App() {
 
 ### $props
 
-该标签与 [propsData](/essentials/api/#propsdata) 配合使用，例如需要在子组件中向父组件传递数据。
+该标签与 [propsData](/zh/essentials/api/#propsdata) 配合使用，例如需要在子组件中向父组件传递数据。
 
 ```js
 // Son

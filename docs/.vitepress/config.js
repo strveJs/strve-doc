@@ -27,7 +27,7 @@ export default {
 			appId: 'OO7L0TPJ7C',
 		},
 		socialLinks: [
-			{ icon: 'github', link: 'https://github.com/maomincoding/strve' }
+			{ icon: 'github', link: 'https://github.com/maomincoding/strve' },
 		],
 		locales: {
 			'/': {
@@ -43,7 +43,7 @@ export default {
 				sidebar: [
 					{
 						text: 'Guide',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'Introduce',
@@ -61,7 +61,7 @@ export default {
 					},
 					{
 						text: 'Essentials',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'API',
@@ -75,7 +75,7 @@ export default {
 					},
 					{
 						text: 'Tool',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'CreateStrveApp',
@@ -93,7 +93,7 @@ export default {
 					},
 					{
 						text: 'Other',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'Change Log',
@@ -133,7 +133,7 @@ export default {
 				sidebar: [
 					{
 						text: '指导',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: '介绍',
@@ -151,7 +151,7 @@ export default {
 					},
 					{
 						text: '要点',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'API',
@@ -165,7 +165,7 @@ export default {
 					},
 					{
 						text: '工具',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'CreateStrveApp',
@@ -183,7 +183,7 @@ export default {
 					},
 					{
 						text: '其他',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: '更新日志',
