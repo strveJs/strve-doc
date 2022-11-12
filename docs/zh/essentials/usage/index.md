@@ -110,10 +110,10 @@ function App() {
              <button onClick=${useShow}>show</button>
              <div $key>
                   ${
-										state.isShow
-											? h`<p $key>Strve.js</p>`
-											: h`<null $key></null>`
-									}
+				state.isShow
+					? h`<p $key>Strve.js</p>`
+					: h`<null $key></null>`
+				}
              </div>
     `;
 }
@@ -416,10 +416,10 @@ function App() {
             <button onClick=${useShow}>show</button>
             <div $key>
                  ${
-										state.isShow
-											? h`<p $key>Strve.js</p>`
-											: h`<null $key></null>`
-									}
+				state.isShow
+					? h`<p $key>Strve.js</p>`
+					: h`<null $key></null>`
+				}
             </div>
     `;
 }

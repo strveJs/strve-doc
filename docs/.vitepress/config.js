@@ -27,7 +27,8 @@ export default {
 			appId: 'OO7L0TPJ7C',
 		},
 		socialLinks: [
-			{ icon: 'github', link: 'https://github.com/maomincoding/strve' },
+			{ icon: 'twitter', link: 'https://twitter.com/maomincoding' },
+			{ icon: 'github', link: 'https://github.com/maomincoding/strve' }
 		],
 		locales: {
 			'/': {

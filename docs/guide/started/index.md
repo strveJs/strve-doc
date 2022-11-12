@@ -2,6 +2,8 @@
 
 A way to try Strve.js is to use direct ingest CDN links. You can open it in your browser and follow the example to learn some basic usage.
 
+## ES Modules
+
 It should be noted that the source code of Strve.js is managed by ES Modules, so when using it directly in the browser, you need to add a `type="module"` attribute to the `<script>` tag to indicate that this file is used as a `'module'` way to run.
 
 ```html
@@ -44,6 +46,8 @@ It should be noted that the source code of Strve.js is managed by ES Modules, so
 	</body>
 </html>
 ```
+
+## IIFE
 
 Of course, you may also use the scene introduced directly in the script, so that it can be opened directly in the browser.
 

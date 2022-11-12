@@ -39,7 +39,7 @@
 <style scoped>
 	.started_main {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-start;
 		padding: 20px;
 		border-radius: 10px;
 		border: 1px solid #c6715b;
