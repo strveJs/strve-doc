@@ -1,7 +1,5 @@
 # strveRouter
 
-<a href="https://npmjs.com/package/strve-router"><img src="https://badgen.net/npm/v/strve-router" alt="npm package"></a>
-
 Strve Router is the official route manager for Strve.js. It is deeply integrated with the core of Strve.js, making it easy to build single-page applications.
 
 Currently only Hash mode is supported.

@@ -1,7 +1,5 @@
 # strveRouter
 
-<a href="https://npmjs.com/package/strve-router"><img src="https://badgen.net/npm/v/strve-router" alt="npm package"></a>
-
 Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心深度集成，轻松构建单页应用程序。
 
 目前仅支持 Hash 模式。

@@ -1,7 +1,5 @@
 # Install
 
-<a href="https://npmjs.com/package/strve-js"><img src="https://badgen.net/npm/v/strve-js" alt="npm package"></a>
-
 ## CDN
 
 If you use native ES Modules.
