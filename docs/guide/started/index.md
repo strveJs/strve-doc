@@ -26,20 +26,20 @@ It should be noted that the source code of Strve.js is managed by ES Modules, so
 			const state = {
 				count: 0,
 			};
-            
-            function add() {
-                $setData(() => {
-                    state.count++;
-                });
-            }
-			
+
+			function add() {
+				$setData(() => {
+					state.count++;
+				});
+			}
+
 			function App() {
 				return h`
                         <h1 $key>${state.count}</h1>
                         <button onClick=${add}>Add</button> 
                 `;
 			}
-            
+
 			const app = createApp(App);
 			app.mount('#app');
 		</script>
@@ -66,25 +66,23 @@ Of course, you may also use the scene introduced directly in the script, so that
 			const state = {
 				count: 0,
 			};
-            
-            function add() {
-                $setData(() => {
-                    state.count++;
-                });
-            }
-			
+
+			function add() {
+				$setData(() => {
+					state.count++;
+				});
+			}
+
 			function App() {
 				return $h`
                         <h1 $key>${state.count}</h1>
                         <button onClick=${add}>Add</button> 
                 `;
 			}
-            
+
 			const app = $createApp(App);
 			app.mount('#app');
 		</script>
 	</body>
 </html>
 ```
-
-<startedCom/>

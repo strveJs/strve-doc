@@ -1,6 +1,6 @@
 export default {
-	base: '/strvejs-doc/',
-	head: [['link', { rel: 'icon', href: '/strvejs-doc/' + 'logo.png' }]],
+	base: '/strve-doc/',
+	head: [['link', { rel: 'icon', href: '/strve-doc/' + 'logo.png' }]],
 	markdown: {
 		theme: 'material-palenight',
 		lineNumbers: true,
@@ -28,7 +28,7 @@ export default {
 		},
 		socialLinks: [
 			{ icon: 'twitter', link: 'https://twitter.com/maomincoding' },
-			{ icon: 'github', link: 'https://github.com/maomincoding/strve' }
+			{ icon: 'github', link: 'https://github.com/maomincoding/strve' },
 		],
 		locales: {
 			'/': {

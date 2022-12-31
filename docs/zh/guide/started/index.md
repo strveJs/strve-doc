@@ -66,7 +66,7 @@
 			const state = {
 				count: 0,
 			};
-			
+
 			function add() {
 				$setData(() => {
 					state.count++;
@@ -86,5 +86,3 @@
 	</body>
 </html>
 ```
-
-<startedCom/>

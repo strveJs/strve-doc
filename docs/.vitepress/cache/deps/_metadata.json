@@ -1,0 +1,23 @@
+{
+  "hash": "65c0a259",
+  "browserHash": "986e7bea",
+  "optimized": {
+    "vue": {
+      "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "c75f367e",
+      "needsInterop": false
+    },
+    "strve-js": {
+      "src": "../../../../node_modules/strve-js/dist/strve.runtime-esm.js",
+      "file": "strve-js.js",
+      "fileHash": "db1b54be",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-T2T6Q22Z": {
+      "file": "chunk-T2T6Q22Z.js"
+    }
+  }
+}

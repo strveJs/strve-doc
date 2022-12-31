@@ -1,21 +1,22 @@
 {
-  "name": "strvejsdoc",
-  "version": "4.0.0",
-  "description": "Strve.js document address",
-  "main": "index.js",
-  "repository": "https://github.com/maomincoding/strvejs-doc.git",
-  "author": "maomincoding <17864296568@163.com>",
-  "license": "MIT",
-  "private": false,
-  "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "serve": "vitepress serve docs --port 8080",
-    "sh": "bash deploy.sh"
-  },
-  "devDependencies": {
-    "strvejs": "^4.3.0",
-    "vitepress": "^1.0.0-alpha.4",
-    "vue": "^3.2.37"
-  }
+	"name": "strve-doc",
+	"version": "5.0.1",
+	"description": "Strve.js document address",
+	"main": "index.js",
+	"repository": "https://github.com/maomincoding/strve-doc.git",
+	"author": "maomincoding",
+	"license": "MIT",
+	"private": false,
+	"scripts": {
+		"dev": "vitepress dev docs",
+		"build": "vitepress build docs",
+		"serve": "vitepress serve docs --port 8080",
+		"sh": "bash deploy.sh"
+	},
+	"devDependencies": {
+		"vitepress": "^1.0.0-alpha.4"
+	},
+	"dependencies": {
+		"strve-js": "^5.0.1"
+	}
 }

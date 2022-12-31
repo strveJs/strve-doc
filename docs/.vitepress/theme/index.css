@@ -5,8 +5,12 @@
 	--vp-c-brand-lighter: #c6715b;
 
 	--vp-home-hero-name-color: transparent;
-	--vp-home-hero-image-filter:blur(88px);
-	--vp-home-hero-image-background-image: linear-gradient( -45deg, #ecaf07ea 50%, #c6715b 50% );
+	--vp-home-hero-image-filter: blur(88px);
+	--vp-home-hero-image-background-image: linear-gradient(
+		-45deg,
+		#ecaf07ea 50%,
+		#c6715b 50%
+	);
 	--vp-home-hero-name-background: linear-gradient(45deg, #ecaf07ea, #c6715b);
 }
 
@@ -15,45 +19,40 @@ html .dark {
 	--vp-c-brand-light: #c6715b;
 }
 
-/* 版本号 */
-.clip::after{
-	content: 'v4.3.0';
-	font-size: 24px;
-	color: #fff;
-	padding:0 10px;
-}
-
 /* 搜索栏 */
-.VPNavBarSearch{
-	justify-content:flex-end;
+.VPNavBarSearch {
+	justify-content: flex-end;
 	padding-right: 16px;
 }
 
 /* 首页小图标 */
-.items .icon{
+.items .icon {
 	margin: 20px auto;
 }
 
 /* 首页标题描述 */
-.title,.details{
+.title,
+.details {
 	text-align: center;
 }
 
 /* 上一页，下一页 */
-.prev .desc,.prev .title{
+.prev .desc,
+.prev .title {
 	text-align: left;
 }
-.next .desc,.next .title{
+.next .desc,
+.next .title {
 	text-align: right;
 }
 
 /* 头像 */
-.user-img{
+.user-img {
 	width: 80px;
 	height: 80px;
-	border-radius:100% ;
+	border-radius: 100%;
 }
-.user-img:hover{
+.user-img:hover {
 	transition: all 1s;
 	transform: rotate(360deg);
 }
