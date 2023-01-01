@@ -5,13 +5,14 @@
 	--vp-c-brand-lighter: #c6715b;
 
 	--vp-home-hero-name-color: transparent;
-	--vp-home-hero-image-filter: blur(88px);
+	--vp-home-hero-image-filter: blur(100px);
 	--vp-home-hero-image-background-image: linear-gradient(
 		-45deg,
 		#ecaf07ea 50%,
 		#c6715b 50%
 	);
 	--vp-home-hero-name-background: linear-gradient(45deg, #ecaf07ea, #c6715b);
+	--vp-c-bg-alpha-with-backdrop: transparent;
 }
 
 html .dark {
@@ -19,13 +20,18 @@ html .dark {
 	--vp-c-brand-light: #c6715b;
 }
 
+@media (min-width: 960px) {
+	.VPHome .image-container {
+		transform: translate(0, 0);
+	}
+}
 /* 版本号 */
-.clip::after {
+/* .clip::after {
 	content: 'v5.0.3';
 	font-size: 24px;
 	color: #fff;
 	padding: 0 10px;
-}
+} */
 
 /* 搜索栏 */
 .VPNavBarSearch {

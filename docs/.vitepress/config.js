@@ -51,12 +51,12 @@ export default {
 								link: '/guide/introduce/',
 							},
 							{
-								text: 'Install',
-								link: '/guide/install/',
-							},
-							{
 								text: 'Started',
 								link: '/guide/started/',
+							},
+							{
+								text: 'Install',
+								link: '/guide/install/',
 							},
 						],
 					},
@@ -141,12 +141,12 @@ export default {
 								link: '/zh/guide/introduce/',
 							},
 							{
-								text: '安装',
-								link: '/zh/guide/install/',
-							},
-							{
 								text: '开始',
 								link: '/zh/guide/started/',
+							},
+							{
+								text: '安装',
+								link: '/zh/guide/install/',
 							},
 						],
 					},
