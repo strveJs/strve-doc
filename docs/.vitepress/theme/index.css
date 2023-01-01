@@ -19,6 +19,14 @@ html .dark {
 	--vp-c-brand-light: #c6715b;
 }
 
+/* 版本号 */
+.clip::after {
+	content: 'v5.0.3';
+	font-size: 24px;
+	color: #fff;
+	padding: 0 10px;
+}
+
 /* 搜索栏 */
 .VPNavBarSearch {
 	justify-content: flex-end;
