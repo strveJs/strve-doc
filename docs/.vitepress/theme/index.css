@@ -13,6 +13,7 @@
 	);
 	--vp-home-hero-name-background: linear-gradient(45deg, #ecaf07ea, #c6715b);
 	--vp-c-bg-alpha-with-backdrop: transparent;
+	/* --vp-c-black-mute:background:rgb(47,47,47); */
 }
 
 html .dark {
