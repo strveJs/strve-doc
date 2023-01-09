@@ -102,9 +102,9 @@ app.mount('#app');
 
 在 NPM 包的 dist/ 目录你将会找到很多不同的 Strve.js 构建版本。这里列出了它们之间的差别：
 
-|                    | ES Module (基于构建工具使用) | ES Module (直接用于浏览器) | UMD |
-| ------------------ | ---------------------------- | -------------------------- | --- |
-| 完整版             |                              |                            |
-| 完整版(生产环境)   |                              |                            |
-| 运行时版           |                              |                            |
-| 运行时版(生产环境) |                              |                            |
+|  | ES Module (基于构建工具使用) | ES Module (直接用于浏览器) | UMD |
+| --- | --- | --- | --- |
+| 完整版 | - | strve.full-esm.js | strve.full.js |
+| 完整版(生产环境) | - | strve.full-esm.prod.js | strve.full.prod.js |
+| 运行时版 | strve.runtime-esm.js | - | - |
+| 运行时版(生产环境) | strve.runtime-esm.prod.js | - | - |

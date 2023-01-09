@@ -16,13 +16,13 @@ hero:
       text: 在 GitHub 上查看
       link: https://github.com/maomincoding/strve
 features:
-  - icon:  🔌
+  - icon: 🔌
     title: 易用
     details: 更容易上手
-  - icon:  🚀
+  - icon: 🚀
     title: 快速
     details: 超快的虚拟 DOM
-  - icon:  🔩
+  - icon: 🔩
     title: 灵活
     details: 灵活操作代码块
 ---
