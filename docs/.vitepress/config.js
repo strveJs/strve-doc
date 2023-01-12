@@ -90,6 +90,10 @@ export default {
 								text: 'StrveRouter',
 								link: '/tool/strveRouter/',
 							},
+							{
+								text: 'BabelPluginStrve',
+								link: '/tool/babelPluginStrve/',
+							},
 						],
 					},
 					{
@@ -179,6 +183,10 @@ export default {
 							{
 								text: 'StrveRouter',
 								link: '/zh/tool/strveRouter/',
+							},
+							{
+								text: 'BabelPluginStrve',
+								link: '/zh/tool/babelPluginStrve/',
 							},
 						],
 					},
