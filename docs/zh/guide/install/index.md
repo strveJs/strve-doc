@@ -108,3 +108,8 @@ app.mount('#app');
 | 完整版(生产环境) | - | strve.full-esm.prod.js | strve.full.prod.js |
 | 运行时版 | strve.runtime-esm.js | - | - |
 | 运行时版(生产环境) | strve.runtime-esm.prod.js | - | - |
+
+不同的版本：
+
+1. 完整版本：包括编译器(用于将模板字符串编译为 JavaScript 呈现函数的代码)和运行时版本；
+2. 运行时：用于创建实例、渲染和处理虚拟 DOM 的代码。基本上，它是从编译器中删除所有其他内容；
