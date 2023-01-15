@@ -6,9 +6,9 @@
 - 调整源代码仓库构建模块；
 - 不同的版本：
   1. 完整版本：包括编译器(用于将模板字符串编译为 JavaScript 呈现函数的代码)和运行时版本；
-  2. 运行时：用于创建实例、渲染和处理虚拟 DOM 的代码。基本上，它是从编译器中删除所有其他内容；
+  2. 运行时版：用于创建实例、渲染和处理虚拟 DOM 的代码。基本上，它是从编译器中删除所有其他内容；
 - 监听事件的前缀可以缩写为@；
-- 引进编译器：开发一个 babel 插件[(babel-plugin-strve)](https://www.npmjs.com/package/babel-plugin-strve)，将 HTML 模板字符串呈现为一个 Virtual Dom，从之前的运行时转移到编译时；
+- 引进编译器：开发一个 babel 插件[(babel-plugin-strve)](https://www.npmjs.com/package/babel-plugin-strve)，将 HTML 模板字符串转化为 Virtual Dom，从之前的运行时转移到编译时；
 - 引进 Web Components：
   1. `defineCustomElement` API 支持 Web Components 的引入；
   2. 支持 Web Components UI 框架，例如[quarkDesign](https://quark-design.hellobike.com/)；

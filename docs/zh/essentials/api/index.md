@@ -88,10 +88,11 @@ function App() {
 
 第二个参数为对象类型，可选属性如下：
 
-| 特性   | 功能                                                                                                              |
-| ------ | ----------------------------------------------------------------------------------------------------------------- |
-| status | 标识字符串类型的特殊状态字段。 具体属性值请参考 [status](/zh/essentials/usage/#status)                            |
-| name   | 函数组件的名称，类型为 Function。 直接传入一个函数组件，请参考 [命名功能组件](/zh/essentials/usage/#命名功能组件) |
+| 特性 | 功能 |
+| --- | --- |
+| status | 标识字符串类型的特殊状态字段。 具体属性值请参考 [status](/zh/essentials/usage/#status) |
+| name | 函数组件的名称，类型为 Function。 直接传入一个函数组件，请参考 [命名功能组件](/zh/essentials/usage/#命名功能组件) |
+| customElement |  |
 
 ## version
 
@@ -306,3 +307,5 @@ function Component2() {
     `;
 }
 ```
+
+## defineCustomElement

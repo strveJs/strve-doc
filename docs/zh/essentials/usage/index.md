@@ -110,10 +110,10 @@ function App() {
              <button onClick=${useShow}>show</button>
              <div $key>
                   ${
-				state.isShow
-					? h`<p $key>Strve.js</p>`
-					: h`<null $key></null>`
-				}
+										state.isShow
+											? h`<p $key>Strve.js</p>`
+											: h`<null $key></null>`
+									}
              </div>
     `;
 }
@@ -176,7 +176,7 @@ function Home() {
 
 ## 事件处理
 
-我们可以使用 `on` 指令来监听 DOM 事件并在事件触发时执行一些 JavaScript。 我们推荐使用这种驼峰式命名法，比如`onClick`。
+我们可以使用 `on` 指令来监听 DOM 事件并在事件触发时执行一些 JavaScript。 我们推荐使用这种驼峰式命名法，比如`onClick`。监听事件的前缀可以缩写为`@`；
 
 此外，您需要使用符号 `${}` 来绑定事件。
 
@@ -416,10 +416,10 @@ function App() {
             <button onClick=${useShow}>show</button>
             <div $key>
                  ${
-				state.isShow
-					? h`<p $key>Strve.js</p>`
-					: h`<null $key></null>`
-				}
+										state.isShow
+											? h`<p $key>Strve.js</p>`
+											: h`<null $key></null>`
+									}
             </div>
     `;
 }
@@ -534,3 +534,5 @@ home.render = function () {
     `;
 };
 ```
+
+## Web Components

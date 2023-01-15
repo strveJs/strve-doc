@@ -7,7 +7,7 @@
 ### npm
 
 ```bash
-npm init strve-app@latest
+npm init strve-app
 ```
 
 ### yarn
