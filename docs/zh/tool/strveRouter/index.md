@@ -27,7 +27,7 @@ Strve Router 是 Strve.js 的官方路由管理器。 它与 Strve.js 的核心�
 			import {
 				initRouter,
 				linkTo,
-			} from 'https://cdn.jsdelivr.net/npm/strve-router@2.2.0/dist/strve-router.esm.js';
+			} from 'https://cdn.jsdelivr.net/npm/strve-router@2.3.1/dist/strve-router.esm.js';
 
 			class Home {
 				constructor() {
