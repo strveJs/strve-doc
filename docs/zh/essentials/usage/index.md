@@ -536,3 +536,41 @@ home.render = function () {
 ```
 
 ## Web Components
+
+自定义元素的主要好处是，它们可以在使用任何框架，甚至是在不使用框架的场景下使用。当你面向的最终用户可能使用了不同的前端技术栈，或是当你希望将最终的应用与它使用的组件实现细节解耦时，它们会是理想的选择。
+
+使用[`defineCustomElement`](/zh/essentials/api/#definecustomelement)API 即可注册原生自定义元素。
+
+另外，需要注意一点，我们在更新内部自定义元素数据时，比如像下面这样，内部Virtual Dom不需要全量对比，可以使用`setData`API中`customElement`字段。
+
+```js
+const data = {
+	count: 1
+}
+
+function changeCount() {
+	setData(() => {
+		data.count++;
+	}, {
+		customElement: myCom2,
+		name: 'useCustomElement'
+	})
+}
+
+const myCom2 = {
+	id: "myCom2",
+	template: () => {
+		return h`
+				<h2 $key @click="${changeCount}">${data.count}</h2>
+		`
+	},
+}
+
+defineCustomElement(myCom2, 'my-com2');
+
+function App() {
+	return h`
+			<h1>1</h1>
+			<my-com2></my-com2>
+	`
+```

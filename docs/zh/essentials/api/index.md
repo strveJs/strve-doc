@@ -91,8 +91,8 @@ function App() {
 | 特性 | 功能 |
 | --- | --- |
 | status | 标识字符串类型的特殊状态字段。 具体属性值请参考 [status](/zh/essentials/usage/#status) |
-| name | 函数组件的名称，类型为 Function。 直接传入一个函数组件，请参考 [命名功能组件](/zh/essentials/usage/#命名功能组件) |
-| customElement |  |
+| name | 函数组件的名称，类型为 `Function`（与`customElement`属性搭配使用时类型为`String`）， 直接传入一个函数组件，请参考 [命名功能组件](/zh/essentials/usage/#命名功能组件) |
+| customElement | 原生自定义组件对象，类型为Object。直接传入[defineCustomElement](/zh/essentials/api/#definecustomelement) 第一个参数即可。另外，需与`name='useCustomElement'`搭配使用，以便根据需要更新组件视图|
 
 ## version
 
@@ -309,3 +309,90 @@ function Component2() {
 ```
 
 ## defineCustomElement
+
+- 参数：
+
+  - `Object`
+  - `String`
+
+- 详情：
+
+支持 [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) 的引入。
+
+第一个参数是对象类型，对象属性如下：
+
+|属性|类型|必选|含义|
+|-|-|-|-|
+|id|`String`|是|原生自定义组件ID，应保持其唯一性|
+|template|`Function`|是|返回一个模版字符串函数|
+|styles|`Array<string>`|否|原生自定义组件样式集合|
+|attributeChanged|`Array<string>`|否|原生自定义组件监听属性集合|
+|immediateProps|`Boolean`|否|原生自定义组件是否开启立即监听属性变化|
+|lifetimes|`Object`|否|原生自定义组件生命周期，与[Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)生命周期一致|
+
+第二个参数是字符串类型，原生自定义组件的名称，名称中必须含有`-`字段。
+
+示例1：
+```js
+const data = {
+	count1: 1
+}
+
+const myCom1 = {
+	id: "myCom1",
+	template: () => {
+		return h`
+			   <p class="msg" $key>${data.count1}</p>
+		`
+	},
+	styles: [`.msg { color: red; }`],
+}
+
+defineCustomElement(myCom1, 'my-com1')
+
+function App() {
+	return h`
+			<my-com1></my-com1>
+	`
+}
+```
+示例2：
+```js
+const myCom1 = {
+	id: "myCom1",
+	template: (props) => {
+		return h`
+				<p class="msg" $key>${props.value}</p>
+				<p class="msg" $key>${props.msg}</p>
+		`
+	},
+	styles: [`.msg { color: red; }`],
+	attributeChanged: ['value', 'msg'],
+	immediateProps: true,
+	lifetimes: {
+		attributeChangedCallback(v) {
+			console.log(v);
+		}
+	}
+}
+
+defineCustomElement(myCom1, 'my-com1');
+
+const data = {
+	count1: 1,
+	count2: '1',
+}
+
+function add() {
+	setData(() => {
+		data.count1++;
+	})
+}
+
+function App() {
+	return h`
+			<button @click="${add}">btn</button>
+			<my-com1 value=${data.count1} msg="${data.count2}" $key></my-com1>
+	`
+}
+```
