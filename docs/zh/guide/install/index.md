@@ -6,7 +6,7 @@
 
 如果你想使用 ES Modules。
 
-> 如果直接在浏览器中打开了上面的 index.html，你会发现它抛出了一个错误，因为 ES 模块不能通过 file:// 协议工作。为了使其工作，你需要使用本地 HTTP 服务器通过 http:// 协议提供 index.html。
+> 如果直接在浏览器中打开了上面的 index.html，你会发现它抛出了一个错误，因为 ES 模块不能通过 `file://` 协议工作。为了使其工作，你需要使用本地 HTTP 服务器通过 `http://` 协议提供 index.html。
 
 ```html
 <script type="module">
@@ -100,7 +100,7 @@ app.mount('#app');
 
 ## 对不同构建版本的解释
 
-在 NPM 包的 dist/ 目录你将会找到很多不同的 Strve.js 构建版本。这里列出了它们之间的差别：
+在 NPM 包的 `dist/` 目录你将会找到很多不同的 Strve.js 构建版本。这里列出了它们之间的差别：
 
 |  | ES Module (基于构建工具使用) | ES Module (直接用于浏览器) | UMD |
 | --- | --- | --- | --- |

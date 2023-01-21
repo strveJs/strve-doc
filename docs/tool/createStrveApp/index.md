@@ -7,7 +7,7 @@ A set of command line tools to quickly build Strve.js projects. Compared with th
 ### npm
 
 ```bash
-npm init strve-app@latest
+npm init strve-app
 ```
 
 ### yarn

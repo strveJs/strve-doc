@@ -88,10 +88,11 @@ function App() {
 
 The second parameter is the object type, and the optional properties are as follows:
 
-| Properties | Functions                                                                                                                                                                                |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| status     | Identifies a special status field, of type String. For specific attribute values, please refer to [status](/essentials/usage/#status)                                                    |
-| name       | The name of the function component, the type is Function. Directly pass in a function component, please refer to [Named-function-component](/essentials/usage/#named-function-component) |
+| Property | Function |
+| --- | --- |
+| status | Identifies a special status field of type string. For specific attribute values, please refer to [status](/essentials/usage/#status) |
+| name | The name of the function component, the type is `Function` (the type is `String` when used with the `customElement` attribute), directly pass in a function component, please refer to [Named-function-component](/essentials/usage/#named-function-component) |
+| customElement | The native custom component object, whose type is Object. Just pass in the first parameter of [defineCustomElement](/essentials/api/#definecustomelement) directly. In addition, it needs to be used with `name='useCustomElement'` to update the component view as needed|
 
 ## version
 
@@ -304,5 +305,94 @@ function Component2() {
             </div>
             <button onClick=${f}>btn</button>
     `;
+}
+```
+## defineCustomElement
+
+- Parameters:
+
+  - `Object`
+  - `String`
+
+- Details:
+
+Support for the introduction of [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
+
+The first parameter is the object type, and the object properties are as follows:
+
+|Attribute|Type|Required|Meaning|
+|-|-|-|-|
+|id|`String`| true |Native custom component ID, it should be unique|
+|template|`Function`|true|returns a template string function|
+|styles|`Array<string>`|false|Native custom component style collection|
+|attributeChanged|`Array<string>`|false|Native custom component monitor attribute collection|
+|immediateProps|`Boolean`|fasle|Whether the native custom component is enabled to immediately monitor property changes|
+|lifetimes|`Object`|false|Native custom component life cycle, consistent with [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) life cycle|
+
+The second parameter is a string type, the name of the native custom component, and the name must contain a `-` field.
+
+Example 1:
+
+```js
+const data = {
+	count1: 1
+}
+
+const myCom1 = {
+	id: "myCom1",
+	template: () => {
+		return h`
+			   <p class="msg" $key>${data.count1}</p>
+		`
+	},
+	styles: [`.msg { color: red; }`],
+}
+
+defineCustomElement(myCom1, 'my-com1')
+
+function App() {
+	return h`
+			<my-com1></my-com1>
+	`
+}
+```
+Example 2:
+```js
+const myCom1 = {
+	id: "myCom1",
+	template: (props) => {
+		return h`
+				<p class="msg" $key>${props.value}</p>
+				<p class="msg" $key>${props.msg}</p>
+		`
+	},
+	styles: [`.msg { color: red; }`],
+	attributeChanged: ['value', 'msg'],
+	immediateProps: true,
+	lifetimes: {
+		attributeChangedCallback(v) {
+			console.log(v);
+		}
+	}
+}
+
+defineCustomElement(myCom1, 'my-com1');
+
+const data = {
+	count1: 1,
+	count2: '1',
+}
+
+function add() {
+	setData(() => {
+		data.count1++;
+	})
+}
+
+function App() {
+	return h`
+			<button @click="${add}">btn</button>
+			<my-com1 value=${data.count1} msg="${data.count2}" $key></my-com1>
+	`
 }
 ```

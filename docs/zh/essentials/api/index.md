@@ -206,8 +206,8 @@ function add() {
 
 function App() {
 	return h`
-              <h1 $key="h1" style=${styleColor}>${state.count}</h1>
-              <button onClick=${add}>Add</button> 
+			<h1 $key="h1" style=${styleColor}>${state.count}</h1>
+			<button onClick=${add}>Add</button> 
     `;
 }
 ```

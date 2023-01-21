@@ -1,6 +1,6 @@
 # babelPluginStrve
 
-[babelPluginStrve](https://www.npmjs.com/package/babel-plugin-strve)是一款babel 插件，将 HTML 模板字符串转化为 Virtual Dom。从之前的运行时转移到编译时，提高性能。
+[babelPluginStrve](https://www.npmjs.com/package/babel-plugin-strve)是一款babel 插件，将 HTML 模板字符串转化为 Virtual Dom。从之前的运行时转移到编译时，大幅度提高渲染性能。
 
 ```js
 // input:
@@ -55,7 +55,7 @@ pnpm add babel-plugin-strve
 
 ### tag=h
 
-默认情况下，`babelPluginStrve` 将处理所有带有名为 `h` 的标记函数的标记模板。 要使用不同的名称，请在 `Babel` 配置中使用 `tag` 选项：
+默认情况下，[babelPluginStrve](https://www.npmjs.com/package/babel-plugin-strve)将处理所有带有名为 `h` 的标记函数的标记模板。 要使用不同的名称，请在 `Babel` 配置中使用 `tag` 选项：
 
 ```json
 {

@@ -23,11 +23,11 @@ The easiest way to try Strve Router is to use a direct import CDN link. You can 
 				h,
 				createApp,
 				setData,
-			} from 'https://cdn.jsdelivr.net/npm/strvejs@4.3.0/dist/strve.esm.min.js';
+			} from 'https://cdn.jsdelivr.net/npm/strve-js@5.1.1/dist/strve.full-esm.prod.js';
 			import {
 				initRouter,
 				linkTo,
-			} from 'https://cdn.jsdelivr.net/npm/strve-router@2.1.0/dist/strve-router.esm.js';
+			} from 'https://cdn.jsdelivr.net/npm/strve-router@2.3.1/dist/strve-router.esm.js';
 
 			class Home {
 				constructor() {
@@ -60,7 +60,7 @@ The easiest way to try Strve Router is to use a direct import CDN link. You can 
 						msg: 'About',
 					};
 				}
-                
+
 				useChange = () => {
 					setData(() => {
 						this.state.msg = 'Changed';
@@ -70,13 +70,13 @@ The easiest way to try Strve Router is to use a direct import CDN link. You can 
 				goHome = () => {
 					linkTo('/');
 				};
-                
-                render = () => {
-                    return h`
+
+				render = () => {
+					return h`
                             <button onClick=${this.goHome}>goHome</button>
                             <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
                     `;
-                };
+				};
 			}
 
 			const router = initRouter(
@@ -95,9 +95,9 @@ The easiest way to try Strve Router is to use a direct import CDN link. You can 
 
 			function App() {
 				return h`
-                        <div class="main">
-                            ${router.view()}
-                        </div>
+                    <div class="main">
+                        ${router.view()}
+                    </div>
                 `;
 			}
 
@@ -130,7 +130,7 @@ pnpm add strve-router
 
 ## Usage
 
-We have pre-installed the project configuration for you, you can use [Create Strve App](/tool/createStrveApp/) to select the **strve-apps** template.
+We have pre-installed the project configuration for you, you can use [CreateStrveApp](/tool/createStrveApp/) to select the **strve-apps** template.
 
 ## API
 

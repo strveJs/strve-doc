@@ -1,10 +1,10 @@
 # Started
 
-A way to try Strve.js is to use direct ingest CDN links. You can open it in your browser and follow the example to learn some basic usage.
+The way to try Strve.js is to open it in your browser and follow the examples to learn some basic usage.
 
 ## ES Modules
 
-It should be noted that the source code of Strve.js is managed by ES Modules, so when using it directly in the browser, you need to add a `type="module"` attribute to the `<script>` tag to indicate that this file is used as a `'module'` way to run.
+In the rest of this document we mainly use ES module syntax. Most modern browsers already support ES modules natively. So we can use Strve.js via CDN as well as native ES modules like this:
 
 ```html
 <!DOCTYPE html>
@@ -15,29 +15,28 @@ It should be noted that the source code of Strve.js is managed by ES Modules, so
 	</head>
 
 	<body>
-		<div id="app"></div>
 		<script type="module">
 			import {
 				h,
-				createApp,
 				setData,
-			} from 'https://cdn.jsdelivr.net/npm/strvejs@4.3.0/dist/strve.esm.min.js';
+				createApp,
+			} from 'https://cdn.jsdelivr.net/npm/strve-js@5.1.1/dist/strve.full-esm.js';
 
 			const state = {
 				count: 0,
 			};
 
 			function add() {
-				$setData(() => {
+				setData(() => {
 					state.count++;
 				});
 			}
 
 			function App() {
 				return h`
-                        <h1 $key>${state.count}</h1>
-                        <button onClick=${add}>Add</button> 
-                `;
+						<h1 $key>${state.count}</h1>
+						<button onClick=${add}>Add</button> 
+				`;
 			}
 
 			const app = createApp(App);
@@ -47,9 +46,9 @@ It should be noted that the source code of Strve.js is managed by ES Modules, so
 </html>
 ```
 
-## IIFE
+## UMD
 
-Of course, you may also use the scene introduced directly in the script, so that it can be opened directly in the browser.
+Of course, you can also choose to use the `<script>` tag to import directly, so that it can be opened directly in the browser.
 
 ```html
 <!DOCTYPE html>
@@ -60,27 +59,27 @@ Of course, you may also use the scene introduced directly in the script, so that
 	</head>
 
 	<body>
-		<div id="app"></div>
-		<script src="https://cdn.jsdelivr.net/npm/strvejs@4.3.0/dist/strve.iife.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/strve-js@5.1.1/dist/strve.full.prod.js"></script>
 		<script>
+			const { h, setData, createApp } = Strve;
 			const state = {
 				count: 0,
 			};
 
 			function add() {
-				$setData(() => {
+				setData(() => {
 					state.count++;
 				});
 			}
 
 			function App() {
-				return $h`
-                        <h1 $key>${state.count}</h1>
-                        <button onClick=${add}>Add</button> 
-                `;
+				return h`
+						<h1 $key>${state.count}</h1>
+						<button onClick=${add}>Add</button> 
+				`;
 			}
 
-			const app = $createApp(App);
+			const app = createApp(App);
 			app.mount('#app');
 		</script>
 	</body>

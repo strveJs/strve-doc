@@ -110,10 +110,10 @@ function App() {
              <button onClick=${useShow}>show</button>
              <div $key>
                   ${
-				state.isShow
-					? h`<p $key>Strve.js</p>`
-					: h`<null $key></null>`
-				}
+						state.isShow
+						? h`<p $key>Strve.js</p>`
+						: h`<null $key></null>`
+					}
              </div>
     `;
 }
@@ -436,7 +436,7 @@ const state = {
 };
 
 function App() {
-	return $h`
+	return h`
             <fragment>
                 <h1 $key>Mouse position is at: ${state.x}, ${state.y}</h1>
             </fragment>
@@ -533,4 +533,44 @@ home.render = function () {
             <h2 $key>${home.state.msg}</h2>
     `;
 };
+```
+
+## Web Components
+
+The main benefit of custom elements is that they can be used with any framework, or even without a framework. They are ideal when you target end users who may use different front-end technology stacks, or when you want to decouple the final application from the implementation details of the components it uses.
+
+Use the [`defineCustomElement`](/essentials/api/#definecustomelement) API to register native custom elements.
+
+In addition, it should be noted that when we update the internal custom element data, such as the following, the internal Virtual Dom does not need to be compared in full, and we can use the `customElement` field in the `setData` API.
+
+```js
+const data = {
+	count: 1
+}
+
+function changeCount() {
+	setData(() => {
+		data.count++;
+	}, {
+		customElement: myCom2,
+		name: 'useCustomElement'
+	})
+}
+
+const myCom2 = {
+	id: "myCom2",
+	template: () => {
+		return h`
+				<h2 $key @click="${changeCount}">${data.count}</h2>
+		`
+	},
+}
+
+defineCustomElement(myCom2, 'my-com2');
+
+function App() {
+	return h`
+			<h1>1</h1>
+			<my-com2></my-com2>
+	`
 ```

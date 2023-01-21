@@ -130,7 +130,7 @@ pnpm add strve-router
 
 ## 使用
 
-我们已经为您预装了项目配置，您可以使用[Create Strve App](/zh/tool/createStrveApp/)选择**strve-apps**模板。
+我们已经为您预装了项目配置，您可以使用[CreateStrveApp](/zh/tool/createStrveApp/)选择**strve-apps**模板。
 
 ## API
 
@@ -174,9 +174,9 @@ import router from './router/index';
 
 export default function App() {
 	return h`
-        <div class='inner'>
-          ${router.view()}
-        </div>
+			<div class='inner'>
+			${router.view()}
+			</div>
     `;
 }
 ```

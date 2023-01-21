@@ -19,7 +19,7 @@ const state = {
 
 function App() {
 	return h`
-           <h1 $key>${state.msg}</h1>
+			<h1 $key>${state.msg}</h1>
     `;
 }
 ```
@@ -36,7 +36,7 @@ const state = {
 
 function App() {
 	return h`
-          <h1 $key>${state.a + state.b}</h1>
+			<h1 $key>${state.a + state.b}</h1>
     `;
 }
 ```
@@ -52,7 +52,7 @@ const state = {
 
 function App() {
 	return h`
-          <input type="text" value=${state.msg} $key/>
+			<input type="text" value=${state.msg} $key/>
     `;
 }
 ```
@@ -67,7 +67,7 @@ const state = {
 
 function App() {
 	return h`
-          <h1 class=${state.isRed ? 'red' : ''} $key>${state.msg}</h1>
+			<h1 class=${state.isRed ? 'red' : ''} $key>${state.msg}</h1>
     `;
 }
 ```
@@ -85,7 +85,7 @@ const state = {
 
 function App() {
 	return h`
-          <p style="${state.style}">${state.msg}</p>
+			<p style="${state.style}">${state.msg}</p>
     `;
 }
 ```
@@ -166,10 +166,10 @@ function useUnshift() {
 
 function Home() {
 	return h`
-            <button onClick=${useUnshift}>unshift</button>
-            <ul $key>
-                ${state.arr.map((item) => h`<li $key>${item}</li>`)}
-            </ul>
+			<button onClick=${useUnshift}>unshift</button>
+			<ul $key>
+				${state.arr.map((item) => h`<li $key>${item}</li>`)}
+			</ul>
     `;
 }
 ```
