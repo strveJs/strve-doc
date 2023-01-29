@@ -323,7 +323,7 @@ The first parameter is the object type, and the object properties are as follows
 |Attribute|Type|Required|Meaning|
 |-|-|-|-|
 |id|`String`| true |Native custom component ID, it should be unique|
-|template|`Function`|true|returns a template string function|
+|template|`Function`|true|Returns a template string function|
 |styles|`Array<string>`|false|Native custom component style collection|
 |attributeChanged|`Array<string>`|false|Native custom component monitor attribute collection|
 |immediateProps|`Boolean`|fasle|Whether the native custom component is enabled to immediately monitor property changes|
