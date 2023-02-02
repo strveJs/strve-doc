@@ -26,6 +26,7 @@ html .dark {
 		transform: translate(0, 0);
 	}
 }
+
 /* 版本号 */
 /* .clip::after {
 	content: 'v5.0.3';
@@ -33,6 +34,18 @@ html .dark {
 	color: #fff;
 	padding: 0 10px;
 } */
+
+.container .name{
+	padding-top: 4vh;
+}
+.container .name,.container .text,.container .tagline{
+	max-width: 100vw;
+	text-align: center;
+}
+
+.container .actions{
+	justify-content: center;
+}
 
 /* 搜索栏 */
 .VPNavBarSearch {

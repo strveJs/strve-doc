@@ -2,12 +2,11 @@
 layout: home
 
 hero:
-  name: Strve.js
-  text: 一个可以将字符串转换成视图的JS库
+  name: 字符串转换成视图的JavaScript库
   tagline: 轻量级的 MVVM 框架
-  image:
-    src: /logo.png
-    alt: Strve.js
+  # image:
+  #   src: /logo.png
+  #   alt: Strve.js
   actions:
     - theme: brand
       text: 开始使用

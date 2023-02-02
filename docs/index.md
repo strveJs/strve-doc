@@ -2,12 +2,11 @@
 layout: home
 
 hero:
-  name: Strve.js
-  text: A JS library that can convert strings into view
+  name: JavaScript library that can convert strings into view
   tagline: Lightweight MVVM framework
-  image:
-    src: /logo.png
-    alt: Strve.js
+  # image:
+  #   src: /logo.png
+  #   alt: Strve.js
   actions:
     - theme: brand
       text: Get Started
