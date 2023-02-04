@@ -15,13 +15,13 @@ hero:
       text: View on GitHub
       link: https://github.com/maomincoding/strve
 features:
-  - icon:  🔌
+  - icon: 🔌
     title: Approachable
     details: Easier to get started
-  - icon:  🚀
+  - icon: 🚀
     title: Fast
     details: Blazing Fast Virtual DOM
-  - icon:  🔩
+  - icon: 🔩
     title: Flexible
     details: Flexible manipulation of code blocks
 ---

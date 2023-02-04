@@ -2,7 +2,7 @@ export default {
 	base: '/strve-doc/',
 	head: [['link', { rel: 'icon', href: '/strve-doc/' + 'logo.png' }]],
 	markdown: {
-		theme: 'material-palenight',
+		theme: 'material-default',
 		lineNumbers: false,
 	},
 	locales: {
