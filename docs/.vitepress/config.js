@@ -34,6 +34,14 @@ export default {
 			'/': {
 				nav: [
 					{
+						text: 'Playground',
+						link: 'https://codepen.io/maomincoding/pen/BaOKqVE',
+					},
+					{
+						text: 'Change Log',
+						link: '/changeLog/',
+					},
+					{
 						text: 'Languages',
 						items: [
 							{ text: 'English', link: '/' },
@@ -101,10 +109,6 @@ export default {
 						collapsible: false,
 						items: [
 							{
-								text: 'Change Log',
-								link: '/other/changeLog/',
-							},
-							{
 								text: 'IDE Support',
 								link: '/other/ide/',
 							},
@@ -126,6 +130,14 @@ export default {
 			},
 			'/zh/': {
 				nav: [
+					{
+						text: '演练场',
+						link: 'https://codepen.io/maomincoding/pen/BaOKqVE',
+					},
+					{
+						text: '更新日志',
+						link: '/zh/changeLog/',
+					},
 					{
 						text: '选择语言',
 						items: [
@@ -194,10 +206,6 @@ export default {
 						text: '其他',
 						collapsible: false,
 						items: [
-							{
-								text: '更新日志',
-								link: '/zh/other/changeLog/',
-							},
 							{
 								text: 'IDE 支持',
 								link: '/zh/other/ide/',
