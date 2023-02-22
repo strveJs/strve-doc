@@ -121,6 +121,10 @@ export default {
 								link: '/other/browser/',
 							},
 							{
+								text: 'Adaptation',
+								link: '/other/adaptation/',
+							},
+							{
 								text: 'About',
 								link: '/other/about/',
 							},
@@ -217,6 +221,10 @@ export default {
 							{
 								text: '浏览器兼容性',
 								link: '/zh/other/browser/',
+							},
+							{
+								text: '适配',
+								link: '/zh/other/adaptation/',
 							},
 							{
 								text: '关于',
