@@ -35,7 +35,7 @@ export default {
 				nav: [
 					{
 						text: 'Playground',
-						link: 'https://codepen.io/maomincoding/pen/BaOKqVE',
+						link: '/playground/',
 					},
 					{
 						text: 'Change Log',
@@ -109,6 +109,10 @@ export default {
 						collapsible: false,
 						items: [
 							{
+								text: 'Adapt',
+								link: '/other/adapt/',
+							},
+							{
 								text: 'IDE Support',
 								link: '/other/ide/',
 							},
@@ -119,10 +123,6 @@ export default {
 							{
 								text: 'Browser Compatibility',
 								link: '/other/browser/',
-							},
-							{
-								text: 'Adaptation',
-								link: '/other/adaptation/',
 							},
 							{
 								text: 'About',
@@ -136,7 +136,7 @@ export default {
 				nav: [
 					{
 						text: '演练场',
-						link: 'https://codepen.io/maomincoding/pen/BaOKqVE',
+						link: '/zh/playground/',
 					},
 					{
 						text: '更新日志',
@@ -211,6 +211,10 @@ export default {
 						collapsible: false,
 						items: [
 							{
+								text: '适配',
+								link: '/zh/other/adapt/',
+							},
+							{
 								text: 'IDE 支持',
 								link: '/zh/other/ide/',
 							},
@@ -221,10 +225,6 @@ export default {
 							{
 								text: '浏览器兼容性',
 								link: '/zh/other/browser/',
-							},
-							{
-								text: '适配',
-								link: '/zh/other/adaptation/',
 							},
 							{
 								text: '关于',
