@@ -55,7 +55,7 @@ html .dark {
 	margin: auto;
 }
 
-/* .container .name {
+.container .name {
 	padding-top: 4vh;
 }
 .container .name,
@@ -63,11 +63,11 @@ html .dark {
 .container .tagline {
 	max-width: 100vw;
 	text-align: center;
-} */
+}
 
-/* .container .actions {
+.container .actions {
 	justify-content: center;
-} */
+}
 
 /* 搜索栏 */
 /* .VPNavBarSearch {
