@@ -44,10 +44,10 @@ html .dark {
 	max-width: 100% !important;
 }
 
-/* .content {
+.container > .content {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
-} */
+}
 
 .VPDocFooter {
 	display: none;
