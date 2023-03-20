@@ -574,4 +574,5 @@ function App() {
 			<h1>1</h1>
 			<my-com2></my-com2>
 	`
+}
 ```
