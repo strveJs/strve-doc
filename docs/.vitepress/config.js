@@ -12,7 +12,7 @@ export default {
 			titleTemplate: 'A JS library that can convert strings into view',
 			description: 'A JS library that can convert strings into view',
 		},
-		'/zh': {
+		'/zh/': {
 			lang: 'zh-CN',
 			title: 'Strve.js',
 			titleTemplate: '一个可以将字符串转换为视图的JS库',
@@ -45,7 +45,7 @@ export default {
 						text: 'Languages',
 						items: [
 							{ text: 'English', link: '/' },
-							{ text: '简体中文', link: '/zh' },
+							{ text: '简体中文', link: '/zh/' },
 						],
 					},
 				],
@@ -132,7 +132,7 @@ export default {
 					},
 				],
 			},
-			'/zh': {
+			'/zh/': {
 				nav: [
 					{
 						text: '演练场',
@@ -146,7 +146,7 @@ export default {
 						text: '选择语言',
 						items: [
 							{ text: 'English', link: '/' },
-							{ text: '简体中文', link: '/zh' },
+							{ text: '简体中文', link: '/zh/' },
 						],
 					},
 				],
