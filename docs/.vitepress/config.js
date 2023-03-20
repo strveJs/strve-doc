@@ -52,7 +52,7 @@ export default {
 				sidebar: [
 					{
 						text: 'Guide',
-						collapsible: false,
+						collapsible: true,
 						items: [
 							{
 								text: 'Introduce',
@@ -70,7 +70,7 @@ export default {
 					},
 					{
 						text: 'Essentials',
-						collapsible: false,
+						collapsible: true,
 						items: [
 							{
 								text: 'API',
@@ -84,7 +84,7 @@ export default {
 					},
 					{
 						text: 'Tool',
-						collapsible: false,
+						collapsible: true,
 						items: [
 							{
 								text: 'CreateStrveApp',
@@ -106,7 +106,7 @@ export default {
 					},
 					{
 						text: 'Other',
-						collapsible: false,
+						collapsible: true,
 						items: [
 							{
 								text: 'Adapt',
@@ -154,7 +154,7 @@ export default {
 				sidebar: [
 					{
 						text: '指导',
-						collapsible: false,
+						collapsible: true,
 						items: [
 							{
 								text: '介绍',
@@ -172,7 +172,7 @@ export default {
 					},
 					{
 						text: '要点',
-						collapsible: false,
+						collapsible: true,
 						items: [
 							{
 								text: 'API',
@@ -186,7 +186,7 @@ export default {
 					},
 					{
 						text: '工具',
-						collapsible: false,
+						collapsible: true,
 						items: [
 							{
 								text: 'CreateStrveApp',
@@ -208,7 +208,7 @@ export default {
 					},
 					{
 						text: '其他',
-						collapsible: false,
+						collapsible: true,
 						items: [
 							{
 								text: '适配',

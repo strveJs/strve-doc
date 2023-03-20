@@ -35,6 +35,24 @@ html .dark {
 	padding: 0 10px;
 } */
 
+/* 侧边栏 */
+/* .aside {
+	display: none !important;
+} */
+
+.content-container {
+	max-width: 100% !important;
+}
+
+/* .content {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+} */
+
+.VPDocFooter {
+	display: none;
+}
+
 .pager-link .desc {
 	display: none;
 }
