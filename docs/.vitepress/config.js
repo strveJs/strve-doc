@@ -204,12 +204,17 @@ export default {
 								text: 'BabelPluginStrve',
 								link: '/zh/tool/babelPluginStrve/',
 							},
+
 						],
 					},
 					{
 						text: '其他',
 						collapsible: true,
 						items: [
+							{
+								text: 'SFC',
+								link: '/zh/other/SFC/',
+							},
 							{
 								text: '适配',
 								link: '/zh/other/adapt/',
