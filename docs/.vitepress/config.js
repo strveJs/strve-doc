@@ -110,7 +110,7 @@ export default {
 						items: [
 							{
 								text: 'SFC',
-								link: '/other/SFC/',
+								link: '/other/sfc/',
 							},
 							{
 								text: 'Adapt',
@@ -217,7 +217,7 @@ export default {
 						items: [
 							{
 								text: 'SFC',
-								link: '/zh/other/SFC/',
+								link: '/zh/other/sfc/',
 							},
 							{
 								text: '适配',
