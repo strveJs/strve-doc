@@ -8,9 +8,9 @@
 	"license": "MIT",
 	"private": false,
 	"scripts": {
-		"dev": "vitepress dev docs --port 8080",
+		"dev": "vitepress dev docs",
 		"build": "vitepress build docs",
-		"serve": "vitepress serve docs --port 8080",
+		"serve": "vitepress serve docs",
 		"sh": "bash deploy.sh"
 	},
 	"dependencies": {

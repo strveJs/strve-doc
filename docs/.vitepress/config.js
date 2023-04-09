@@ -109,6 +109,10 @@ export default {
 						collapsible: true,
 						items: [
 							{
+								text: 'SFC',
+								link: '/other/SFC/',
+							},
+							{
 								text: 'Adapt',
 								link: '/other/adapt/',
 							},
