@@ -33,3 +33,7 @@ Only contains the basic functions of Strve.js. This template is suitable for app
 - strve-apps
 
 Not only includes the basic functions of Strve.js, but also includes Strve Router, which is suitable for jumping multiple pages and slightly more complex applications.
+
+- strve-sfc
+
+Suitable for developing Strve single-file components.
