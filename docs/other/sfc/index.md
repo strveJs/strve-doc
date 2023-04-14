@@ -4,9 +4,7 @@ SFC (Single File Component) is also a single file component, which is a special 
 
 ## Install
 
-We provide code templates to quickly build SFC projects. You only need to pull the project code, and the address of the project template is as follows:
-
-> https://github.com/maomincoding/strve-sfc-template
+You can use [createStrveApp](/tool/createStrveApp/) to quickly build the project and select the `strve-sfc` template.
 
 The project template is pre-installed with [vite-plugin-strve](https://www.npmjs.com/package/vite-plugin-strve), which is a Vite plugin used to compile and end with `.strve` document.
 
