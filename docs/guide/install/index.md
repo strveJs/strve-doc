@@ -93,21 +93,18 @@ Install using your favorite package manager.
 
 When you build a large application, it is recommended to use the official project scaffolding provided by Strve.js to build the project. Quickly build complex scaffolding for single-page applications (SPAs). It provides out-of-the-box build settings for modern front-end workflows.
 
-There are currently two tools:
-
-1. [CreateStrveApp](/tool/createStrveApp/)
-2. [CreateStrve](/tool/createStrve/)
+> [CreateStrveApp](/tool/createStrveApp/)
 
 ## Explanation of the different builds
 
 You'll find many different builds of Strve.js in the `dist/` directory of the NPM package. Here are the differences between them:
 
-| | ES Module (used based on build tools) | ES Module (directly used in browsers) | UMD |
-| --- | --- | --- | --- |
-| Full Version | - | strve.full-esm.js | strve.full.js |
-| Full version (production environment) | - | strve.full-esm.prod.js | strve.full.prod.js |
-| Runtime version | strve.runtime-esm.js | - | - |
-| Runtime version (production environment) | strve.runtime-esm.prod.js | - | - |
+|                                          | ES Module (used based on build tools) | ES Module (directly used in browsers) | UMD                |
+| ---------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------ |
+| Full Version                             | -                                     | strve.full-esm.js                     | strve.full.js      |
+| Full version (production environment)    | -                                     | strve.full-esm.prod.js                | strve.full.prod.js |
+| Runtime version                          | strve.runtime-esm.js                  | -                                     | -                  |
+| Runtime version (production environment) | strve.runtime-esm.prod.js             | -                                     | -                  |
 
 Different versions:
 

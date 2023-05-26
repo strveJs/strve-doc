@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: JavaScript library that can convert strings into view
-  tagline: Lightweight MVVM framework
+  tagline: Easy-to-use, fast and flexible JavaScript framework
   # image:
   #   src: /logo.png
   #   alt: Strve.js

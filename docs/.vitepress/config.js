@@ -46,7 +46,7 @@ export default {
 				sidebar: [
 					{
 						text: 'Guide',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'Introduce',
@@ -64,7 +64,7 @@ export default {
 					},
 					{
 						text: 'Essentials',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'API',
@@ -78,15 +78,11 @@ export default {
 					},
 					{
 						text: 'Tool',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'CreateStrveApp',
 								link: '/tool/createStrveApp/',
-							},
-							{
-								text: 'CreateStrve',
-								link: '/tool/createStrve/',
 							},
 							{
 								text: 'StrveRouter',
@@ -96,11 +92,15 @@ export default {
 								text: 'BabelPluginStrve',
 								link: '/tool/babelPluginStrve/',
 							},
+							{
+								text: 'VitePluginStrve',
+								link: '/tool/vitePluginStrve/',
+							},
 						],
 					},
 					{
 						text: 'Other',
-						collapsible: true,
+						collapsible: false,
 						items: [
 							{
 								text: 'SFC',

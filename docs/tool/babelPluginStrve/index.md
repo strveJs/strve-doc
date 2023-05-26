@@ -21,7 +21,7 @@ h`<h1 $key>${state.count}</h1>`;
 
 ## Install
 
-> [createStrve](/tool/createStrve/), [createStrveApp](/tool/createStrveApp/) two project scaffolding tools are installed by default.
+> [createStrveApp](/tool/createStrveApp/) project scaffolding tool is installed by default.
 
 ### npm
 

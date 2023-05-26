@@ -4,23 +4,20 @@ SFC (Single File Component) is also a single file component, which is a special 
 
 ## Install
 
-You can use [createStrveApp](/tool/createStrveApp/) to quickly build the project and select the `strve-sfc` template.
+You can use [createStrveApp](/tool/createStrveApp/) to quickly build the project.
 
-The project template is pre-installed with [vite-plugin-strve](https://www.npmjs.com/package/vite-plugin-strve), which is a Vite plugin used to compile and end with `.strve` document.
-
-## Version
-
-The latest version is **5.1.1**. This version will match the Strve.js version.
+- Basic template: select `strve-sfc` template;
+- strve-router template: select `strve-sfc-apps` template;
 
 ## Usage
 
-Before using, please read the notes below for compatibility with Strve.js.
+The SFC feature is based on Strve.js, and many uses are similar but not entirely the same. Please read the following precautions before use.
 
-- Event handling
+### event-handling
 
 Only the `@` abbreviation is supported. In addition, the event name needs to be bound to the namespace and needs to be wrapped in quotes. Such as `@click="myComponent2.btn"`.
 
-- List rendering
+### list-rendering
 
 Use `join('')` to remove extra commas in the rendered result page. like:
 
@@ -28,7 +25,7 @@ Use `join('')` to remove extra commas in the rendered result page. like:
 ${arr.map((todo) => `<li>${todo}</li>`).join('')}
 ```
 
-- Conditional rendering
+### conditional-rendering
 
 Labels are wrapped using ````. like:
 
@@ -36,34 +33,30 @@ Labels are wrapped using ````. like:
 ${isShow ? `<p $key>Strve.js</p>` : `<null $key></null>`}
 ```
 
-- Property binding
+### property-binding
 
 When binding properties, you can use no quotes, such as: `value=${msg}`.
 
-- Naming functional components
+### naming-functional-components
 
 Named function components are not supported.
 
-- Web Components
+### web-components
 
-Support for Web Components.
+Support.
 
-- Component mode
+### component-mode
 
-Component mode is not supported.
+Not supported.
 
-- Register component
+### register-component
 
 Call functions. like:
 
 ```js
-`${C2()}`;
+`${component()}`;
 ```
 
-- strveRouter
+### strve-router
 
-not support.
-
-- babelPluginStrve
-
-not support.
+Support.

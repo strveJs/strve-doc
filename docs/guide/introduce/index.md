@@ -4,6 +4,4 @@ Strve.js is a JS library that converts strings into views. The string here refer
 
 Strve.js is not only easy to use, but also flexible to disassemble different code blocks. Using template strings to develop views mainly takes advantage of native JavaScript’s ability to separate code blocks more flexibly and focus only on JavaScript files.
 
-Strve.js is another lightweight MVVM framework. You only need to care about the data and how to operate it, and leave the rest to Strve.js for internal processing.
-
 If you want to get started with Strve.js, check it out below!

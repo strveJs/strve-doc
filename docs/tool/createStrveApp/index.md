@@ -1,25 +1,11 @@
 # createStrveApp
 
-A set of command line tools to quickly build Strve.js projects. Compared with the early scaffolding Create Strve, Create Strve App is better, you can directly enter commands to quickly create Strve projects. Create Strve App is built with [Vite](https://vitejs.dev/), which is a new front-end construction tool that can significantly improve the front-end development experience.
+A set of command-line tools for quickly building Strve.js projects. Create Strve App is built using [Vite](https://vitejs.dev/), a new front-end building tool that dramatically improves the front-end development experience.
 
 ## Scaffolding Your First Strve Project
 
-### npm
-
 ```bash
 npm init strve-app
-```
-
-### yarn
-
-```bash
-yarn create strve-app
-```
-
-### pnpm
-
-```bash
-pnpm create strve-app
 ```
 
 ## Choose a template
@@ -37,3 +23,7 @@ Not only includes the basic functions of Strve.js, but also includes Strve Route
 - strve-sfc
 
 Suitable for developing Strve single-file components.
+
+- strve-sfc-apps
+
+Strve SFC + Strve Router.
