@@ -125,3 +125,17 @@ html .dark {
 	transition: all 1s;
 	transform: rotate(360deg);
 }
+
+
+.name, .tagline{
+	animation: cl 1s ease-in-out;
+}
+
+@keyframes cl {
+	0% {
+		transform: scale(0.1);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
