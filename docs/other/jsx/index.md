@@ -4,7 +4,7 @@ The common way we use Strve.js is to write HTML-like tags in tag templates. We k
 
 ## Learn JSX syntax
 
-We can go to React official documentation [https://zh-hans.react.dev/learn/writing-markup-with-jsx](https://zh-hans.react.dev/learn/writing-markup-with-jsx) to learn more about JSX syntax.
+We can go to React official documentation [https://react.dev/learn/writing-markup-with-jsx](https://react.dev/learn/writing-markup-with-jsx) to learn more about JSX syntax.
 
 ## Use
 
