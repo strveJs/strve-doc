@@ -1,6 +1,6 @@
 # babelPluginStrve
 
-[babelPluginStrve](https://www.npmjs.com/package/babel-plugin-strve) is a babel plugin that converts HTML template strings into Virtual Dom. Dramatically improved rendering performance by moving from previous runtime to compile time.
+[babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve) is a babel plugin that converts HTML template strings into Virtual Dom. Dramatically improved rendering performance by moving from previous runtime to compile time.
 
 ```js
 // input:
@@ -55,7 +55,7 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `babel` field in `pa
 
 ### tag=h
 
-By default, [babelPluginStrve](https://www.npmjs.com/package/babel-plugin-strve) will process all markup templates with a markup function named `h`. To use a different name, use the `tag` option in your `Babel` configuration:
+By default, [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve) will process all markup templates with a markup function named `h`. To use a different name, use the `tag` option in your `Babel` configuration:
 
 ```json
 {
@@ -69,3 +69,18 @@ By default, [babelPluginStrve](https://www.npmjs.com/package/babel-plugin-strve)
 	]
 }
 ```
+
+## Other modes
+
+By default, `h``` will be used as a tag template mode. If there are other scenarios, you can choose to call the expression mode, there are two.
+
+1. The function name is `tem_h`, and the parameter is a template string.
+```js
+tem_h(`<p>hello</p>`);
+```
+1. The function name is `str_h`, and the parameters are ordinary strings.
+```js
+str_h('<p>hello</p>');
+```
+
+> Whether you choose the default mode or call the expression mode, their final output structure is the same. In addition, these modes we can use at the same time.

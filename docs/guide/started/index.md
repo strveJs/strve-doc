@@ -24,7 +24,7 @@ In the rest of this document we mainly use ES module syntax. Most modern browser
 				h,
 				setData,
 				createApp,
-			} from 'https://cdn.jsdelivr.net/npm/strve-js@5.1.1/dist/strve.full-esm.js';
+			} from 'https://cdn.jsdelivr.net/npm/strve-js@5.6.0/dist/strve.full-esm.js';
 
 			const state = {
 				count: 0,
@@ -63,7 +63,7 @@ Of course, you can also choose to use the `<script>` tag to import directly, so 
 	</head>
 
 	<body>
-		<script src="https://cdn.jsdelivr.net/npm/strve-js@5.1.1/dist/strve.full.prod.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/strve-js@5.6.0/dist/strve.full.prod.js"></script>
 		<script>
 			const { h, setData, createApp } = Strve;
 			const state = {

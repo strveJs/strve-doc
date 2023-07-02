@@ -4,8 +4,22 @@ A set of command-line tools for quickly building Strve.js projects. Create Strve
 
 ## Scaffolding Your First Strve Project
 
+**NPM**
+
 ```bash
-npm init strve-app
+npm create strve-app@latest
+```
+
+**Yarn**
+
+```bash
+yarn create strve-app
+```
+
+**PNPM**
+
+```bash
+pnpm create strve-app
 ```
 
 ## Choose a template
@@ -20,10 +34,10 @@ Only contains the basic functions of Strve.js. This template is suitable for app
 
 Not only includes the basic functions of Strve.js, but also includes Strve Router, which is suitable for jumping multiple pages and slightly more complex applications.
 
-- strve-sfc
+- strve-jsx
 
-Suitable for developing Strve single-file components.
+Strve.js is developed using JSX syntax.
 
-- strve-sfc-apps
+- strve-jsx-apps
 
-Strve SFC + Strve Router.
+Use JSX syntax to develop Strve.js + Strve Router, which is suitable for jumping multiple pages and slightly more complex applications.

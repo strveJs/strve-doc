@@ -1,6 +1,15 @@
 # Change Log
 
-## v5.1.1 (Latest)
+Although the version number is taken from the version number of Strve.js, the content not only contains the update content of Strve.js, but also the update content of other official tools in the same period.
+
+## v5.6.0 (Latest)
+
+- Optimize `onMounted`, `nextTick` API;
+- Support JSX syntax;
+- Update [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve), add call expression mode;
+- Release [babel-plugin-jsx-to-strve](https://www.npmjs.com/package/babel-plugin-jsx-to-strve), which converts JSX to markup templates for use with Strve.js ;
+
+## v5.1.1
 
 - Add the compile module;
 - Adjust the source code warehouse building module;
@@ -13,7 +22,6 @@
   1. New defineCustomElement API supports the introduction of Web Components;
   2. Support for Web Components UI frameworks (e.g. https://quark-design.hellobike.com/);
   3. Add the customElement field in the setDataAPI to update the component view as needed;
-
 
 ## v4.3.0
 
