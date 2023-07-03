@@ -6,7 +6,7 @@ npm run build
 
 cd docs/.vitepress/dist
 
-git init
+git init -b main
 git add -A
 git commit -m 'deploy'
 
