@@ -18,6 +18,7 @@
     var(--color)
   );
   --vp-c-bg-alpha-with-backdrop: transparent;
+  --vp-layout-max-width: 1420px;
 }
 
 html .dark {
