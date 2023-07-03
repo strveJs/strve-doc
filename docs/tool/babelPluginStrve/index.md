@@ -78,7 +78,7 @@ By default, `h``` will be used as a tag template mode. If there are other scenar
 ```js
 tem_h(`<p>hello</p>`);
 ```
-1. The function name is `str_h`, and the parameters are ordinary strings.
+2. The function name is `str_h`, and the parameters are ordinary strings.
 ```js
 str_h('<p>hello</p>');
 ```
