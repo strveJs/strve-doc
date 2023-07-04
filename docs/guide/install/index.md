@@ -14,7 +14,7 @@ If you want to use ES Modules.
 		h,
 		setData,
 		createApp,
-	} from 'https://cdn.jsdelivr.net/npm/strve-js@5.6.0/dist/strve.full-esm.prod.js';
+	} from 'https://cdn.jsdelivr.net/npm/strve-js@5.6.1/dist/strve.full-esm.prod.js';
 
 	const state = {
 		count: 0,
@@ -41,7 +41,7 @@ If you want to use ES Modules.
 If you think the above method is a bit cumbersome, for more convenience, you can also directly import it in the `<script>` tag and use it directly.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/strve-js@5.6.0/dist/strve.full.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/strve-js@5.6.1/dist/strve.full.prod.js"></script>
 ```
 
 It should be noted that in this way, you need to use the corresponding method through object destructuring.
