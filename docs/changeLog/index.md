@@ -2,7 +2,7 @@
 
 Although the version number is taken from the version number of Strve.js, the content not only contains the update content of Strve.js, but also the update content of other official tools in the same period.
 
-## v5.6.1 (Latest)
+## v5.6.2 (Latest)
 
 - Optimize `onMounted`, `nextTick` API;
 - Support JSX syntax;
