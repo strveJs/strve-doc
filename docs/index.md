@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: |
-    Easy-to-use, fast and flexible
-    JavaScript framework
+    The Approachable
+    JavaScript Framework
   tagline: A JS library that can convert strings into view
   actions:
     - theme: brand
