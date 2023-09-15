@@ -86,7 +86,7 @@ When you build a large-scale application, it is recommended to use the official 
 
 ## Explanation of the different builds
 
-You'll find many different builds of Strve.js in the `dist/` directory of the NPM package. Here are the differences between them:
+You'll find many different builds of Strve in the `dist/` directory of the NPM package. Here are the differences between them:
 
 |                                          | ES Module (used based on build tools) | ES Module (directly used in browsers) | UMD                |
 | ---------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------ |

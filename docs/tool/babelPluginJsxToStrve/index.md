@@ -1,6 +1,6 @@
 # babelPluginJsxToStrve
 
-[babel-plugin-jsx-to-strve](https://www.npmjs.com/package/babel-plugin-jsx-to-strve) is a babel plugin that converts JSX for use with Strve.js tag template.
+[babel-plugin-jsx-to-strve](https://www.npmjs.com/package/babel-plugin-jsx-to-strve) is a babel plugin that converts JSX for use with Strve tag template.
 
 ## Install
 
