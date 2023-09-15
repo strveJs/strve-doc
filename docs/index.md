@@ -2,8 +2,10 @@
 layout: home
 
 hero:
-  name: JavaScript library that can convert strings into view
-  tagline: Easy-to-use, fast and flexible JavaScript framework
+  name: |
+    Easy-to-use, fast and flexible
+    JavaScript framework
+  tagline: A JS library that can convert strings into view
   actions:
     - theme: brand
       text: Get Started

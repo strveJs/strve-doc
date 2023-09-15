@@ -2,15 +2,11 @@
 
 ## Data-binding
 
-Strve.js uses a JavaScript-based template string syntax that allows developers to declaratively bind the DOM to the underlying instance's data. All Strve.js template strings are valid HTML, so can be parsed by spec-compliant browsers and HTML parsers.
-
-Under the hood, Strve.js compiles template strings into virtual DOM rendering functions and minimizes DOM manipulation.
-
-In Strve.js, you can use JavaScript template strings to your heart's content and feel its unique charm!
+Strve allows developers to declaratively bind the DOM to the underlying instance's data.
 
 ### text
 
-The form of text binding in data binding is to use the notation `${}`.
+The form of text binding in data binding is to use the symbol `${}`.
 
 ```js
 const state = {
@@ -18,15 +14,13 @@ const state = {
 };
 
 function App() {
-	return h`
-            <h1 $key>${state.msg}</h1>
-    `;
+	return html`<h1>${state.msg}</h1>`;
 }
 ```
 
 ### expressions
 
-Use expressions in the notation `${}`.
+Use expressions in symbols `${}`.
 
 ```js
 const state = {
@@ -35,15 +29,13 @@ const state = {
 };
 
 function App() {
-	return h`
-            <h1 $key>${state.a + state.b}</h1>
-    `;
+	return html`<h1>${state.a + state.b}</h1>`;
 }
 ```
 
 ## Property-binding
 
-Use the notation `${}` to bind a value to the property `value`.
+Use the notation `${}` to bind a value to the attribute `value`.
 
 ```js
 const state = {
@@ -51,13 +43,11 @@ const state = {
 };
 
 function App() {
-	return h`
-            <input type="text" value=${state.msg} $key/>
-    `;
+	return html`<input type="text" value=${state.msg}/>`;
 }
 ```
 
-In addition, you can also bind other properties, such as `class`.
+Additionally, you can bind other properties such as `class`.
 
 ```js
 const state = {
@@ -66,9 +56,7 @@ const state = {
 };
 
 function App() {
-	return h`
-            <h1 class=${state.isRed ? 'red' : ''} $key>${state.msg}</h1>
-    `;
+	return html`<h1 class=${state.isRed ? 'red' : ''}>${state.msg}</h1>`;
 }
 ```
 
@@ -84,15 +72,13 @@ const state = {
 };
 
 function App() {
-	return h`
-            <p style="${state.style}">${state.msg}</p>
-    `;
+	return html`<p style=${state.style}>${state.msg}</p>`;
 }
 ```
 
 ## Conditional-rendering
 
-Using the notation `${}`, the block will only be rendered if the directive's expression returns a `true` value.
+Using the notation `${}`, the label will only be displayed if the expression of the directive returns a `true` value.
 
 ```js
 const state = {
@@ -106,22 +92,24 @@ function useShow() {
 }
 
 function App() {
-	return h`
-             <button onClick=${useShow}>show</button>
-             <div $key>
-                  ${
+	return html`
+			<fragment>
+				<button onClick=${useShow}>show</button>
+				<div>
+					${
 						state.isShow
-						? h`<p $key>Strve.js</p>`
-						: h`<null $key></null>`
+						? html`<p>Strve.js</p>`
+						: html`<null></null>`
 					}
-             </div>
+				</div>
+			 </fragment>
     `;
 }
 ```
 
 ## List-rendering
 
-We can render a list based on an array using the notation `${}`. For example, we use the `map` method of arrays to render lists, and we can dynamically add array items.
+Use the notation `${}` to render an array-based list, and use the array's `map` method to return an array.
 
 ```js
 const state = {
@@ -135,50 +123,25 @@ function usePush() {
 }
 
 function App() {
-	return h`
-             <button onClick=${usePush}>push</button>
-             <ul $key>
-               ${state.arr.map((todo) => h`<li>${todo}</li>`)}
-             </ul>
+	return html`
+			<fragment>
+				<button onClick=${usePush}>push</button>
+				<ul>
+				${state.arr.map((todo) => html`<li key=${todo}>${todo}</li>`)}
+				</ul>
+			</fragment>
     `;
 }
 ```
-
-When using a list to render a page, if you insert data at the head of the list, you need to pass in the value of `useFirstKey` to avoid repeated rendering of `DOM` nodes, which is a must.
-
-Any actions that operate on the head of the list, such as `unshift`, `pop` array methods, need to add this `useFirstKey` value. This is not required for other operations and has been optimized internally.
-
-```js
-const state = {
-	arr: [1, 2],
-};
-
-function useUnshift() {
-	setData(
-		() => {
-			state.arr.unshift('2');
-		},
-		{
-			status: 'useFirstKey',
-		}
-	);
-}
-
-function Home() {
-	return h`
-            <button onClick=${useUnshift}>unshift</button>
-            <ul $key>
-                ${state.arr.map((item) => h`<li $key>${item}</li>`)}
-            </ul>
-    `;
-}
-```
+::: warning
+Child elements under the same parent element must have unique keys. Duplicate keys will cause rendering exceptions. The special attribute key is mainly used as a hint for Vue's virtual DOM algorithm and is used to identify vnode when comparing the old and new node lists.
+:::
 
 ## Event-handling
 
-We can use the `on` directive to listen to DOM events and execute some JavaScript when the event is fired. We recommend using this camelCase `onClick` method.
+We can use the `on` directive to listen to DOM events and execute some JavaScript when the event fires. We recommend using this camelCase naming method, such as `onClick`. Additionally, the `on` directive can be abbreviated as `@`.
 
-Also, you need to use the notation `${}` to bind events.
+Additionally, you need to use the notation `${}` to bind events.
 
 ```js
 const state = {
@@ -190,49 +153,20 @@ function useClick() {
 }
 
 function App() {
-	return h`
-            <button onClick=${useClick}>${state.msg}</button>
-    `;
-}
-```
-
-## Status
-
-### useFirstKey
-
-When you use list rendering, inserting data at the head of the list needs to bind the `useFirstKey` field to avoid repeated rendering of `DOM` nodes.
-
-```js
-const state = {
-	arr: [1, 2],
-};
-
-function useUnshift() {
-	setData(
-		() => {
-			state.arr.unshift('2');
-		},
-		{
-			status: 'useFirstKey',
-		}
-	);
-}
-
-function Home() {
-	return h`
-            <button onClick=${useUnshift}>unshift</button>
-            <ul $key>
-                ${state.arr.map((item) => h`<li $key>${item}</li>`)}
-            </ul>
+	return html`
+			<fragment>
+				<button onClick=${useClick}>${state.msg}</button>
+				<button @click=${useClick}>${state.msg}</button>
+			</fragment>
     `;
 }
 ```
 
 ## Named-function-component
 
-When we update component data, we do not need full comparison (such as the following h2, p tags, which do not belong to the content of Component1, so they do not need Diff comparison), just update the data in the component.
+When we update the component data, we do not need to compare the full amount (such as the h2 and p tags below, they do not belong to the content of Component1, so Diff is not needed), we only need to update the data in the component.
 
-At this time, you need to pass an object in the second parameter of the `setData()` method, the object key is `name`, and the value is the function component that needs to be updated. In addition, what you also need to do is to wrap a `component` tag outside the function component in the parent component, and use the `$name` tag (for more information about tags, please see [Static-tags](/essentials/usage/#static-tags)), the value is the name of the function component.
+At this time, you need to pass in an object in the second parameter of the `setData()` method. The object key is `name` and the value is the function component that needs to be updated. In addition, you also need to wrap a `component` tag outside the function component in the parent component and use the `$name` built-in attribute (for more information, please see [Built-in-properties](/essentials/usage/#built-in-properties)) , this value is the name of the functional component.
 
 ```js
 const state1 = {
@@ -251,57 +185,55 @@ function add1() {
 }
 
 function Component1() {
-	return h`
-            <h1>Component1</h1>
-            <h1 $key>${state1.count}</h1>
-            <button onClick=${add1}>add1</button> 
+	return html`
+			<fragment>
+				<h1>Component1</h1>
+				<h1>${state1.count}</h1>
+				<button onClick=${add1}>add1</button>
+			</fragment>
     `;
 }
 
 function App() {
-	return h`
-            <h2>txt1</h2>
-            <div>
-                <p>txt2</p>
-                <component $name=${Component1.name}>
-                    ${Component1()}
-                </component>
-            </div>
+	return html`
+			<fragment>
+				<h2>txt1</h2>
+				<div>
+					<p>txt2</p>
+					<component $name=${Component1.name}>
+						${Component1()}
+					</component>
+				</div>
+			</fragment>
     `;
 }
 ```
 
-## Static-tags
+## Built-in-properties
 
-### $key
+### $ref
 
-When we change the data, a Diff comparison is performed internally to find the differences, and then the page is updated accordingly. However, some nodes that do not need to be updated, such as the button and h1 tags below, do not need to be compared. Only dynamic data nodes such as the p tag need to be updated, so we explicitly add the static tag `$key` to the tag.
+The `$ref` attribute can reference a DOM element. It is used to reference other elements within a component or DOM element.
 
 ```js
-const state = {
-	count: 0,
-};
-
 function add() {
-	setData(() => {
-		state.count++;
-	});
+	console.log(domInfo.h1); // <h1>Strve.js</h1>
 }
 
 function App() {
-	return h`
-            <button onClick=${add}>add</button>
-            <p $key>${state.count}</p>
-            <h1>Hello Strve.js</h1>
+	return html`
+			<fragment>
+				<h1 $ref="h1">Strve.js</h1>
+				<button onClick=${add}>Add</button>
+			</fragment>
     `;
 }
-```
 
-In addition, in addition to adding tags to dynamic data nodes, you also need to pay attention to adding `$key` tags in some special scenarios, such as dynamically adding nodes and dynamically displaying and hiding nodes. Because, only nodes marked with `$key` will have the ability to be manipulated with their own DOM.
+```
 
 ### $name
 
-This tag needs to be used on the built-in tag `component` to indicate the internal component name, which must be the same as the function component name.
+This attribute needs to be used on the built-in tag `component`, which represents the name of the internal component and must be the same as the name of the functional component.
 
 ```js
 const state1 = {
@@ -320,14 +252,16 @@ function add1() {
 }
 
 function Component1() {
-	return h`
-            <h1 $key>${state1.count}</h1>
-            <button onClick=${add1}>add1</button> 
+	return html`
+			<fragment>
+				<h1>${state1.count}</h1>
+				<button onClick=${add1}>add1</button>
+			</fragment>
     `;
 }
 
 function App() {
-	return h`
+	return html`
             <component $name=${Component1.name}>
                 ${Component1()}
             </component>
@@ -337,7 +271,7 @@ function App() {
 
 ### $props
 
-This tag is used in conjunction with [propsData](/essentials/api/#propsdata), for example, you need to pass data to the parent component in the child component.
+This attribute is used with [propsData](/essentials/api/#propsdata) when, for example, you need to pass data from a child component to a parent component.
 
 ```js
 // Son
@@ -350,9 +284,7 @@ function emitData() {
 }
 
 function Component1() {
-	return h`
-            <h1 onClick=${emitData}>Son</h1>
-    `;
+	return html`<h1 onClick=${emitData}>Son</h1>`;
 }
 ```
 
@@ -364,9 +296,9 @@ function useGetTit(v) {
 }
 
 function App() {
-	return h`
+	return html`
             <component $name=${Component1.name} $props=${useGetTit}>
-                ${Component1()}   
+                ${Component1()}
             </component>
     `;
 }
@@ -376,17 +308,15 @@ function App() {
 
 ### component
 
-A component label, which wraps a function component inside the label.
+Component placeholder label, which wraps a functional component within the label.
 
 ```js
 function Component1() {
-	return h`
-            <h1>Hello</h1>
-    `;
+	return html`<h1>Hello</h1>`;
 }
 
 function App() {
-	return h`
+	return html`
             <component $name=${Component1.name}>
                 ${Component1()}
             </component>
@@ -396,9 +326,7 @@ function App() {
 
 ### null
 
-Empty label. It can be understood as a placeholder tag and will not be rendered into the page.
-
-Typically used for conditional rendering.
+Placeholder tags will not be rendered into the page.
 
 ```js
 const state = {
@@ -412,22 +340,24 @@ function useShow() {
 }
 
 function App() {
-	return h`
-            <button onClick=${useShow}>show</button>
-            <div $key>
-                 ${
-				state.isShow
-					? h`<p $key>Strve.js</p>`
-					: h`<null $key></null>`
-				}
-            </div>
+	return html`
+			<fragment>
+				<button onClick=${useShow}>show</button>
+				<div>
+					${
+						state.isShow
+						? html`<p>Strve.js</p>`
+						: html`<null></null>`
+					}
+				</div>
+			</fragment>
     `;
 }
 ```
 
 ### fragment
 
-Create a document fragment tag. It is not part of the real DOM tree, its changes will not trigger a re-render of the DOM tree, and there will be no performance impact.
+Create a document fragment tag. It is not part of the real DOM tree, its changes will not trigger a re-rendering of the DOM tree, and will not have an impact on performance.
 
 ```js
 const state = {
@@ -436,9 +366,9 @@ const state = {
 };
 
 function App() {
-	return h`
+	return html`
             <fragment>
-                <h1 $key>Mouse position is at: ${state.x}, ${state.y}</h1>
+                <h1>Mouse position is at: ${state.x}, ${state.y}</h1>
             </fragment>
     `;
 }
@@ -473,9 +403,11 @@ class About {
 	};
 
 	render = () => {
-		return h`
-                <button onClick=${this.goHome}>goHome</button>
-                <h1 onClick=${this.useChange} $key>${this.state.msg}</h1>
+		return html`
+				<fragment>
+					<button onClick=${this.goHome}>goHome</button>
+					<h1 onClick=${this.useChange}>${this.state.msg}</h1>
+				</fragment>
         `;
 	};
 }
@@ -494,7 +426,7 @@ function About() {
 	}
 
 	function render() {
-		return h`<h1 onClick=${goHome} $key>${state.msg}</h1>`;
+		return html`<h1 onClick=${goHome}>${state.msg}</h1>`;
 	}
 
 	return {
@@ -527,10 +459,12 @@ home.goAbout = function () {
 };
 
 home.render = function () {
-	return h`
-            <button onClick=${home.goAbout}>GoAbout</button>
-            <h1 onClick=${home.useAdd} $key>${home.state.count}</h1>
-            <h2 $key>${home.state.msg}</h2>
+	return html`
+			<fragment>
+				<button onClick=${home.goAbout}>GoAbout</button>
+				<h1 onClick=${home.useAdd}>${home.state.count}</h1>
+				<h2>${home.state.msg}</h2>
+			</fragment>
     `;
 };
 ```
@@ -560,18 +494,18 @@ function changeCount() {
 const myCom2 = {
 	id: "myCom2",
 	template: () => {
-		return h`
-				<h2 $key @click="${changeCount}">${data.count}</h2>
-		`
+		return html`<h2 @click=${changeCount}>${data.count}</h2>`
 	},
 }
 
 defineCustomElement(myCom2, 'my-com2');
 
 function App() {
-	return h`
-			<h1>1</h1>
-			<my-com2></my-com2>
+	return html`
+			<fragment>
+				<h1>1</h1>
+				<my-com2></my-com2>
+			</fragment>
 	`
 }
 ```

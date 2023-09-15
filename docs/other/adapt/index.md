@@ -1,12 +1,12 @@
 # Adapt
 
-Strve.js is a view rendering library that renders simple string templates into real pages. A view rendering library can be used flexibly with other frameworks or libraries, and you can refer to them in the following ways.
+Strve can be said to be a view rendering library that renders simple string templates into real pages. A view rendering library can be flexibly used with other frameworks or libraries. Below you can choose the appropriate way to reference it.
 
 ## Adapt React.js
 
 React is a JavaScript library for building user interfaces. It mixes HTML and JavaScript code together by using an HTML-in-javascript syntax called JSX to make it easier to build interactive and reusable UI components. The main goals of React are to improve application performance and speed, and to simplify complex UI development.
 
-Strve.js can be used with React, allowing you to enjoy Strve.js features while using React.
+Strve can be used with React, allowing you to enjoy Strve features while using React.
 
 Here is an example paired with React.
 
@@ -62,20 +62,18 @@ function add() {
 
 export function template() {
 	return html`
-		<div class="card">
-			<button @click=${add} $key>count is ${data.count}</button>
-		</div>
+			<div class="card">
+				<button @click=${add}>count is ${data.count}</button>
+			</div>
 	`;
 }
 ```
 
-If you want to see the full code, you can go to [online sample](https://stackblitz.com/edit/reactandstrve)。
-
 ## Adapt Vue.js
 
-Vue.js is a popular JavaScript front-end framework designed to better organize and simplify Web development. The core focus of Vue is the view layer in the MVC pattern. At the same time, it can easily obtain data updates and realize the interaction between the view and the model through specific methods within the component. Vue.js is a progressive framework that focuses only on the view layer and uses a bottom-up incremental development design. The goal of Vue is to implement responsive data binding and composite view components through the simplest possible API. The advantages of Vue.js include easy to use, lightweight, efficient, fast, flexible, extensible and so on.
+Vue is a popular JavaScript front-end framework designed to better organize and simplify Web development. The core focus of Vue is the view layer in the MVC pattern. At the same time, it can easily obtain data updates and realize the interaction between the view and the model through specific methods within the component. Vue is a progressive framework that focuses only on the view layer and uses a bottom-up incremental development design. The goal of Vue is to implement responsive data binding and composite view components through the simplest possible API. The advantages of Vue include easy to use, lightweight, efficient, fast, flexible, extensible and so on.
 
-Strve.js can also be used with Vue.js. If Strve.js conflicts with Vue.js' API name, you can use 'as' to give it a different name.
+Strve can also be used with Vue. If Strve conflicts with Vue' API name, you can use `as` to give it a different name.
 
 Here's the sample code.
 
@@ -128,12 +126,12 @@ function add() {
 }
 
 export function template() {
-	return html`<div class="card">
-		<button type="button" @click=${add} $key>
-			Strve：count is ${data.count}
-		</button>
-	</div>`;
+	return html`
+			<div class="card">
+				<button type="button" @click=${add}>
+					Strve：count is ${data.count}
+				</button>
+			</div>
+	`;
 }
 ```
-
-If you want to see the full code, you can go to [online sample](https://stackblitz.com/edit/strveandvue)。

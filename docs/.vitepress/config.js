@@ -9,7 +9,7 @@ export default {
     "/": {
       lang: "en-US",
       title: "Strve.js",
-      titleTemplate: "A JS library that can convert strings into view",
+      titleTemplate: "Easy-to-use, fast and flexible JavaScript framework",
       description: "A JS library that can convert strings into view",
     },
   },
@@ -22,10 +22,6 @@ export default {
     locales: {
       "/": {
         nav: [
-          {
-            text: "Playground",
-            link: "/playground/",
-          },
           {
             text: "Change Log",
             link: "/changeLog/",

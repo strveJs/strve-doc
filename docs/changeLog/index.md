@@ -2,7 +2,20 @@
 
 Although the version number is taken from the version number of Strve.js, the content not only contains the update content of Strve.js, but also the update content of other official tools in the same period.
 
-## v5.6.2 (Latest)
+## v6.0.2 (Latest)
+
+- Remove `useFirstKey`;
+- Added `key` attribute. This special attribute `key` is mainly used as a hint for Vue's virtual DOM algorithm and is used to identify vnode when comparing the old and new node lists. The double-ended Diff algorithm is used internally, which is more efficient;
+- Remove static tag `$key`;
+- Added built-in attribute `$ref`;
+- Change API `h` to `html`;
+- There must be one and only one root node, use the `<fragment></fragment>` tag;
+- Update [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve);
+- Update [babel-plugin-jsx-to-strve](https://www.npmjs.com/package/babel-plugin-jsx-to-strve);
+- Update [strve-router](https://www.npmjs.com/package/strve-router);
+- Update [create-strve-app](https://www.npmjs.com/package/create-strve-app);
+
+## v5.6.2
 
 - Optimize `onMounted`, `nextTick` API;
 - Support JSX syntax;

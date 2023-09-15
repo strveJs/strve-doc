@@ -1,99 +1,88 @@
 # Install
 
-In the previous article, we briefly and quickly understood the use of Strve.js, so we will explain in detail the installation methods of Strve.js in this article.
+In the previous article, we briefly and quickly understood the use of Strve, so in this article we will explain in detail the installation methods of Strve.
 
 ## CDN
 
 If you want to use ES Modules.
 
-> If you opened the above index.html directly in your browser, you'll see that it throws an error because ES modules don't work over the `file://` protocol. In order for this to work, you need to use a local HTTP server to serve index.html via the `http://` protocol.
+::: warning
+If you open the above index.html directly in the browser, you will find that it throws an error because ES modules cannot work through the `file://` protocol. In order for this to work, you need to use a local HTTP server to serve index.html via the `http://` protocol.
+:::
 
 ```html
 <script type="module">
-	import {
-		h,
-		setData,
-		createApp,
-	} from 'https://cdn.jsdelivr.net/npm/strve-js@5.6.2/dist/strve.full-esm.prod.js';
+  import {
+    html,
+    setData,
+    createApp,
+  } from "https://cdn.jsdelivr.net/npm/strve-js@6.0.2/dist/strve.full-esm.prod.js";
 
-	const state = {
-		count: 0,
-	};
+  const state = {
+    count: 0,
+  };
 
-	function add() {
-		setData(() => {
-			state.count++;
-		});
-	}
+  function add() {
+    setData(() => {
+      state.count++;
+    });
+  }
 
-	function App() {
-		return h`
-                <h1 $key>${state.count}</h1>
-                <button onClick=${add}>Add</button>
-		`;
-	}
+  function App() {
+    return html`<h1>${state.count}</h1>`;
+  }
 
-	const app = createApp(App);
-	app.mount('#app');
+  const app = createApp(App);
+  app.mount("#app");
 </script>
 ```
 
-If you think the above method is a bit cumbersome, for more convenience, you can also directly import it in the `<script>` tag and use it directly.
+If you think the above method is a bit troublesome, for more convenience, you can also import it directly in the `<script>` tag.
+
+::: warning
+It should be noted that in this way you need to use the corresponding method through object destructuring.
+:::
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/strve-js@5.6.2/dist/strve.full.prod.js"></script>
-```
-
-It should be noted that in this way, you need to use the corresponding method through object destructuring.
-
-```js
-const { h, setData, createApp } = Strve;
+<script
+src="https://cdn.jsdelivr.net/npm/strve-js@6.0.2/dist/strve.full.prod.js"
+></script>
+<script>
+const { html, setData, createApp } = Strve;
 const state = {
-	count: 0,
+  count: 0,
 };
 
 function add() {
-	setData(() => {
-		state.count++;
-	});
+  setData(() => {
+    state.count++;
+  });
 }
 
 function App() {
-	return h`
-			<h1 $key>${state.count}</h1>
-			<button onClick=${add}>Add</button>
-	`;
+  return html`<h1>${state.count}</h1>`;
 }
 
 const app = createApp(App);
-app.mount('#app');
+app.mount("#app");
+</script>
 ```
 
-> The above two methods use the production version by default. If you want to get better code error prompts in the development environment, you can use the development version. You only need to delete the `prod` field in the file suffix `*.prod.js` That's it.
+::: tip
+The above two methods use the production version by default. If you want to get better code error prompts in the development environment, you can use the development version. You only need to delete the `prod` field in the file suffix `*.prod.js`. That’s it.
+:::
 
 ## Package Manager
 
-Package manager installation is recommended when building large applications with Strve.js.
-
-Install using your favorite package manager.
-
-### Npm
+When building large applications with Strve, it is recommended to install using a package manager.
 
 ```bash
 > npm install strve-js
 ```
 
-### Yarn
-
-```bash
-> yarn add strve-js
-```
-
 ## CLI
 
-When you build a large application, it is recommended to use the official project scaffolding provided by Strve.js to build the project. Quickly build complex scaffolding for single-page applications (SPAs). It provides out-of-the-box build settings for modern front-end workflows.
-
-> [CreateStrveApp](/tool/createStrveApp/)
+When you build a large-scale application, it is recommended to use the official project scaffolding [CreateStrveApp](/tool/createStrveApp/) provided by Strve to build the project. Quickly build complex scaffolding for single page applications (SPA). It provides out-of-the-box build settings for modern front-end workflows.
 
 ## Explanation of the different builds
 
@@ -108,5 +97,5 @@ You'll find many different builds of Strve.js in the `dist/` directory of the NP
 
 Different versions:
 
-1. Full version: includes compiler (code for compiling template strings into JavaScript rendering functions) and runtime versions;
-2. Runtime version: Code for creating instances, rendering and manipulating the virtual DOM. Basically, it removes everything else from the compiler;
+- Full version: includes compiler (code for compiling template strings into JavaScript rendering functions) and runtime versions;
+- Runtime version: Code for creating instances, rendering and manipulating the virtual DOM. Basically, it removes everything else from the compiler;

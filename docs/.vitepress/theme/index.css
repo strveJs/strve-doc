@@ -4,20 +4,6 @@
   --vp-c-brand-dark: var(--color);
   --vp-c-brand-light: var(--color);
   --vp-c-brand-lighter: var(--color);
-
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-image-filter: blur(150px);
-  --vp-home-hero-image-background-image: linear-gradient(
-    45deg,
-    #ecaf07ea 50%,
-    var(--color) 50%
-  );
-  --vp-home-hero-name-background: linear-gradient(
-    45deg,
-    #ecaf07ea,
-    var(--color)
-  );
-  --vp-c-bg-alpha-with-backdrop: transparent;
   --vp-layout-max-width: 1420px;
 }
 
@@ -29,9 +15,12 @@ html .dark {
 .VPSwitch {
   margin: auto;
 }
-
 .container .name {
   padding-top: 4vh;
+  color: var(--color);
+}
+.container .name .clip{
+line-height: 44px;
 }
 .container .name,
 .container .text,
@@ -39,7 +28,9 @@ html .dark {
   max-width: 100vw;
   text-align: center;
 }
-
+.container .tagline {
+  padding-top: 16px;
+}
 .container .actions {
   justify-content: center;
 }

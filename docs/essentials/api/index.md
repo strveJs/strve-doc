@@ -8,13 +8,11 @@
 
 - Details:
 
-Pass in a function, which is the template function that needs to be rendered. You can chain other application APIs after `createApp`.
+Pass in a function, which is the template function that needs to be rendered.
 
 ```js
 function App() {
-	return h`
-            <h1>Hello</h1>
-    `;
+	return html`<h1>Hello</h1>`;
 }
 
 createApp(App).mount('#app');
@@ -28,9 +26,9 @@ createApp(App).mount('#app');
 
 - Details:
 
-Mount the root component. The innerHTML of the provided DOM element will be replaced with the template rendering of the root component of the application.
+Mount the root component. The innerHTML of the provided DOM element will be replaced with the template rendering of the application's root component.
 
-## h
+## html
 
 - Parameters:
 
@@ -38,23 +36,22 @@ Mount the root component. The innerHTML of the provided DOM element will be repl
 
 - Details:
 
-` h`` ` is a label function, the syntax of label function is to directly follow the function name with a template string. For example, you can write HTML tags directly in template strings.
+` html`` ` is a tag function. The syntax of the tag function is directly followed by a template string after the function name. For example, you can write HTML tags directly in the template string.
 
 ```js
 function App() {
-	return h`
-             <div class='inner'>
-                 <h1>Hello</h1>
-             </div>
+	return html`
+			<div class='inner'>
+				<h1>Hello</h1>
+			</div>
     `;
 }
 ```
 
-If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plugin, then, in Add `/*html*/` between ` h`` `.
-
-Just like that, in the VSCode editor, this plugin can make HTML template characters highlighted.
-
-![](/code1.png)
+::: tip
+If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plug-in,
+This plugin enables HTML template string highlighting.
+:::
 
 ## setData
 
@@ -65,7 +62,7 @@ Just like that, in the VSCode editor, this plugin can make HTML template charact
 
 - Details:
 
-The first parameter is a function. The function body needs to execute values ​​that will change the state of the page, such as `state.msg` in the following example.
+The first parameter is a function. The function body needs to execute the value that will change the page state, such as `state.msg` in the example below.
 
 ```js
 const state = {
@@ -73,24 +70,20 @@ const state = {
 };
 
 function useChange() {
-  setData(() => {
-    state.msg = '2';
-  });
+	setData(() => {
+		state.msg = '2';
+	});
 }
 
 function App() {
-	return h`
-            <button onClick=${useChange}>change</button>
-            <p $key>${state.msg}</p>
-    `;
+	return html`<p onClick=${useChange}>${state.msg}</p>`;
 }
 ```
 
-The second parameter is the object type, and the optional properties are as follows:
+The second parameter is the object type, and the optional attributes are as follows:
 
 | Property | Function |
 | --- | --- |
-| status | Identifies a special status field of type string. For specific attribute values, please refer to [status](/essentials/usage/#status) |
 | name | The name of the function component, the type is `Function` (the type is `String` when used with the `customElement` attribute), directly pass in a function component, please refer to [Named-function-component](/essentials/usage/#named-function-component) |
 | customElement | The native custom component object, whose type is Object. Just pass in the first parameter of [defineCustomElement](/essentials/api/#definecustomelement) directly. In addition, it needs to be used with `name='useCustomElement'` to update the component view as needed|
 
@@ -98,7 +91,7 @@ The second parameter is the object type, and the optional properties are as foll
 
 - Details:
 
-Directly get the version number of Strve.js.
+Directly get the version number of Strve.
 
 ## onMounted
 
@@ -108,7 +101,7 @@ Directly get the version number of Strve.js.
 
 - Details:
 
-Lifecycle hook: Triggered when the node mount is complete.
+Life cycle hook function: triggered when the node is mounted.
 
 ```js
 const state = {
@@ -116,20 +109,17 @@ const state = {
 };
 
 function add() {
-  setData(() => {
-    state.count++;
-  });
+	setData(() => {
+		state.count++;
+	});
 }
 
 function App() {
-	return h`
-            <h1 $key="h1">${state.count}</h1>
-            <button onClick=${add}>Add</button> 
-    `;
+	return html`<h1 $ref="h1" onClick=${add}>${state.count}</h1>`;
 }
 
 onMounted(() => {
-	console.log(domInfo.h1); // <button>Add</button>
+	console.log(domInfo.h1); // <h1>0</h1>
 });
 ```
 
@@ -141,41 +131,17 @@ onMounted(() => {
 
 - Details:
 
-Lifecycle hook: Called when the page is destroyed.
+Life cycle hook function: called when the page is destroyed.
 
 ```js
-class Home {
-	constructor() {
-		onUnmounted(() => {
-			console.log('onUnmounted'); // onUnmounted
-		});
-	}
-
-	goAbout = () => {
-		linkTo('/about');
-	};
-
-	render = () => h`
-            <button onClick=${this.goAbout}>goAbout</button>
-    `;
-}
-
-class About {
-	constructor() {
-		onMounted(() => {
-			console.log(document.querySelector('button'));
-		});
-	}
-
-	goHome = () => {
-		linkTo('/');
-	};
-
-	render = () => h`
-            <button onClick=${this.goHome}>goHome</button>
-    `;
-}
+onUnmounted(() => {
+	console.log('onUnmounted!');
+});
 ```
+
+::: tip
+Generally used with [StrveRouter](/tool/strveRouter/).
+:::
 
 ## nextTick
 
@@ -185,7 +151,7 @@ class About {
 
 - Details:
 
-Use it right after changing some data to wait for the DOM to update.
+Use it immediately after changing some data to wait for the DOM to update.
 
 ```js
 const state = {
@@ -195,19 +161,21 @@ const state = {
 let styleColor = 'color:red';
 
 function add() {
-  setData(() => {
-    styleColor = 'color:green';
-    state.count++;
-    nextTick(() => {
-      console.log(domInfo.h1); // <h1 style="color:green">1</h1>
-    });
-  });
+	setData(() => {
+		styleColor = 'color:green';
+		state.count++;
+		nextTick(() => {
+			console.log(domInfo.h1); // <h1 style="color:green">1</h1>
+		});
+	});
 }
 
 function App() {
-	return h`
-            <h1 $key="h1" style=${styleColor}>${state.count}</h1>
-            <button onClick=${add}>Add</button> 
+	return html`
+			<fragment>
+				<h1 $ref="h1" style=${styleColor}>${state.count}</h1>
+				<button onClick=${add}>Add</button>
+			</fragment>
     `;
 }
 ```
@@ -216,17 +184,19 @@ function App() {
 
 - Details:
 
-It is a DOM information object, you can define a property in `$key` in the DOM.
+It is a DOM information object, and you can define a property in `$ref` in the DOM.
 
 ```js
 function add() {
-  console.log(domInfo.h1); // <h1>Strve.js</h1>
+	console.log(domInfo.h1); // <h1>Strve.js</h1>
 }
 
 function App() {
-	return h`
-            <h1 $key="h1">Strve.js</h1>
-            <button onClick=${add}>Add</button> 
+	return html`
+			<fragment>
+				<h1 $ref="h1">Strve.js</h1>
+				<button onClick=${add}>Add</button>
+			</fragment>
     `;
 }
 ```
@@ -235,31 +205,33 @@ function App() {
 
 - Details:
 
-It needs to be used when passing a value from a component.
+It is required when passing values from components.
 
 ```js
 // Father
 
 function useGetTit(v) {
-  console.log(v);
-  setData(
-          () => {
-            propsData.Component2 = v;
-          },
-          {
-            name: Component2,
-          }
-  );
+	console.log(v);
+	setData(
+		() => {
+			propsData.Component2 = v;
+		},
+		{
+			name: Component2,
+		}
+	);
 }
 
 function App() {
-	return h`
-            <component $name=${Component1.name} $props=${useGetTit}>
-                ${Component1()}   
-            </component>
-            <component $name=${Component2.name}>
-                ${Component2()}   
-            </component>
+	return html`
+			<div>
+				<component $name=${Component1.name} $props=${useGetTit}>
+					${Component1()}
+				</component>
+				<component $name=${Component2.name}>
+					${Component2()}
+				</component>
+			</div>
     `;
 }
 ```
@@ -270,12 +242,12 @@ function App() {
 let isShow = true;
 
 function emitData() {
-  isShow = !isShow;
-  propsData.Component1(isShow);
+	isShow = !isShow;
+	propsData.Component1(isShow);
 }
 
 function Component1() {
-	return h`
+	return html`
             <h1 onClick=${emitData}>Son</h1>
     `;
 }
@@ -287,26 +259,29 @@ function Component1() {
 let v = true;
 
 function f() {
-  setData(
-          () => {
-            v = propsData.Component2;
-            console.log(v);
-          },
-          {
-            name: Component2,
-          }
-  );
+	setData(
+		() => {
+			v = propsData.Component2;
+			console.log(v);
+		},
+		{
+			name: Component2,
+		}
+	);
 }
 
 function Component2() {
-	return h`
-            <div $key>
-            ${v ? h`<p $key>${v}</p>` : h`<null></null>`}
-            </div>
-            <button onClick=${f}>btn</button>
+	return html`
+			<fragment>
+				<div>
+				${v ? html`<p>${v}</p>` : html`<null></null>`}
+				</div>
+				<button onClick=${f}>btn</button>
+			</fragment>
     `;
 }
 ```
+
 ## defineCustomElement
 
 - Parameters:
@@ -341,9 +316,7 @@ const data = {
 const myCom1 = {
 	id: "myCom1",
 	template: () => {
-		return h`
-			   <p class="msg" $key>${data.count1}</p>
-		`
+		return html`<p class="msg">${data.count1}</p>`
 	},
 	styles: [`.msg { color: red; }`],
 }
@@ -351,9 +324,7 @@ const myCom1 = {
 defineCustomElement(myCom1, 'my-com1')
 
 function App() {
-	return h`
-			<my-com1></my-com1>
-	`
+	return html`<my-com1></my-com1>`
 }
 ```
 Example 2:
@@ -361,9 +332,11 @@ Example 2:
 const myCom1 = {
 	id: "myCom1",
 	template: (props) => {
-		return h`
-				<p class="msg" $key>${props.value}</p>
-				<p class="msg" $key>${props.msg}</p>
+		return html`
+				<fragment>
+					<p class="msg">${props.value}</p>
+					<p class="msg">${props.msg}</p>
+				</fragment>
 		`
 	},
 	styles: [`.msg { color: red; }`],
@@ -390,9 +363,11 @@ function add() {
 }
 
 function App() {
-	return h`
-			<button @click="${add}">btn</button>
-			<my-com1 value=${data.count1} msg="${data.count2}" $key></my-com1>
+	return html`
+			<fragment>
+				<button onClick=${add}>btn</button>
+				<my-com1 value=${data.count1} msg=${data.count2}></my-com1>
+			<fragment>
 	`
 }
 ```
