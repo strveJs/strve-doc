@@ -134,7 +134,7 @@ function App() {
 }
 ```
 ::: warning
-Child elements under the same parent element must have unique keys. Duplicate keys will cause rendering exceptions. The special attribute key is mainly used as a hint for Vue's virtual DOM algorithm and is used to identify vnode when comparing the old and new node lists.
+Child elements under the same parent element must have unique keys. Duplicate keys will cause rendering exceptions. The special attribute key is mainly used as a hint for Strve's virtual DOM algorithm, and is used to identify vnode when comparing the old and new node lists.
 :::
 
 ## Event-handling
