@@ -31,11 +31,11 @@ export default {
             items: [
               {
                 text: "English",
-                link: "https://maomincoding.github.io/strve-doc/",
+                link: "https://strvejs.github.io/strve-doc/",
               },
               {
                 text: "简体中文",
-                link: "https://maomincoding.github.io/strve-doc-zh/",
+                link: "https://strvejs.github.io/strve-doc-zh/",
               },
             ],
           },
