@@ -1,123 +1,120 @@
 export default {
-  base: "/strve-doc",
-  head: [["link", { rel: "icon", href: "/strve-doc/" + "logo.png" }]],
+  base: '/strve-doc',
+  head: [['link', { rel: 'icon', href: '/strve-doc/' + 'logo.png' }]],
   markdown: {
-    theme: "material-default",
+    theme: 'material-default',
     lineNumbers: false,
   },
   locales: {
-    "/": {
-      lang: "en-US",
-      title: "Strve.js",
-      titleTemplate: "The Approachable JavaScript Framework",
-      description: "A JS library that can convert strings into view",
+    '/': {
+      lang: 'en-US',
+      title: 'Strve.js',
+      titleTemplate: 'The Approachable JavaScript Framework',
+      description: 'A JS library that can convert strings into view',
     },
   },
   themeConfig: {
-    logo: "/logo.png",
-    socialLinks: [
-      { icon: "twitter", link: "https://twitter.com/maomincoding" },
-      { icon: "github", link: "https://github.com/maomincoding/strve" },
-    ],
+    logo: '/logo.png',
+    socialLinks: [{ icon: 'github', link: 'https://github.com/strveJs' }],
     locales: {
-      "/": {
+      '/': {
         nav: [
           {
-            text: "Change Log",
-            link: "/changeLog/",
+            text: 'Change Log',
+            link: '/changeLog/',
           },
           {
-            text: "Languages",
+            text: 'Languages',
             items: [
               {
-                text: "English",
-                link: "https://maomincoding.github.io/strve-doc/",
+                text: 'English',
+                link: 'https://strvejs.github.io/strve-doc/',
               },
               {
-                text: "简体中文",
-                link: "https://maomincoding.github.io/strve-doc-zh/",
+                text: '简体中文',
+                link: 'https://strvejs.github.io/strve-doc-zh/',
               },
             ],
           },
         ],
         sidebar: [
           {
-            text: "Guide",
+            text: 'Guide',
             collapsible: false,
             items: [
               {
-                text: "Started",
-                link: "/guide/started/",
+                text: 'Started',
+                link: '/guide/started/',
               },
               {
-                text: "Install",
-                link: "/guide/install/",
+                text: 'Install',
+                link: '/guide/install/',
               },
             ],
           },
           {
-            text: "Essentials",
+            text: 'Essentials',
             collapsible: false,
             items: [
               {
-                text: "API",
-                link: "/essentials/api/",
+                text: 'API',
+                link: '/essentials/api/',
               },
               {
-                text: "Usage",
-                link: "/essentials/usage/",
+                text: 'Usage',
+                link: '/essentials/usage/',
               },
             ],
           },
           {
-            text: "Tool",
+            text: 'Tool',
             collapsible: false,
             items: [
               {
-                text: "CreateStrveApp",
-                link: "/tool/createStrveApp/",
+                text: 'CreateStrveApp',
+                link: '/tool/createStrveApp/',
               },
               {
-                text: "StrveRouter",
-                link: "/tool/strveRouter/",
+                text: 'StrveRouter',
+                link: '/tool/strveRouter/',
               },
               {
-                text: "BabelPluginStrve",
-                link: "/tool/babelPluginStrve/",
+                text: 'BabelPluginStrve',
+                link: '/tool/babelPluginStrve/',
               },
               {
-                text: "BabelPluginJsxToStrve",
-                link: "/tool/babelPluginJsxToStrve/",
+                text: 'BabelPluginJsxToStrve',
+                link: '/tool/babelPluginJsxToStrve/',
               },
             ],
           },
           {
-            text: "Other",
+            text: 'Other',
             collapsible: false,
             items: [
               {
-                text: "JSX Support",
-                link: "/other/jsx/",
+                text: 'JSX Support',
+                link: '/other/jsx/',
               },
               {
-                text: "Adapt",
-                link: "/other/adapt/",
+                text: 'Adapt',
+                link: '/other/adapt/',
               },
               {
-                text: "IDE Support",
-                link: "/other/ide/",
+                text: 'IDE Support',
+                link: '/other/ide/',
               },
               {
-                text: "UI Framework",
-                link: "/other/ui/",
+                text: 'UI Framework',
+                link: '/other/ui/',
               },
               {
-                text: "Browser Compatibility",
-                link: "/other/browser/",
+                text: 'Browser Compatibility',
+                link: '/other/browser/',
               },
               {
-                text: "About",
-                link: "/other/about/",
+                text: 'About',
+                link: '/other/about/',
               },
             ],
           },
@@ -125,7 +122,7 @@ export default {
       },
     },
     footer: {
-      message: "Released under the MIT License.",
+      message: 'Released under the MIT License.',
       copyright: `Copyright © 2021-${new Date().getFullYear()} maomincoding`,
     },
   },

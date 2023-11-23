@@ -12,7 +12,7 @@ hero:
       link: /guide/started/
     - theme: alt
       text: View on GitHub
-      link: https://github.com/maomincoding/strve
+      link: https://github.com/strveJs/strve
 features:
   - icon: 🔌
     title: Approachable
