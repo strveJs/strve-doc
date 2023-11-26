@@ -40,15 +40,15 @@ By default, [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strv
 }
 ```
 
-## Other modes
+## Expression Pattern
 
 By default, ` html`` ` will be used as a tag template mode. If there are other scenarios, you can choose to call the expression mode, there are two.
 
-1. The function name is `tem_h`, and the parameter is a template string.
+- The function name is `tem_h`, and the parameter is a template string.
 ```js
 tem_h(`<p>hello</p>`);
 ```
-2. The function name is `str_h`, and the parameters are ordinary strings.
+- The function name is `str_h`, and the parameters are ordinary strings.
 ```js
 str_h('<p>hello</p>');
 ```

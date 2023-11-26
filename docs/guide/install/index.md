@@ -1,10 +1,12 @@
 # Install
 
+::: tip
 In the previous article, we briefly and quickly understood the use of Strve, so in this article we will explain in detail the installation methods of Strve.
+:::
 
 ## CDN
 
-If you want to use ES Modules.
+If you want to use ES Module.
 
 ::: warning
 If you open the above index.html directly in the browser, you will find that it throws an error because ES modules cannot work through the `file://` protocol. In order for this to work, you need to use a local HTTP server to serve index.html via the `http://` protocol.
@@ -16,7 +18,7 @@ If you open the above index.html directly in the browser, you will find that it 
     html,
     setData,
     createApp,
-  } from "https://cdn.jsdelivr.net/npm/strve-js@6.0.2/dist/strve.full-esm.prod.js";
+  } from "https://cdn.jsdelivr.net/npm/strve-js@6.2.0/dist/strve.full-esm.prod.js";
 
   const state = {
     count: 0,
@@ -29,7 +31,7 @@ If you open the above index.html directly in the browser, you will find that it 
   }
 
   function App() {
-    return html`<h1>${state.count}</h1>`;
+    return html`<h1>${state.count}</h1>`
   }
 
   const app = createApp(App);
@@ -37,18 +39,19 @@ If you open the above index.html directly in the browser, you will find that it 
 </script>
 ```
 
-If you think the above method is a bit troublesome, for more convenience, you can also import it directly in the `<script>` tag.
+If you find the above method a bit troublesome, you can also import it directly in the `<script>` tag.
 
-::: warning
-It should be noted that in this way you need to use the corresponding method through object destructuring.
+::: tip
+All top-level APIs of this version are exposed as properties on the global Strve object.
 :::
 
 ```html
 <script
-src="https://cdn.jsdelivr.net/npm/strve-js@6.0.2/dist/strve.full.prod.js"
+src="https://cdn.jsdelivr.net/npm/strve-js@6.2.0/dist/strve.full.prod.js"
 ></script>
 <script>
 const { html, setData, createApp } = Strve;
+
 const state = {
   count: 0,
 };
@@ -60,7 +63,7 @@ function add() {
 }
 
 function App() {
-  return html`<h1>${state.count}</h1>`;
+  return html`<h1>${state.count}</h1>`
 }
 
 const app = createApp(App);
@@ -69,7 +72,7 @@ app.mount("#app");
 ```
 
 ::: tip
-The above two methods use the production version by default. If you want to get better code error prompts in the development environment, you can use the development version. You only need to delete the `prod` field in the file suffix `*.prod.js`. That’s it.
+The above two methods use the production version by default. If you want to get more accurate code positioning during development, you can use the development version. You only need to delete the `prod` field in the file suffix `*.prod.js`.
 :::
 
 ## Package Manager
@@ -97,5 +100,6 @@ You'll find many different builds of Strve in the `dist/` directory of the NPM p
 
 Different versions:
 
-- Full version: includes compiler (code for compiling template strings into JavaScript rendering functions) and runtime versions;
-- Runtime version: Code for creating instances, rendering and manipulating the virtual DOM. Basically, it removes everything else from the compiler;
+- **Full version:** includes compiler (code for compiling template strings into JavaScript rendering functions) and runtime versions;
+
+- **Runtime version:** Code for creating instances, rendering and manipulating the virtual DOM. Basically, it removes everything else from the compiler;

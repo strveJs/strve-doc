@@ -9,8 +9,8 @@ export default {
     '/': {
       lang: 'en-US',
       title: 'Strve.js',
-      titleTemplate: 'The Approachable JavaScript Framework',
-      description: 'A JS library that can convert strings into view',
+      titleTemplate: 'A approachable, fast, flexible and lightweight JavaScript library',
+      description: 'Building user interfaces',
     },
   },
   themeConfig: {

@@ -2,10 +2,8 @@
 layout: home
 
 hero:
-  name: |
-    The Approachable
-    JavaScript Framework
-  tagline: A JS library that can convert strings into view
+  name: A approachable, fast, flexible and lightweight JavaScript library
+  tagline: Building user interfaces
   actions:
     - theme: brand
       text: Get Started

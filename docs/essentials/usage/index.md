@@ -1,68 +1,72 @@
 # Usage
 
-## Data-binding
+::: tip
+For a better reading experience, the following code examples are written using JSX syntax.
+:::
+
+## Data Binding
 
 Strve allows developers to declaratively bind the DOM to the underlying instance's data.
 
-### text
+### Text
 
-The form of text binding in data binding is to use the symbol `${}`.
+The form of text binding in data binding is to use the symbol `{}`.
 
-```js
+```jsx
 const state = {
 	msg: 'Hello',
 };
 
 function App() {
-	return html`<h1>${state.msg}</h1>`;
+	return h1>{state.msg}</h1>
 }
 ```
 
-### expressions
+### Expression
 
-Use expressions in symbols `${}`.
+Use expressions within the notation `{}`.
 
-```js
+```jsx
 const state = {
 	a: 1,
 	b: 2,
 };
 
 function App() {
-	return html`<h1>${state.a + state.b}</h1>`;
+	return <h1>{state.a + state.b}</h1>
 }
 ```
 
-## Property-binding
+## Property Binding
 
-Use the notation `${}` to bind a value to the attribute `value`.
+Use the notation `{}` to bind a value to the property `value`.
 
-```js
+```jsx
 const state = {
 	msg: 'Hello',
 };
 
 function App() {
-	return html`<input type="text" value=${state.msg}/>`;
+	return <input type="text" value=${state.msg}/>
 }
 ```
 
 Additionally, you can bind other properties such as `class`.
 
-```js
+```jsx
 const state = {
 	isRed: true,
 	msg: 'Hello',
 };
 
 function App() {
-	return html`<h1 class=${state.isRed ? 'red' : ''}>${state.msg}</h1>`;
+	return <h1 class={state.isRed ? 'red' : ''}>{state.msg}</h1>
 }
 ```
 
 If you want to bind the `style` property, you can too.
 
-```js
+```jsx
 const state = {
 	msg: 'Hello',
 	style: {
@@ -72,286 +76,253 @@ const state = {
 };
 
 function App() {
-	return html`<p style=${state.style}>${state.msg}</p>`;
+	return <p style={state.style}>{state.msg}</p>
 }
 ```
 
-## Conditional-rendering
+## Conditional Rendering
 
-Using the notation `${}`, the label will only be displayed if the expression of the directive returns a `true` value.
+Using the notation `{}`, the label will only be displayed if the expression of the directive returns a `true` value.
 
-```js
+```jsx
 const state = {
-	isShow: true,
+  isShow: true,
 };
 
 function useShow() {
-	setData(() => {
-		state.isShow = !state.isShow;
-	});
+  setData(() => {
+    state.isShow = !state.isShow;
+  });
 }
 
 function App() {
-	return html`
-			<fragment>
-				<button onClick=${useShow}>show</button>
-				<div>
-					${
-						state.isShow
-						? html`<p>Strve.js</p>`
-						: html`<null></null>`
-					}
-				</div>
-			 </fragment>
-    `;
+  return (
+    <fragment>
+      <button onClick={useShow}>show</button>
+      <div>{state.isShow ? <p>Strve.js</p> : <null></null>}</div>
+    </fragment>
+  );
 }
 ```
 
-## List-rendering
+## List Rendering
 
-Use the notation `${}` to render an array-based list, and use the array's `map` method to return an array.
+Use the notation `{}` to render an array-based list, and use the array's `map` method to return an array.
 
-```js
+```jsx
 const state = {
-	arr: [1, 2],
+  arr: [1, 2],
 };
 
 function usePush() {
-	setData(() => {
-		state.arr.push(3);
-	});
+  setData(() => {
+    state.arr.push(3);
+  });
 }
 
 function App() {
-	return html`
-			<fragment>
-				<button onClick=${usePush}>push</button>
-				<ul>
-				${state.arr.map((todo) => html`<li key=${todo}>${todo}</li>`)}
-				</ul>
-			</fragment>
-    `;
+  return (
+    <fragment>
+      <button onClick={usePush}>push</button>
+      <ul>
+        {state.arr.map((todo) => (
+          <li key={todo}>{todo}</li>
+        ))}
+      </ul>
+    </fragment>
+  );
 }
 ```
+
 ::: warning
 Child elements under the same parent element must have unique keys. Duplicate keys will cause rendering exceptions. The special attribute key is mainly used as a hint for Strve's virtual DOM algorithm, and is used to identify vnode when comparing the old and new node lists.
 :::
 
-## Event-handling
+## Event Handling
 
-We can use the `on` directive to listen to DOM events and execute some JavaScript when the event fires. We recommend using this camelCase naming method, such as `onClick`. Additionally, the `on` directive can be abbreviated as `@`.
+We can use the `on` directive to listen to DOM events and execute some JavaScript when the event fires. We recommend using this camelCase naming method, such as `onClick`.
 
-Additionally, you need to use the notation `${}` to bind events.
+Additionally, you need to use the notation `{}` to bind events.
 
-```js
+```jsx
 const state = {
-	msg: 'sayHello',
+  msg: 'sayHello',
 };
 
 function useClick() {
-	alert('hello');
+  alert('hello');
 }
 
 function App() {
-	return html`
-			<fragment>
-				<button onClick=${useClick}>${state.msg}</button>
-				<button @click=${useClick}>${state.msg}</button>
-			</fragment>
-    `;
+  return (
+    <fragment>
+      <button onClick={useClick}>{state.msg}</button>
+    </fragment>
+  );
 }
 ```
 
-## Named-function-component
+## Named Component
 
-When we update the component data, we do not need to compare the full amount (such as the h2 and p tags below, they do not belong to the content of Component1, so Diff is not needed), we only need to update the data in the component.
+Strve applications are composed of components. A component is a part of a UI (user interface) that has its own logic and appearance. Components can be as small as a button or as large as an entire page.
 
-At this time, you need to pass in an object in the second parameter of the `setData()` method. The object key is `name` and the value is the function component that needs to be updated. In addition, you also need to wrap a `component` tag outside the function component in the parent component and use the `$name` built-in attribute (for more information, please see [Built-in-properties](/essentials/usage/#built-in-properties)) , this value is the name of the functional component.
+In Strve, a component is a function. If you give it a unique and specific name, then it is called a named component.
 
-```js
-const state1 = {
-	count: 0,
-};
+```jsx
+import { setData, registerComponent } from 'strve-js';
 
-function add1() {
-	setData(
-		() => {
-			state1.count++;
-		},
-		{
-			name: Component1,
-		}
-	);
+export const MyComponent = registerComponent('MyComponent');
+
+export function myComponent() {
+  let count = 1;
+  let render;
+
+  function add() {
+    setData(() => {
+      count++;
+    }, [MyComponent, render]);
+  }
+
+  return (render = () => (
+    <fragment>
+      <h1 onClick={add}>{count}</h1>
+    </fragment>
+  ));
 }
+```
+We encapsulate a `myComponent` component, and the component name is `MyComponent`. This component name should be unique. So, where do we reuse or use components?
 
-function Component1() {
-	return html`
-			<fragment>
-				<h1>Component1</h1>
-				<h1>${state1.count}</h1>
-				<button onClick=${add1}>add1</button>
-			</fragment>
-    `;
-}
+```jsx
+import { createApp, setData } from 'strve-js';
+import { myComponent, MyComponent } from './myComponent';
 
 function App() {
-	return html`
-			<fragment>
-				<h2>txt1</h2>
-				<div>
-					<p>txt2</p>
-					<component $name=${Component1.name}>
-						${Component1()}
-					</component>
-				</div>
-			</fragment>
-    `;
+  let render;
+
+  return (render = () => (
+    <fragment>
+	  <h1>App</h1>
+      <component $name={myComponent}>{myComponent()()}</component>
+    </fragment>
+  ));
 }
+
+createApp(App()).mount('#main');
 ```
 
-## Built-in-properties
+The internal rendering system of Strve is built based on virtual DOM. Virtual DOM (Virtual DOM, referred to as VDOM) is a programming concept, which means to "virtually" represent the UI required by the target through a data structure and save it in the memory. Then use the Diff algorithm to compare the old and new data and synchronize the real DOM with it.
+
+If the virtual DOM tree is too large and the Diff calculation time is greater than 16.6ms, it may cause performance lag. One feature of named components is "isolated islands". What is an "isolated island"? An isolated island can be understood as an independent module in the Strve application. Decompose a huge virtual DOM tree into many independent modules, so that the Diff calculation time will be controlled at the module level, greatly reducing the calculation time and improving performance.
+
+::: tip
+Complying with the coding standards of named components, Strve will automatically start modular and accurate updates of components internally.
+:::
+
+## Built-in Properties
 
 ### $ref
 
 The `$ref` attribute can reference a DOM element. It is used to reference other elements within a component or DOM element.
 
-```js
-function add() {
-	console.log(domInfo.h1); // <h1>Strve.js</h1>
-}
+```jsx
+function Home() {
+  const h1Ref = Object.create(null);
+  let render;
 
-function App() {
-	return html`
-			<fragment>
-				<h1 $ref="h1">Strve.js</h1>
-				<button onClick=${add}>Add</button>
-			</fragment>
-    `;
-}
+  function view() {
+    nextTick(() => {
+      console.log(domInfo.get(h1Ref)); // <h1>1</h1>
+    });
+  }
 
+  return (render = () => (
+    <fragment>
+      <button onClick={view}>Btn</button>
+      <h1 $ref={h1Ref}>1</h1>
+    </fragment>
+  ));
+}
 ```
 
 ### $name
 
-This attribute needs to be used on the built-in tag `component`, which represents the name of the internal component and must be the same as the name of the functional component.
+This attribute needs to be used on the built-in tag `component` to represent the internal component name. Can be an object or array.
 
-```js
-const state1 = {
-	count: 0,
-};
-
-function add1() {
-	setData(
-		() => {
-			state1.count++;
-		},
-		{
-			name: Component1,
-		}
-	);
-}
-
-function Component1() {
-	return html`
-			<fragment>
-				<h1>${state1.count}</h1>
-				<button onClick=${add1}>add1</button>
-			</fragment>
-    `;
-}
+```jsx
+import { myComponent, MyComponent } from './myComponent';
 
 function App() {
-	return html`
-            <component $name=${Component1.name}>
-                ${Component1()}
-            </component>
-    `;
+  let render;
+
+  return (render = () => (
+    <fragment>
+	  <h1>App</h1>
+      <component $name={myComponent}>{myComponent()()}</component>
+    </fragment>
+  ));
 }
 ```
-
-### $props
-
-This attribute is used with [propsData](/essentials/api/#propsdata) when, for example, you need to pass data from a child component to a parent component.
-
-```js
-// Son
-
-let isShow = true;
-
-function emitData() {
-	isShow = !isShow;
-	propsData.Component1(isShow);
-}
-
-function Component1() {
-	return html`<h1 onClick=${emitData}>Son</h1>`;
-}
-```
-
-```js
-// Father
-
-function useGetTit(v) {
-	console.log(v); // false
-}
+```jsx
+import { myComponent, MyComponent, MyComponent1 } from './myComponent';
 
 function App() {
-	return html`
-            <component $name=${Component1.name} $props=${useGetTit}>
-                ${Component1()}
-            </component>
-    `;
+  let render;
+
+  return (render = () => (
+    <fragment>
+	  <h1>App</h1>
+      <component $name={[myComponent,MyComponent1]}>{myComponent()()}</component>
+    </fragment>
+  ));
 }
 ```
 
-## Built-in-tags
+## Built-in Tags
 
 ### component
 
-Component placeholder label, which wraps a functional component within the label.
+Component placeholder tag, which wraps a component within the tag.
 
-```js
-function Component1() {
-	return html`<h1>Hello</h1>`;
-}
+```jsx
+import { createApp, setData } from 'strve-js';
+import { myComponent, MyComponent } from './myComponent';
 
 function App() {
-	return html`
-            <component $name=${Component1.name}>
-                ${Component1()}
-            </component>
-    `;
+  let render;
+
+  return (render = () => (
+    <fragment>
+	  <h1>App</h1>
+      <component $name={myComponent}>{myComponent()()}</component>
+    </fragment>
+  ));
 }
+
+createApp(App()).mount('#main');
 ```
 
 ### null
 
 Placeholder tags will not be rendered into the page.
 
-```js
+```jsx
 const state = {
-	isShow: true,
+  isShow: true,
 };
 
 function useShow() {
-	setData(() => {
-		state.isShow = !state.isShow;
-	});
+  setData(() => {
+    state.isShow = !state.isShow;
+  });
 }
 
 function App() {
-	return html`
-			<fragment>
-				<button onClick=${useShow}>show</button>
-				<div>
-					${
-						state.isShow
-						? html`<p>Strve.js</p>`
-						: html`<null></null>`
-					}
-				</div>
-			</fragment>
-    `;
+  return (
+    <fragment>
+      <button onClick={useShow}>show</button>
+      <div>{state.isShow ? <p>Strve.js</p> : <null></null>}</div>
+    </fragment>
+  );
 }
 ```
 
@@ -359,153 +330,25 @@ function App() {
 
 Create a document fragment tag. It is not part of the real DOM tree, its changes will not trigger a re-rendering of the DOM tree, and will not have an impact on performance.
 
-```js
+::: warning
+There is only one root component, so you will see it used as the root component in many places in the documentation.
+:::
+
+```jsx
 const state = {
-	x: 0,
-	y: 0,
+  x: 0,
+  y: 0,
 };
 
 function App() {
-	return html`
-            <fragment>
-                <h1>Mouse position is at: ${state.x}, ${state.y}</h1>
-            </fragment>
-    `;
-}
-```
-
-## Component mode
-
-Components can be defined in three modes, namely:
-
-- Class mode;
-- Constructor mode;
-- Prototype mode;
-
-**Class mode**
-
-```js
-class About {
-	constructor() {
-		this.state = {
-			msg: 'About',
-		};
-	}
-
-	useChange = () => {
-		setData(() => {
-			this.state.msg = 'Changed';
-		});
-	};
-
-	goHome = () => {
-		linkTo('/');
-	};
-
-	render = () => {
-		return html`
-				<fragment>
-					<button onClick=${this.goHome}>goHome</button>
-					<h1 onClick=${this.useChange}>${this.state.msg}</h1>
-				</fragment>
-        `;
-	};
-}
-```
-
-**Constructor mode**
-
-```js
-function About() {
-	const state = {
-		msg: 'About',
-	};
-
-	function goHome() {
-		linkTo('/');
-	}
-
-	function render() {
-		return html`<h1 onClick=${goHome}>${state.msg}</h1>`;
-	}
-
-	return {
-		render,
-	};
-}
-```
-
-**Prototype mode**
-
-This mode has a caching mechanism.
-
-```js
-const Home = function () {};
-const home = Home.prototype;
-
-home.state = {
-	msg: 'Home',
-	count: 0,
-};
-
-home.useAdd = function () {
-	setData(() => {
-		home.state.count++;
-	});
-};
-
-home.goAbout = function () {
-	linkTo('/about');
-};
-
-home.render = function () {
-	return html`
-			<fragment>
-				<button onClick=${home.goAbout}>GoAbout</button>
-				<h1 onClick=${home.useAdd}>${home.state.count}</h1>
-				<h2>${home.state.msg}</h2>
-			</fragment>
-    `;
-};
-```
-
-## Web Components
-
-The main benefit of custom elements is that they can be used with any framework, or even without a framework. They are ideal when you target end users who may use different front-end technology stacks, or when you want to decouple the final application from the implementation details of the components it uses.
-
-Use the [`defineCustomElement`](/essentials/api/#definecustomelement) API to register native custom elements.
-
-In addition, it should be noted that when we update the internal custom element data, such as the following, the internal Virtual Dom does not need to be compared in full, and we can use the `customElement` field in the `setData` API.
-
-```js
-const data = {
-	count: 1
+  return (
+    <fragment>
+      <h1>
+        Mouse position is at: {state.x}, {state.y}
+      </h1>
+	  <h2>Hello!</h2>
+    </fragment>
+  );
 }
 
-function changeCount() {
-	setData(() => {
-		data.count++;
-	}, {
-		customElement: myCom2,
-		name: 'useCustomElement'
-	})
-}
-
-const myCom2 = {
-	id: "myCom2",
-	template: () => {
-		return html`<h2 @click=${changeCount}>${data.count}</h2>`
-	},
-}
-
-defineCustomElement(myCom2, 'my-com2');
-
-function App() {
-	return html`
-			<fragment>
-				<h1>1</h1>
-				<my-com2></my-com2>
-			</fragment>
-	`
-}
 ```

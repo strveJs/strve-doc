@@ -1,5 +1,5 @@
 :root {
-  --color: #b95e46;
+  --color: #cc6f55;
   --vp-c-brand: var(--color);
   --vp-c-brand-dark: var(--color);
   --vp-c-brand-light: var(--color);
@@ -15,22 +15,30 @@ html .dark {
 .VPSwitch {
   margin: auto;
 }
+
 .container .name {
   padding-top: 4vh;
-  color: var(--color);
 }
-.container .name .clip{
-line-height: 44px;
+
+.container .name .clip {
+  line-height: 44px;
+  background: -webkit-linear-gradient(270deg, var(--color) 25%, rgb(225, 164, 99));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
 .container .name,
 .container .text,
 .container .tagline {
   max-width: 100vw;
   text-align: center;
 }
+
 .container .tagline {
   padding-top: 16px;
 }
+
 .container .actions {
   justify-content: center;
 }
@@ -57,6 +65,7 @@ line-height: 44px;
 .prev .title {
   text-align: left;
 }
+
 .next .desc,
 .next .title {
   text-align: right;
@@ -68,6 +77,7 @@ line-height: 44px;
   height: 80px;
   border-radius: 100%;
 }
+
 .user-img:hover {
   transition: all 1s;
   transform: rotate(360deg);
@@ -82,6 +92,7 @@ line-height: 44px;
   0% {
     transform: scale(0.1);
   }
+
   100% {
     transform: scale(1);
   }

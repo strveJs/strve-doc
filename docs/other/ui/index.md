@@ -7,7 +7,3 @@
 - Tailwindcss
 
 [https://tailwindcss.com/](https://tailwindcss.com/)
-
-- Quark
-
-[https://quark-design.hellobike.com/](https://quark-design.hellobike.com/)

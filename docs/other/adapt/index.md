@@ -63,7 +63,7 @@ function add() {
 export function template() {
 	return html`
 			<div class="card">
-				<button @click=${add}>count is ${data.count}</button>
+				<button onClick=${add}>count is ${data.count}</button>
 			</div>
 	`;
 }
@@ -128,7 +128,7 @@ function add() {
 export function template() {
 	return html`
 			<div class="card">
-				<button type="button" @click=${add}>
+				<button type="button" onClick=${add}>
 					Strve：count is ${data.count}
 				</button>
 			</div>

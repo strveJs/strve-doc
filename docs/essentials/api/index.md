@@ -1,18 +1,22 @@
 # API
 
+::: tip
+For a better reading experience, the following code examples are all written using JSX syntax, except for the `html` API which is written using tag templates.
+:::
+
 ## createApp
 
-- Parameters:
+- parameter：
 
   - `Function`
 
-- Details:
+- details：
 
 Pass in a function, which is the template function that needs to be rendered.
 
-```js
+```jsx
 function App() {
-	return html`<h1>Hello</h1>`;
+	return <h1>Hello</h1>;
 }
 
 createApp(App).mount('#app');
@@ -20,34 +24,29 @@ createApp(App).mount('#app');
 
 ### mount
 
-- Parameters:
+- parameter：
 
   - `HTMLElement | String`
 
-- Details:
+- details：
 
-Mount the root component. The innerHTML of the provided DOM element will be replaced with the template rendering of the application's root component.
+Mount the root component. This method accepts a "container" parameter, which can be an actual DOM element or a CSS selector string.
 
 ## html
 
-- Parameters:
+- parameter：
 
   - `Function`
 
-- Details:
+- details：
 
-` html`` ` is a tag function. The syntax of the tag function is directly followed by a template string after the function name. For example, you can write HTML tags directly in the template string.
+` html`` ` is a tag function. The syntax of the tag function is to directly follow the function name with a template string. For example, you can write HTML tags directly in the template string.
 
 ```js
 function App() {
-	return html`
-			<div class='inner'>
-				<h1>Hello</h1>
-			</div>
-    `;
+	return html`<h1>Hello</h1>`
 }
 ```
-
 ::: tip
 If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plug-in,
 This plugin enables HTML template string highlighting.
@@ -55,16 +54,16 @@ This plugin enables HTML template string highlighting.
 
 ## setData
 
-- Parameters:
+- parameter：
 
   - `Function`
-  - `Object` (optional)
+  - `Array` (可选)
 
-- Details:
+- details：
 
 The first parameter is a function. The function body needs to execute the value that will change the page state, such as `state.msg` in the example below.
 
-```js
+```jsx
 const state = {
 	msg: '1',
 };
@@ -76,60 +75,122 @@ function useChange() {
 }
 
 function App() {
-	return html`<p onClick=${useChange}>${state.msg}</p>`;
+	return <p onClick={useChange}>{state.msg}</p>
 }
 ```
 
-The second parameter is the object type, and the optional attributes are as follows:
+The second parameter (optional) is an array with a length of 2.
 
-| Property | Function |
+| Index | Function |
 | --- | --- |
-| name | The name of the function component, the type is `Function` (the type is `String` when used with the `customElement` attribute), directly pass in a function component, please refer to [Named-function-component](/essentials/usage/#named-function-component) |
-| customElement | The native custom component object, whose type is Object. Just pass in the first parameter of [defineCustomElement](/essentials/api/#definecustomelement) directly. In addition, it needs to be used with `name='useCustomElement'` to update the component view as needed|
+| 0 | The first array item is the component name that needs to be registered and must be unique. |
+| 1 | The second array item is the method name of the page template being rendered. |
 
-## version
 
-- Details:
+::: tip
+When we pass in the second parameter according to the specification, the "island feature" of the named component is automatically enabled.
+:::
 
-Directly get the version number of Strve.
+Let’s briefly introduce it here to have a macro understanding.
+
+```js
+const homeCom = registerComponent('homeCom');
+
+function Home() {
+  let count = 0;
+  let render;
+
+  function add() {
+    setData(() => {
+      count++;
+    }, [homeCom, render]);
+  }
+
+  return (render = () => (
+    <fragment>
+      <button onClick={add}>Add</button>
+      <h1>{count}</h1>
+      <input value={count} />
+    </fragment>
+  ));
+}
+```
+You may already have some questions, but don’t worry, we will introduce every detail in the subsequent documents.
+
+## registerComponent
+
+- parameter：
+
+  - `String`
+
+- details：
+
+Register the component name, the parameter is a field string, and the component name is returned. Component names must be unique.
+
+```jsx
+const homeCom = registerComponent('homeCom');
+
+function Home() {
+  let count = 0;
+  let render;
+
+  function add() {
+    setData(() => {
+      count++;
+    }, [homeCom, render]);
+  }
+
+  return (render = () => (
+    <fragment>
+      <button onClick={add}>Add</button>
+      <h1>{count}</h1>
+      <input value={count} />
+    </fragment>
+  ));
+}
+```
 
 ## onMounted
 
-- Parameters:
+- parameter：
 
   - `Function`
 
-- Details:
+- details：
 
 Life cycle hook function: triggered when the node is mounted.
 
-```js
-const state = {
-	count: 0,
-};
+```jsx
+function Home() {
+  let count = 0;
+  let render;
 
-function add() {
-	setData(() => {
-		state.count++;
-	});
+  onMounted(() => {
+    console.log('HOME mount');
+  });
+
+  function add() {
+    setData(() => {
+      count++;
+    });
+  }
+
+  return (render = () => (
+    <fragment>
+      <button onClick={add}>Add</button>
+      <h1>{count}</h1>
+    </fragment>
+  ));
 }
-
-function App() {
-	return html`<h1 $ref="h1" onClick=${add}>${state.count}</h1>`;
-}
-
-onMounted(() => {
-	console.log(domInfo.h1); // <h1>0</h1>
-});
 ```
 
 ## onUnmounted
 
-- Parameters:
+- parameter：
 
   - `Function`
 
-- Details:
+- details：
 
 Life cycle hook function: called when the page is destroyed.
 
@@ -140,234 +201,162 @@ onUnmounted(() => {
 ```
 
 ::: tip
-Generally used with [StrveRouter](/tool/strveRouter/).
+Generally used in conjunction with [StrveRouter](/tool/strveRouter/).
 :::
 
 ## nextTick
 
-- Parameters:
+- parameter：
 
   - `Function`
 
-- Details:
+- details：
 
 Use it immediately after changing some data to wait for the DOM to update.
 
-```js
-const state = {
-	count: 0,
-};
+```jsx
+function Home() {
+  let count = 0;
+  const h1Ref = Object.create(null);
+  let styleColor = 'color:red';
+  let render;
 
-let styleColor = 'color:red';
+  function add() {
+    setData(() => {
+      count++;
+      styleColor = 'color:green';
+      nextTick(() => {
+        console.log(domInfo.get(h1Ref)); // <h1 style="color:green">1</h1>
+      });
+    });
+  }
 
-function add() {
-	setData(() => {
-		styleColor = 'color:green';
-		state.count++;
-		nextTick(() => {
-			console.log(domInfo.h1); // <h1 style="color:green">1</h1>
-		});
-	});
-}
-
-function App() {
-	return html`
-			<fragment>
-				<h1 $ref="h1" style=${styleColor}>${state.count}</h1>
-				<button onClick=${add}>Add</button>
-			</fragment>
-    `;
+  return (render = () => (
+    <fragment>
+      <button onClick={add}>Add</button>
+      <h1 $ref={h1Ref} style={styleColor}>
+        {count}
+      </h1>
+    </fragment>
+  ));
 }
 ```
 
 ## domInfo
 
-- Details:
+- details：
 
-It is a DOM information object, and you can define a property in `$ref` in the DOM.
+Can get DOM information and return `WeakMap` object. An attribute can be defined in the DOM using `$ref`. The attribute value must be a reference type, usually `Object.create(null)`.
 
-```js
-function add() {
-	console.log(domInfo.h1); // <h1>Strve.js</h1>
-}
+```jsx
+function Home() {
+  const h1Ref = Object.create(null);
+  let render;
 
-function App() {
-	return html`
-			<fragment>
-				<h1 $ref="h1">Strve.js</h1>
-				<button onClick=${add}>Add</button>
-			</fragment>
-    `;
-}
-```
+  function view() {
+    nextTick(() => {
+      console.log(domInfo.get(h1Ref)); // <h1>1</h1>
+    });
+  }
 
-## propsData
-
-- Details:
-
-It is required when passing values from components.
-
-```js
-// Father
-
-function useGetTit(v) {
-	console.log(v);
-	setData(
-		() => {
-			propsData.Component2 = v;
-		},
-		{
-			name: Component2,
-		}
-	);
-}
-
-function App() {
-	return html`
-			<div>
-				<component $name=${Component1.name} $props=${useGetTit}>
-					${Component1()}
-				</component>
-				<component $name=${Component2.name}>
-					${Component2()}
-				</component>
-			</div>
-    `;
+  return (render = () => (
+    <fragment>
+      <button onClick={view}>Btn</button>
+      <h1 $ref={h1Ref}>1</h1>
+    </fragment>
+  ));
 }
 ```
 
+## version
+
+- details：
+
+Get the version number of Strve directly.
+
+## createStateFlow
+
+- details：
+
+A lightweight state manager. The usual way is to pass in an object, and the object properties include `state`, `mutations`, and `actions`.
+
+|Properties|Function|
+|-|-|
+|state|store data|
+|mutations|Synchronized update data|
+|actions|Asynchronous operation data|
+
+Below we give a simple example.
+
 ```js
-// Component1
+// store.js
+import { createStateFlow } from 'strve-js';
 
-let isShow = true;
+const store = new createStateFlow({
+  state: {
+    count: 0,
+    user: '',
+  },
+  // for synchronization
+  mutations: {
+    setUser: (state, user) => {
+      state.user = user;
+    },
+    increment(state) {
+      state.count++;
+    },
+    decrement(state) {
+      state.count--;
+    },
+  },
+  // for asynchronous
+  actions: {
+    fetchUser: async (context) => {
+      const user = await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ name: 'John Doe', age: 30 });
+        }, 1000);
+      });
+      context.commit('setUser', user);
+    },
+    increment: (context) => {
+      context.commit('increment');
+    },
+    decrement(context) {
+      context.commit('decrement');
+    },
+  },
+});
 
-function emitData() {
-	isShow = !isShow;
-	propsData.Component1(isShow);
-}
-
-function Component1() {
-	return html`
-            <h1 onClick=${emitData}>Son</h1>
-    `;
-}
+export default store;
 ```
 
-```js
-// Component2
+```jsx
+// App.jsx
+import { setData } from 'strve-js';
+import store from './store.js';
 
-let v = true;
-
-function f() {
-	setData(
-		() => {
-			v = propsData.Component2;
-			console.log(v);
-		},
-		{
-			name: Component2,
-		}
-	);
-}
-
-function Component2() {
-	return html`
-			<fragment>
-				<div>
-				${v ? html`<p>${v}</p>` : html`<null></null>`}
-				</div>
-				<button onClick=${f}>btn</button>
-			</fragment>
-    `;
-}
-```
-
-## defineCustomElement
-
-- Parameters:
-
-  - `Object`
-  - `String`
-
-- Details:
-
-Support for the introduction of [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
-
-The first parameter is the object type, and the object properties are as follows:
-
-|Attribute|Type|Required|Meaning|
-|-|-|-|-|
-|id|`String`| true |Native custom component ID, it should be unique|
-|template|`Function`|true|Returns a template string function|
-|styles|`Array<string>`|false|Native custom component style collection|
-|attributeChanged|`Array<string>`|false|Native custom component monitor attribute collection|
-|immediateProps|`Boolean`|fasle|Whether the native custom component is enabled to immediately monitor property changes|
-|lifetimes|`Object`|false|Native custom component life cycle, consistent with [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) life cycle|
-
-The second parameter is a string type, the name of the native custom component, and the name must contain a `-` field.
-
-Example 1:
-
-```js
-const data = {
-	count1: 1
-}
-
-const myCom1 = {
-	id: "myCom1",
-	template: () => {
-		return html`<p class="msg">${data.count1}</p>`
-	},
-	styles: [`.msg { color: red; }`],
-}
-
-defineCustomElement(myCom1, 'my-com1')
-
-function App() {
-	return html`<my-com1></my-com1>`
-}
-```
-Example 2:
-```js
-const myCom1 = {
-	id: "myCom1",
-	template: (props) => {
-		return html`
-				<fragment>
-					<p class="msg">${props.value}</p>
-					<p class="msg">${props.msg}</p>
-				</fragment>
-		`
-	},
-	styles: [`.msg { color: red; }`],
-	attributeChanged: ['value', 'msg'],
-	immediateProps: true,
-	lifetimes: {
-		attributeChangedCallback(v) {
-			console.log(v);
-		}
-	}
-}
-
-defineCustomElement(myCom1, 'my-com1');
-
-const data = {
-	count1: 1,
-	count2: '1',
+function getUserInfo() {
+  setData(() => {
+    store.dispatch('fetchUser').then(() => {
+      console.log(store.state.user); // { name: 'John Doe', age: 30 }
+    });
+  });
 }
 
 function add() {
-	setData(() => {
-		data.count1++;
-	})
+  setData(() => {
+    store.commit('increment');
+  });
 }
 
 function App() {
-	return html`
-			<fragment>
-				<button onClick=${add}>btn</button>
-				<my-com1 value=${data.count1} msg=${data.count2}></my-com1>
-			<fragment>
-	`
+  return (
+    <fragment>
+      <h1 onClick={getUserInfo}>getUserInfo</h1>
+      <button onClick={add}>Add</button>
+      <h1>{store.state.count}</h1>
+    </fragment>
+  );
 }
 ```

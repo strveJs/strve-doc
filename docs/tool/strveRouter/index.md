@@ -1,109 +1,127 @@
 # strveRouter
 
+::: tip
+For a better reading experience, the following code examples are written using JSX syntax.
+:::
+
 Strve Router is the official routing manager of Strve. It is deeply integrated with Strve’s core to easily build single-page applications.
 
 ## Started
 
-The easiest way to try Strve Router is to use a direct import CDN link. You can open it in your browser and follow the examples to learn some basic usage.
+We can start learning based on the following steps.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>strve-router</title>
-  </head>
+**1. Create home page**
+```jsx
+// home.jsx
+import { setData, onMounted } from 'strve-js';
+import { linkTo } from 'strve-router';
+import logo from '../assets/logo.png';
 
-  <body>
-    <div id="app"></div>
-    <script type="module">
-      import {
-        html,
-        createApp,
-        setData,
-      } from "https://cdn.jsdelivr.net/npm/strve-js@6.0.2/dist/strve.full-esm.prod.js";
-      import {
-        initRouter,
-        linkTo,
-      } from "https://cdn.jsdelivr.net/npm/strve-router@4.0.1/dist/strve-router.esm.js";
+export default function home() {
+  const state = {
+    msg: 'hello',
+    arr: [1, 2],
+    count: 3,
+  };
+  let render;
 
-      class Home {
-        constructor() {
-          this.state = {
-            count: 0,
-          };
-        }
+  onMounted(() => {
+    console.log('HOME mount');
+  });
 
-        useAdd = () => {
-          setData(() => {
-            this.state.count++;
-          });
-        };
+  function goAbout() {
+    linkTo({
+      path: '/about',
+      query: {
+        id: 1,
+        name: 'maomin',
+      },
+    });
+  }
 
-        goAbout = () => {
-          linkTo("/about");
-        };
+  function useChange() {
+    setData(() => {
+      state.msg = 'world';
+      state.count++;
+      state.arr.unshift(state.count);
+    });
+  }
 
-        render = () => {
-          return html`
-                  <fragment>
-                    <button onClick=${this.goAbout}>goAbout</button>
-                    <h1 onClick=${this.useAdd}>${this.state.count}</h1>
-                  </fragment>
-          `;
-        };
-      }
+  return (render = () => (
+    <fragment>
+      <button onClick={goAbout}>goAbout</button>
+      <h1>Home</h1>
+      <div class='logo-inner'>
+        <img src={logo} class='logo' />
+      </div>
+      <p onClick={useChange}>{state.msg}</p>
+      <ul>
+        {state.arr.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </fragment>
+  ));
+}
+```
+**2. Create about page**
+```jsx
+// about.jsx
+import { linkTo, toParse } from 'strve-router';
 
-      class About {
-        constructor() {
-          this.state = {
-            msg: "About",
-          };
-        }
+export default function about() {
+  let render;
 
-        useChange = () => {
-          setData(() => {
-            this.state.msg = "Changed";
-          });
-        };
+  function goHome() {
+    linkTo({
+      path: '/',
+    });
+  }
 
-        goHome = () => {
-          linkTo("/");
-        };
+  function getOption() {
+    console.log(toParse());
+  }
 
-        render = () => {
-          return html`
-                  <fragment>
-                    <button onClick=${this.goHome}>goHome</button>
-                    <h1 onClick=${this.useChange}>${this.state.msg}</h1>
-                  </fragment>
-          `;
-        };
-      }
+  return (render = () => (
+    <fragment>
+      <button onClick={goHome}>goHome</button>
+      <h1 onClick={getOption}>About</h1>
+    </fragment>
+  ));
+}
+```
+**3. Configure routing information**
+```js
+// router/index.js
+import { setData } from 'strve-js';
+import { initRouter } from 'strve-router';
 
-      const router = initRouter(
-        [
-          {
-            path: "/",
-            template: [Home, "render"],
-          },
-          {
-            path: "/about",
-            template: [About, "render"],
-          },
-        ],
-        setData
-      );
+import home from '../template/home';
+import about from '../template/about';
 
-      function App() {
-        return html`<div class="main">${router.view()}</div>`;
-      }
+const router = initRouter(
+  [
+    {
+      path: '/',
+      template: home,
+    },
+    {
+      path: '/about',
+      template: about,
+    },
+  ],
+  setData
+);
 
-      const app = createApp(App);
-      app.mount("#app");
-    </script>
-  </body>
-</html>
+export default router;
+```
+**4. Mount page**
+```jsx
+// App.jsx
+import router from "./router/index";
+import "./styles/app.css";
+
+export default () => <div class="inner">{router.view()}</div>;
 ```
 
 ## Install
@@ -120,81 +138,74 @@ You can use [CreateStrveApp](/tool/createStrveApp/) and choose the **strve-apps*
 
 ### initRouter()
 
-The first parameter is an array object, which is the routing component that needs to be registered, the `path` attribute represents the path of the component, the `template` attribute is an array, and the first item is the imported component (in accordance with [Component-mode](/essentials/usage/#component-mode)), the second item is the name of the rendered component function, such as `render` below.
+The first parameter is an array object, which is the routing component that needs to be registered. The `path` attribute represents the path of the component, and the `template` attribute is the imported component.
 
-The second parameter needs to be passed to the `setData` API, and the page that matches the corresponding path will be updated accordingly. For example, create an `index.js` file in a router folder here.
+The second parameter needs to be passed to the `setData` API, and the page matching the corresponding path will be updated accordingly. For example, create an `index.js` file in the router folder here.
 
 ```js
-import { setData } from 'strvejs';
+// router/index.js
+import { setData } from 'strve-js';
 import { initRouter } from 'strve-router';
 
-import Home from '../template/home';
-import About from '../template/about';
+import home from '../template/home';
+import about from '../template/about';
 
 const router = initRouter(
-	[
-		{
-			path: '/',
-			template: [Home, 'render'],
-		},
-		{
-			path: '/about',
-			template: [About, 'render'],
-		},
-	],
-	setData
+  [
+    {
+      path: '/',
+      template: home,
+    },
+    {
+      path: '/about',
+      template: about,
+    },
+  ],
+  setData
 );
 
 export default router;
 ```
 
-The component matched by the route will be rendered to the place where the `view()` method is located, which is usually placed under the main page entry file (such as `App.js`).
+Components matching the route will be rendered to where the `view()` method is located, usually placed under the main page entry file (such as `App.jsx`).
 
-```js
-// App.js
-
-import { html } from "strvejs";
+```jsx
+// App.jsx
 import router from "./router/index";
+import "./styles/app.css";
 
-export default function App() {
-  return html`
-          <div class='inner'>
-            ${router.view()}
-          </div>
-  `;
-}
+export default () => <div class="inner">{router.view()}</div>;
 ```
 
 ### linkTo()
 
 If you need to jump to the corresponding page, use the `linkTo()` method. You can pass the corresponding path and parameters to be passed, or you can pass the path string directly.
 
-```js
-import { html, setData } from "strvejs";
-import { linkTo } from "strve-router";
+```jsx
+function Home() {
 
-export default class Home {
-  goAbout = () => {
+  function goAbout() {
     linkTo({
-      path: "/about",
+      path: '/about',
       query: {
         id: 1,
-        name: "maomin",
+        name: 'maomin',
       },
     });
+  }
 
-    // linkTo("/about");
-  };
-
-  render = () => {
-    return html`<button onClick=${this.goAbout}>goAbout</button>`;
-  };
+  return (render = () => (
+    <fragment>
+      <button onClick={goAbout}>goAbout</button>
+      <h1>Home</h1>
+    </fragment>
+  ));
 }
 ```
 
 ### forward()
 
-Jump forward 1 page.
+Skip forward 1 page.
 
 ### back()
 
@@ -202,38 +213,35 @@ Jump back 1 page.
 
 ### go(n)
 
-Jump forward n pages.
+Jump n pages within the page.
 
 ### toParse
 
-If you perform the operation of routing parameters, you want to get the parameter object. Object information can be obtained by directly executing the `toParse()` method.
+If you perform the operation of routing parameters, you need to obtain the parameter object. Directly executing the `toParse()` method can obtain object information.
 
-```js
-import { html, setData } from "strvejs";
-import { linkTo, toParse } from "strve-router";
+```jsx
+function About() {
+  let render;
 
-export default class About {
-  goHome = () => {
+  function goHome() {
     linkTo({
-      path: "/",
+      path: '/',
     });
-  };
+  }
 
-  getOption = () => {
+  function getOption() {
     console.log(toParse());
-  };
+  }
 
-  render = () => {
-    return html`
-            <fragment>
-              <button onClick=${this.goHome}>goHome</button>
-              <h1 onClick=${this.getOption}>About</h1>
-            </fragment>
-    `;
-  };
+  return (render = () => (
+    <fragment>
+      <button onClick={goHome}>goHome</button>
+      <h1 onClick={getOption}>About</h1>
+    </fragment>
+  ));
 }
 ```
 
 ### routerVersion
 
-Strve Router version information can be obtained.
+You can get the version information of Strve Router.

@@ -1,5 +1,9 @@
 # IDE support
 
+::: tip
+If you use tag templates to write Strve applications, the following content will help you.
+:::
+
 ## Visual Studio Code
 
 - Template string auto-completion tags

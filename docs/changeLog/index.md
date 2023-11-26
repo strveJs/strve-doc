@@ -1,8 +1,27 @@
 # Change Log
 
-Although the version number is taken from the version number of Strve.js, the content not only contains the update content of Strve.js, but also the update content of other official tools in the same period.
+::: tip
+Although the version number uses the version number of Strve, the content includes not only the updated content of Strve, but also the updated content of other official tools in the same period.
+:::
 
-## v6.0.2 (Latest)
+## v6.2.0 (Latest)
+
+- Optimize the Diff algorithm using the longest increasing subsequence;
+- Added usage of named components and introduced "island" feature;
+- Event processing cancels the `@` abbreviation;
+- Change API `setData`;
+- Remove API `defineCustomElement`;
+- Change API `domInfo`;
+- Delete API `propsData`;
+- Delete built-in properties `$props`;
+- Added API `createStateFlow`;
+- Added API `registerComponent`;
+- Update [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve);
+- Update [babel-plugin-jsx-to-strve](https://www.npmjs.com/package/babel-plugin-jsx-to-strve);
+- Update [strve-router](https://www.npmjs.com/package/strve-router);
+- Update [create-strve-app](https://www.npmjs.com/package/create-strve-app);
+
+## v6.0.2
 
 - Remove `useFirstKey`;
 - Added `key` attribute. This special attribute `key` is mainly used as a hint for Vue's virtual DOM algorithm and is used to identify vnode when comparing the old and new node lists. The double-ended Diff algorithm is used internally, which is more efficient;
