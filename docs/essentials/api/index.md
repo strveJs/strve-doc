@@ -16,7 +16,7 @@ Pass in a function, which is the template function that needs to be rendered.
 
 ```jsx
 function App() {
-	return <h1>Hello</h1>;
+  return <h1>Hello</h1>;
 }
 
 createApp(App).mount('#app');
@@ -44,9 +44,10 @@ Mount the root component. This method accepts a "container" parameter, which can
 
 ```js
 function App() {
-	return html`<h1>Hello</h1>`
+  return html`<h1>Hello</h1>`;
 }
 ```
+
 ::: tip
 If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plug-in,
 This plugin enables HTML template string highlighting.
@@ -57,7 +58,7 @@ This plugin enables HTML template string highlighting.
 - parameter：
 
   - `Function`
-  - `Array` (可选)
+  - `Array` (optional)
 
 - details：
 
@@ -65,27 +66,26 @@ The first parameter is a function. The function body needs to execute the value 
 
 ```jsx
 const state = {
-	msg: '1',
+  msg: '1',
 };
 
 function useChange() {
-	setData(() => {
-		state.msg = '2';
-	});
+  setData(() => {
+    state.msg = '2';
+  });
 }
 
 function App() {
-	return <p onClick={useChange}>{state.msg}</p>
+  return <p onClick={useChange}>{state.msg}</p>;
 }
 ```
 
 The second parameter (optional) is an array with a length of 2.
 
-| Index | Function |
-| --- | --- |
-| 0 | The first array item is the component name that needs to be registered and must be unique. |
-| 1 | The second array item is the method name of the page template being rendered. |
-
+| Index | Function                                                                                   |
+| ----- | ------------------------------------------------------------------------------------------ |
+| 0     | The first array item is the component name that needs to be registered and must be unique. |
+| 1     | The second array item is the method name of the page template being rendered.              |
 
 ::: tip
 When we pass in the second parameter according to the specification, the "island feature" of the named component is automatically enabled.
@@ -93,12 +93,10 @@ When we pass in the second parameter according to the specification, the "island
 
 Let’s briefly introduce it here to have a macro understanding.
 
-```js
-const homeCom = registerComponent('homeCom');
-
+```jsx
 function Home() {
+  let [homeCom, render] = [registerComponent()];
   let count = 0;
-  let render;
 
   function add() {
     setData(() => {
@@ -107,7 +105,7 @@ function Home() {
   }
 
   return (render = () => (
-    <fragment>
+    <fragment $id={homeCom}>
       <button onClick={add}>Add</button>
       <h1>{count}</h1>
       <input value={count} />
@@ -115,24 +113,19 @@ function Home() {
   ));
 }
 ```
+
 You may already have some questions, but don’t worry, we will introduce every detail in the subsequent documents.
 
 ## registerComponent
 
-- parameter：
-
-  - `String`
-
 - details：
 
-Register the component name, the parameter is a field string, and the component name is returned. Component names must be unique.
+Register the component name and return the unique component name.
 
 ```jsx
-const homeCom = registerComponent('homeCom');
-
 function Home() {
+  let [homeCom, render] = [registerComponent()];
   let count = 0;
-  let render;
 
   function add() {
     setData(() => {
@@ -141,7 +134,7 @@ function Home() {
   }
 
   return (render = () => (
-    <fragment>
+    <fragment $id={homeCom}>
       <button onClick={add}>Add</button>
       <h1>{count}</h1>
       <input value={count} />
@@ -196,13 +189,9 @@ Life cycle hook function: called when the page is destroyed.
 
 ```js
 onUnmounted(() => {
-	console.log('onUnmounted!');
+  console.log('onUnmounted!');
 });
 ```
-
-::: tip
-Generally used in conjunction with [StrveRouter](/tool/strveRouter/).
-:::
 
 ## nextTick
 
@@ -280,11 +269,11 @@ Get the version number of Strve directly.
 
 A lightweight state manager. The usual way is to pass in an object, and the object properties include `state`, `mutations`, and `actions`.
 
-|Properties|Function|
-|-|-|
-|state|store data|
-|mutations|Synchronized update data|
-|actions|Asynchronous operation data|
+| Properties | Function                    |
+| ---------- | --------------------------- |
+| state      | store data                  |
+| mutations  | Synchronized update data    |
+| actions    | Asynchronous operation data |
 
 Below we give a simple example.
 

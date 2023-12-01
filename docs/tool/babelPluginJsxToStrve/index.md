@@ -7,8 +7,9 @@
 ```bash
 npm install babel-plugin-jsx-to-strve
 ```
+
 ::: tip
-[createStrveApp](/tool/createStrveApp/) The project scaffolding tool has been installed by default. Select the `strve-jsx` or `strve-jsx-apps` template.
+[CreateStrveApp](/tool/createStrveApp/) The project scaffolding tool has been installed by default. Select the `strve-jsx` or `strve-jsx-apps` template.
 :::
 
 ## Usage

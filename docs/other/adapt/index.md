@@ -1,6 +1,8 @@
 # Adapt
 
-Strve can be said to be a view rendering library that renders simple string templates into real pages. A view rendering library can be flexibly used with other frameworks or libraries. Below you can choose the appropriate way to reference it.
+::: tip
+Strve can be flexibly used with other frameworks or libraries. Below you can choose the appropriate way to reference it.
+:::
 
 ## Adapt React.js
 
@@ -20,26 +22,24 @@ import reactLogo from './assets/react.svg';
 import './App.css';
 
 function App() {
-	const [count, setCount] = useState(0);
-	useEffect(() => {
-		createApp(template).mount('.strve-app');
-	});
-	return (
-		<div className='App'>
-			<div>
-				<a href='https://reactjs.org' target='_blank'>
-					<img src={reactLogo} className='logo react' alt='React logo' />
-				</a>
-			</div>
-			<h1>Strve + React</h1>
-			<div className='card'>
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-			</div>
-			<div className='strve-app'></div>
-		</div>
-	);
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    createApp(template).mount('.strve-app');
+  });
+  return (
+    <div className='App'>
+      <div>
+        <a href='https://reactjs.org' target='_blank'>
+          <img src={reactLogo} className='logo react' alt='React logo' />
+        </a>
+      </div>
+      <h1>Strve + React</h1>
+      <div className='card'>
+        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+      </div>
+      <div className='strve-app'></div>
+    </div>
+  );
 }
 
 export default App;
@@ -51,21 +51,21 @@ export default App;
 import { setData } from 'strve-js';
 
 const data = {
-	count: 1,
+  count: 1,
 };
 
 function add() {
-	setData(() => {
-		data.count++;
-	});
+  setData(() => {
+    data.count++;
+  });
 }
 
 export function template() {
-	return html`
-			<div class="card">
-				<button onClick=${add}>count is ${data.count}</button>
-			</div>
-	`;
+  return html`
+    <div class="card">
+      <button onClick=${add}>count is ${data.count}</button>
+    </div>
+  `;
 }
 ```
 
@@ -81,33 +81,33 @@ Here's the sample code.
 
 ```html
 <script setup>
-	import { ref, onMounted } from 'vue';
-	import { createApp } from 'strve-js';
-	import { template } from './strve-template';
-	defineProps({
-		msg: String,
-	});
+  import { ref, onMounted } from 'vue';
+  import { createApp } from 'strve-js';
+  import { template } from './strve-template';
+  defineProps({
+    msg: String,
+  });
 
-	onMounted(() => {
-		createApp(template).mount('.strve-app');
-	});
+  onMounted(() => {
+    createApp(template).mount('.strve-app');
+  });
 
-	const count = ref(0);
+  const count = ref(0);
 </script>
 
 <template>
-	<h1>{{ msg }}</h1>
+  <h1>{{ msg }}</h1>
 
-	<div class="card">
-		<button type="button" @click="count++">Vue：count is {{ count }}</button>
-	</div>
-	<div class="strve-app"></div>
+  <div class="card">
+    <button type="button" @click="count++">Vue：count is {{ count }}</button>
+  </div>
+  <div class="strve-app"></div>
 </template>
 
 <style scoped>
-	.read-the-docs {
-		color: #888;
-	}
+  .read-the-docs {
+    color: #888;
+  }
 </style>
 ```
 
@@ -116,22 +116,20 @@ Here's the sample code.
 ```js
 import { setData } from 'strve-js';
 const data = {
-	count: 1,
+  count: 1,
 };
 
 function add() {
-	setData(() => {
-		data.count++;
-	});
+  setData(() => {
+    data.count++;
+  });
 }
 
 export function template() {
-	return html`
-			<div class="card">
-				<button type="button" onClick=${add}>
-					Strve：count is ${data.count}
-				</button>
-			</div>
-	`;
+  return html`
+    <div class="card">
+      <button type="button" onClick=${add}>Strve：count is ${data.count}</button>
+    </div>
+  `;
 }
 ```

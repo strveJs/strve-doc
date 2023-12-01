@@ -4,13 +4,14 @@
 For a better reading experience, the following code examples are written using JSX syntax.
 :::
 
-Strve Router is the official routing manager of Strve. It is deeply integrated with Strve’s core to easily build single-page applications.
+StrveRouter is the official routing manager of Strve. It is deeply integrated with Strve’s core to easily build single-page applications.
 
 ## Started
 
 We can start learning based on the following steps.
 
 **1. Create home page**
+
 ```jsx
 // home.jsx
 import { setData, onMounted } from 'strve-js';
@@ -64,7 +65,9 @@ export default function home() {
   ));
 }
 ```
+
 **2. Create about page**
+
 ```jsx
 // about.jsx
 import { linkTo, toParse } from 'strve-router';
@@ -90,7 +93,9 @@ export default function about() {
   ));
 }
 ```
+
 **3. Configure routing information**
+
 ```js
 // router/index.js
 import { setData } from 'strve-js';
@@ -115,13 +120,15 @@ const router = initRouter(
 
 export default router;
 ```
+
 **4. Mount page**
+
 ```jsx
 // App.jsx
-import router from "./router/index";
-import "./styles/app.css";
+import router from './router/index';
+import './styles/app.css';
 
-export default () => <div class="inner">{router.view()}</div>;
+export default () => <div class='inner'>{router.view()}</div>;
 ```
 
 ## Install
@@ -171,10 +178,10 @@ Components matching the route will be rendered to where the `view()` method is l
 
 ```jsx
 // App.jsx
-import router from "./router/index";
-import "./styles/app.css";
+import router from './router/index';
+import './styles/app.css';
 
-export default () => <div class="inner">{router.view()}</div>;
+export default () => <div class='inner'>{router.view()}</div>;
 ```
 
 ### linkTo()
@@ -183,7 +190,6 @@ If you need to jump to the corresponding page, use the `linkTo()` method. You ca
 
 ```jsx
 function Home() {
-
   function goAbout() {
     linkTo({
       path: '/about',
@@ -244,4 +250,4 @@ function About() {
 
 ### routerVersion
 
-You can get the version information of Strve Router.
+You can get the version information of StrveRouter.

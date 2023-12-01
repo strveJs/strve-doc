@@ -9,16 +9,16 @@ import { defineConfig } from 'vite';
 import legacy from '@vitejs/plugin-legacy';
 
 export default defineConfig({
-	// options
-	server: {
-		strictPort: true,
-		port: 3001,
-	},
-	plugins: [
-		legacy({
-			targets: ['ie >= 9'],
-			additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
-		}),
-	],
+  // options
+  server: {
+    strictPort: true,
+    port: 3001,
+  },
+  plugins: [
+    legacy({
+      targets: ['ie >= 9'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+    }),
+  ],
 });
 ```

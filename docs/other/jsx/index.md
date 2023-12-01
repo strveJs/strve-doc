@@ -1,10 +1,10 @@
 # JSX Support
 
-The common way we use Strve is to write HTML-like tags in tag templates. We know that this method is not particularly friendly in terms of code intelligent prompts and code formatting in some scenarios. Therefore, we provide a new coding method, we can use JSX syntax to write Strve. JSX is a JavaScript syntax extension that allows you to write HTML-like tags in JavaScript files.
-
 ::: tip
 We recommend using JSX syntax when developing Strve applications, which will greatly improve the user development experience.
 :::
+
+The common way we use Strve is to write HTML-like tags in tag templates. We know that this method is not particularly friendly in terms of code intelligent prompts and code formatting in some scenarios. Therefore, we provide a new coding method, we can use JSX syntax to write Strve. JSX is a JavaScript syntax extension that allows you to write HTML-like tags in JavaScript files.
 
 ## Learn JSX syntax
 

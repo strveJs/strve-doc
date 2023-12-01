@@ -93,20 +93,16 @@ export default {
             collapsible: false,
             items: [
               {
-                text: 'JSX Support',
-                link: '/other/jsx/',
-              },
-              {
                 text: 'Adapt',
                 link: '/other/adapt/',
               },
               {
-                text: 'IDE Support',
-                link: '/other/ide/',
+                text: 'JSX Support',
+                link: '/other/jsx/',
               },
               {
-                text: 'UI Framework',
-                link: '/other/ui/',
+                text: 'IDE Support',
+                link: '/other/ide/',
               },
               {
                 text: 'Browser Compatibility',

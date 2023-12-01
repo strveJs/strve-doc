@@ -18,7 +18,7 @@ If you open the above index.html directly in the browser, you will find that it 
     html,
     setData,
     createApp,
-  } from "https://cdn.jsdelivr.net/npm/strve-js@6.2.0/dist/strve.full-esm.prod.js";
+  } from 'https://cdn.jsdelivr.net/npm/strve-js@6.2.6/dist/strve.full-esm.prod.js';
 
   const state = {
     count: 0,
@@ -31,11 +31,11 @@ If you open the above index.html directly in the browser, you will find that it 
   }
 
   function App() {
-    return html`<h1>${state.count}</h1>`
+    return html`<h1>${state.count}</h1>`;
   }
 
   const app = createApp(App);
-  app.mount("#app");
+  app.mount('#app');
 </script>
 ```
 
@@ -46,28 +46,26 @@ All top-level APIs of this version are exposed as properties on the global Strve
 :::
 
 ```html
-<script
-src="https://cdn.jsdelivr.net/npm/strve-js@6.2.0/dist/strve.full.prod.js"
-></script>
+<script src="https://cdn.jsdelivr.net/npm/strve-js@6.2.6/dist/strve.full.prod.js"></script>
 <script>
-const { html, setData, createApp } = Strve;
+  const { html, setData, createApp } = Strve;
 
-const state = {
-  count: 0,
-};
+  const state = {
+    count: 0,
+  };
 
-function add() {
-  setData(() => {
-    state.count++;
-  });
-}
+  function add() {
+    setData(() => {
+      state.count++;
+    });
+  }
 
-function App() {
-  return html`<h1>${state.count}</h1>`
-}
+  function App() {
+    return html`<h1>${state.count}</h1>`;
+  }
 
-const app = createApp(App);
-app.mount("#app");
+  const app = createApp(App);
+  app.mount('#app');
 </script>
 ```
 

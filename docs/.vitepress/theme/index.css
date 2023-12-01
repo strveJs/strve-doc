@@ -97,3 +97,30 @@ html .dark {
     transform: scale(1);
   }
 }
+
+/* 菜单文本 */
+.menu-text {
+  display: none;
+}
+
+/* 置顶 */
+.top-link {
+  display: none !important;
+}
+
+.VPNavScreenAppearance .text {
+  display: none;
+}
+
+.prev-next {
+  display: none !important;
+}
+
+.menu-icon {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+.menu {
+  color: inherit !important;
+}

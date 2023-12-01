@@ -7,8 +7,9 @@
 ```bash
 npm install babel-plugin-strve
 ```
+
 ::: tip
-[createStrveApp](/tool/createStrveApp/) The project scaffolding tool is installed by default.
+[CreateStrveApp](/tool/createStrveApp/) The project scaffolding tool is installed by default.
 :::
 
 ## Usage
@@ -17,7 +18,7 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `babel` field in `pa
 
 ```json
 {
-	"plugins": [["babel-plugin-strve"]]
+  "plugins": [["babel-plugin-strve"]]
 }
 ```
 
@@ -29,14 +30,14 @@ By default, [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strv
 
 ```json
 {
-	"plugins": [
-		[
-			"babel-plugin-strve",
-			{
-				"tag": "html"
-			}
-		]
-	]
+  "plugins": [
+    [
+      "babel-plugin-strve",
+      {
+        "tag": "html"
+      }
+    ]
+  ]
 }
 ```
 
@@ -45,10 +46,13 @@ By default, [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strv
 By default, ` html`` ` will be used as a tag template mode. If there are other scenarios, you can choose to call the expression mode, there are two.
 
 - The function name is `tem_h`, and the parameter is a template string.
+
 ```js
 tem_h(`<p>hello</p>`);
 ```
+
 - The function name is `str_h`, and the parameters are ordinary strings.
+
 ```js
 str_h('<p>hello</p>');
 ```

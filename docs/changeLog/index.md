@@ -4,18 +4,16 @@
 Although the version number uses the version number of Strve, the content includes not only the updated content of Strve, but also the updated content of other official tools in the same period.
 :::
 
-## v6.2.0 (Latest)
+## v6.2.6 (Latest)
 
 - Optimize the Diff algorithm using the longest increasing subsequence;
-- Added usage of named components and introduced "island" feature;
+- Added the usage of named components and introduced the **"isolated island"** feature;
 - Event processing cancels the `@` abbreviation;
-- Change API `setData`;
-- Remove API `defineCustomElement`;
-- Change API `domInfo`;
-- Delete API `propsData`;
-- Delete built-in properties `$props`;
-- Added API `createStateFlow`;
-- Added API `registerComponent`;
+- Change API `setData`, `domInfo`;
+- Delete API `defineCustomElement`, `propsData`;
+- Delete the built-in properties `$props` and `$name`;
+- Added built-in attributes `$render` and `$id`;
+- Added APIs `createStateFlow` and `registerComponent`;
 - Update [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve);
 - Update [babel-plugin-jsx-to-strve](https://www.npmjs.com/package/babel-plugin-jsx-to-strve);
 - Update [strve-router](https://www.npmjs.com/package/strve-router);
