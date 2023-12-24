@@ -14,6 +14,7 @@ Although the version number uses the version number of Strve, the content includ
 - Delete the built-in properties `$props` and `$name`;
 - Added built-in attributes `$render` and `$id`;
 - Added APIs `createStateFlow` and `registerComponent`;
+- Publish [strve-reactivity](https://www.npmjs.com/package/strve-reactivity)；
 - Update [babel-plugin-strve](https://www.npmjs.com/package/babel-plugin-strve);
 - Update [babel-plugin-jsx-to-strve](https://www.npmjs.com/package/babel-plugin-jsx-to-strve);
 - Update [strve-router](https://www.npmjs.com/package/strve-router);
