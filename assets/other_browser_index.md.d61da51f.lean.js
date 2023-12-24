@@ -1,1 +1,0 @@
-import{_ as s,c as a,o as n,a as l}from"./app.8c0343b6.js";const d=JSON.parse('{"title":"Browser Compatibility","description":"","frontmatter":{},"headers":[],"relativePath":"other/browser/index.md"}'),p={name:"other/browser/index.md"},o=l("",4),e=[o];function F(t,r,c,y,i,D){return n(),a("div",null,e)}var f=s(p,[["render",F]]);export{d as __pageData,f as default};
