@@ -27,7 +27,7 @@ The main features are as follows:
 ```js
 // strve-reactivity API
 export {
-  setData,
+  resetView,
   createApp,
   nextTick,
   domInfo,
@@ -67,7 +67,7 @@ export default () => <my-component></my-component>;
 
 ```jsx
 // MyComponent.jsx
-import { setData, ref, defineComponent, reactive } from 'strve-reactivity';
+import { ref, defineComponent, reactive } from 'strve-reactivity';
 
 export const MyComponent = defineComponent(() => {
   const items = reactive([
@@ -82,11 +82,9 @@ export const MyComponent = defineComponent(() => {
   ]);
   const count = ref(4);
   const increase = () => {
-    setData(() => {
-      items.unshift({
-        id: count.value++,
-        tit: 'C',
-      });
+    items.unshift({
+      id: count.value++,
+      tit: 'C',
     });
   };
 
@@ -112,14 +110,12 @@ export const MyComponent = defineComponent(() => {
 
 ```jsx
 // MyChild.jsx
-import { setData, ref, defineComponent, reactive, onMounted, onUnmounted } from 'strve-reactivity';
+import { defineComponent, reactive, onMounted, onUnmounted } from 'strve-reactivity';
 
 export const MyChild = defineComponent(() => {
   const state = reactive({ count: 0, msg: '' });
   const increase = () => {
-    setData(() => {
-      state.count++;
-    });
+    state.count++;
   };
 
   onMounted(() => {
