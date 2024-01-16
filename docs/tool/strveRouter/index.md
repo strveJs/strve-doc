@@ -14,91 +14,91 @@ We can start learning based on the following steps.
 
 ```jsx
 // home.jsx
-import { setData, onMounted } from 'strve-js';
+import { defineComponent } from 'strve-js';
 import { linkTo } from 'strve-router';
 import logo from '../assets/logo.png';
 
-export default function home() {
-  const state = {
-    msg: 'hello',
-    arr: [1, 2],
-    count: 3,
-  };
-  let render;
+const home = () =>
+  defineComponent(({ setData }) => {
+    const state = {
+      msg: 'hello',
+      arr: [1, 2],
+      count: 3,
+    };
 
-  onMounted(() => {
-    console.log('HOME mount');
+    function goAbout() {
+      linkTo({
+        path: '/about',
+        query: {
+          id: 1,
+          name: 'maomin',
+        },
+      });
+    }
+
+    function useChange() {
+      setData(() => {
+        state.msg = 'world';
+        state.count++;
+        state.arr.unshift(state.count);
+      });
+    }
+
+    return () => (
+      <fragment>
+        <button onClick={goAbout}>goAbout</button>
+        <h1>Home</h1>
+        <div class='logo-inner'>
+          <img src={logo} class='logo' />
+        </div>
+        <p onClick={useChange}>{state.msg}</p>
+        <ul>
+          {state.arr.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </fragment>
+    );
   });
 
-  function goAbout() {
-    linkTo({
-      path: '/about',
-      query: {
-        id: 1,
-        name: 'maomin',
-      },
-    });
-  }
-
-  function useChange() {
-    setData(() => {
-      state.msg = 'world';
-      state.count++;
-      state.arr.unshift(state.count);
-    });
-  }
-
-  return (render = () => (
-    <fragment>
-      <button onClick={goAbout}>goAbout</button>
-      <h1>Home</h1>
-      <div class='logo-inner'>
-        <img src={logo} class='logo' />
-      </div>
-      <p onClick={useChange}>{state.msg}</p>
-      <ul>
-        {state.arr.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    </fragment>
-  ));
-}
+export default home;
 ```
 
 **2. Create about page**
 
 ```jsx
 // about.jsx
+import { defineComponent } from 'strve-js';
 import { linkTo, toParse } from 'strve-router';
 
-export default function about() {
-  let render;
+const about = () =>
+  defineComponent(() => {
+    function goHome() {
+      linkTo({
+        path: '/',
+      });
+    }
 
-  function goHome() {
-    linkTo({
-      path: '/',
-    });
-  }
+    function getOption() {
+      console.log(toParse());
+    }
 
-  function getOption() {
-    console.log(toParse());
-  }
+    return () => (
+      <fragment>
+        <button onClick={goHome}>goHome</button>
+        <h1 onClick={getOption}>About</h1>
+      </fragment>
+    );
+  });
 
-  return (render = () => (
-    <fragment>
-      <button onClick={goHome}>goHome</button>
-      <h1 onClick={getOption}>About</h1>
-    </fragment>
-  ));
-}
+export default about;
 ```
 
 **3. Configure routing information**
 
 ```js
 // router/index.js
-import { setData } from 'strve-js';
+import { resetView } from 'strve-js';
 import { initRouter } from 'strve-router';
 
 import home from '../template/home';
@@ -115,7 +115,7 @@ const router = initRouter(
       template: about,
     },
   ],
-  setData
+  resetView
 );
 
 export default router;
@@ -124,11 +124,19 @@ export default router;
 **4. Mount page**
 
 ```jsx
-// App.jsx
+// main.js
+import { defineComponent } from 'strve-js';
 import router from './router/index';
 import './styles/app.css';
 
-export default () => <div class='inner'>{router.view()}</div>;
+defineComponent(
+  {
+    mount: '#app',
+  },
+  () => {
+    return () => <component $is={router.view()}></component>;
+  }
+);
 ```
 
 ## Install
@@ -147,11 +155,11 @@ You can use [CreateStrveApp](/tool/createStrveApp/) and choose the **strve-apps*
 
 The first parameter is an array object, which is the routing component that needs to be registered. The `path` attribute represents the path of the component, and the `template` attribute is the imported component.
 
-The second parameter needs to be passed to the `setData` API, and the page matching the corresponding path will be updated accordingly. For example, create an `index.js` file in the router folder here.
+The second parameter needs to be passed to the `resetView` API, and the page matching the corresponding path will be updated accordingly. For example, create an `index.js` file in the router folder here.
 
 ```js
 // router/index.js
-import { setData } from 'strve-js';
+import { resetView } from 'strve-js';
 import { initRouter } from 'strve-router';
 
 import home from '../template/home';
@@ -168,20 +176,28 @@ const router = initRouter(
       template: about,
     },
   ],
-  setData
+  resetView
 );
 
 export default router;
 ```
 
-Components matching the route will be rendered to where the `view()` method is located, usually placed under the main page entry file (such as `App.jsx`).
+Components matching the route will be rendered to where the `view()` method is located, usually placed under the main page entry file (such as `main.js`).
 
 ```jsx
-// App.jsx
+// main.js
+import { defineComponent } from 'strve-js';
 import router from './router/index';
 import './styles/app.css';
 
-export default () => <div class='inner'>{router.view()}</div>;
+defineComponent(
+  {
+    mount: '#app',
+  },
+  () => {
+    return () => <component $is={router.view()}></component>;
+  }
+);
 ```
 
 ### linkTo()
@@ -189,24 +205,25 @@ export default () => <div class='inner'>{router.view()}</div>;
 If you need to jump to the corresponding page, use the `linkTo()` method. You can pass the corresponding path and parameters to be passed, or you can pass the path string directly.
 
 ```jsx
-function Home() {
-  function goAbout() {
-    linkTo({
-      path: '/about',
-      query: {
-        id: 1,
-        name: 'maomin',
-      },
-    });
-  }
+import { defineComponent } from 'strve-js';
+import { linkTo } from 'strve-router';
 
-  return (render = () => (
-    <fragment>
-      <button onClick={goAbout}>goAbout</button>
-      <h1>Home</h1>
-    </fragment>
-  ));
-}
+const about = () =>
+  defineComponent(() => {
+    function goHome() {
+      linkTo({
+        path: '/',
+      });
+    }
+
+    return () => (
+      <fragment>
+        <button onClick={goHome}>goHome</button>
+      </fragment>
+    );
+  });
+
+export default about;
 ```
 
 ### forward()
@@ -226,26 +243,30 @@ Jump n pages within the page.
 If you perform the operation of routing parameters, you need to obtain the parameter object. Directly executing the `toParse()` method can obtain object information.
 
 ```jsx
-function About() {
-  let render;
+import { defineComponent } from 'strve-js';
+import { linkTo, toParse } from 'strve-router';
 
-  function goHome() {
-    linkTo({
-      path: '/',
-    });
-  }
+const about = () =>
+  defineComponent(() => {
+    function goHome() {
+      linkTo({
+        path: '/',
+      });
+    }
 
-  function getOption() {
-    console.log(toParse());
-  }
+    function getOption() {
+      console.log(toParse());
+    }
 
-  return (render = () => (
-    <fragment>
-      <button onClick={goHome}>goHome</button>
-      <h1 onClick={getOption}>About</h1>
-    </fragment>
-  ));
-}
+    return () => (
+      <fragment>
+        <button onClick={goHome}>goHome</button>
+        <h1 onClick={getOption}>About</h1>
+      </fragment>
+    );
+  });
+
+export default about;
 ```
 
 ### routerVersion

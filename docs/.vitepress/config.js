@@ -97,10 +97,6 @@ export default {
             collapsible: false,
             items: [
               {
-                text: 'Adapt',
-                link: '/other/adapt/',
-              },
-              {
                 text: 'JSX Support',
                 link: '/other/jsx/',
               },

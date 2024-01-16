@@ -4,48 +4,133 @@
 For a better reading experience, the following code examples are all written using JSX syntax, except for the `html` API which is written using tag templates.
 :::
 
-## createApp
+## defineComponent
 
-- parameter：
+Define components.
 
-  - `Function`
+The first parameter is the configuration object and can be passed. Its configuration property is `mount`, which is used to mount the root component. Receives a "container" parameter, which can be an actual DOM element or a CSS selector string.
 
-- details：
-
-Pass in a function, which is the template function that needs to be rendered.
+The second parameter is a function and must be passed. Return the HTML template. The parameter of the function is an object, and the properties of the object are `content` and `setData` respectively.
 
 ```jsx
-function App() {
-  return <h1>Hello</h1>;
-}
-
-createApp(App).mount('#app');
+defineComponent(
+  {
+    mount: '#app',
+  },
+  () => {
+    return () => (
+      <div>
+        <h1>Hello Strve</h1>
+      </div>
+    );
+  }
+);
 ```
 
-### mount
+Among them, we can use `content` to define data for the component and use it when you need it.
 
-- parameter：
+```jsx
+const app = defineComponent(({ setData, content }) => {
+  content.data = {
+    name: 'Strve',
+  };
 
-  - `HTMLElement | String`
+  return () => (
+    <div>
+      <h1>Hello Strve</h1>
+    </div>
+  );
+});
 
-- details：
+console.log(app.data); // {name:'Strve'}
+```
 
-Mount the root component. This method accepts a "container" parameter, which can be an actual DOM element or a CSS selector string.
+## setData
+
+Modify page data.
+
+The first parameter is a function and must be passed. Execute the callback function to modify the associated page data.
+The second parameter is the context, which must be passed in the outer scope but not in the inner scope.
+
+**Internal scope:**
+
+```jsx
+defineComponent(({ setData }) => {
+  let count = 0;
+
+  function add() {
+    setData(() => {
+      count++;
+    });
+  }
+
+  return () => (
+    <fragment>
+      <button onClick={add}>Add</button>
+      <h1>{count}</h1>
+    </fragment>
+  );
+});
+```
+
+**External scope:**
+
+```jsx
+import { defineComponent, setData } from 'strve-js';
+
+let count = 0;
+
+const app = defineComponent(() => {
+  return () => (
+    <fragment>
+      <button onClick={add}>Add</button>
+      <h1>{count}</h1>
+    </fragment>
+  );
+});
+
+function add() {
+  setData(() => {
+    count++;
+  }, app);
+}
+```
+
+## domInfo
+
+Get DOM information. It can be defined in the DOM using the built-in attribute `$ref`.
+
+```jsx
+defineComponent(({ setData }) => {
+  let count = 1;
+  function view() {
+    setData(() => {
+      count++;
+    });
+    console.log(domInfo.h1Ref); // <h1>2</h1>
+  }
+
+  return () => (
+    <fragment>
+      <button onClick={view}>Btn</button>
+      <h1 $ref='h1Ref'>{count}</h1>
+    </fragment>
+  );
+});
+```
 
 ## html
 
-- parameter：
-
-  - `Function`
-
-- details：
-
 ` html`` ` is a tag function. The syntax of the tag function is to directly follow the function name with a template string. For example, you can write HTML tags directly in the template string.
 
+In the JSX syntax environment, this API will not be used.
+
 ```js
-function App() {
-  return html`<h1>Hello</h1>`;
-}
+defineComponent(() => {
+  let count = 0;
+
+  return () => html`<p>${count}</p>`;
+});
 ```
 
 ::: tip
@@ -53,227 +138,15 @@ If you are using the VSCode editor, you can go to the store to download the [es6
 This plugin enables HTML template string highlighting.
 :::
 
-## setData
-
-- parameter：
-
-  - `Function`
-  - `Array` (optional)
-
-- details：
-
-The first parameter is a function. The function body needs to execute the value that will change the page state, such as `state.msg` in the example below.
-
-```jsx
-const state = {
-  msg: '1',
-};
-
-function useChange() {
-  setData(() => {
-    state.msg = '2';
-  });
-}
-
-function App() {
-  return <p onClick={useChange}>{state.msg}</p>;
-}
-```
-
-The second parameter (optional) is an array with a length of 2.
-
-| Index | Function                                                                                   |
-| ----- | ------------------------------------------------------------------------------------------ |
-| 0     | The first array item is the component name that needs to be registered and must be unique. |
-| 1     | The second array item is the method name of the page template being rendered.              |
-
-::: tip
-When we pass in the second parameter according to the specification, the "island feature" of the named component is automatically enabled.
-:::
-
-Let’s briefly introduce it here to have a macro understanding.
-
-```jsx
-function Home() {
-  let [homeCom, render] = [registerComponent()];
-  let count = 0;
-
-  function add() {
-    setData(() => {
-      count++;
-    }, [homeCom, render]);
-  }
-
-  return (render = () => (
-    <fragment $id={homeCom}>
-      <button onClick={add}>Add</button>
-      <h1>{count}</h1>
-      <input value={count} />
-    </fragment>
-  ));
-}
-```
-
-You may already have some questions, but don’t worry, we will introduce every detail in the subsequent documents.
-
-## registerComponent
-
-- details：
-
-Register the component name and return the unique component name.
-
-```jsx
-function Home() {
-  let [homeCom, render] = [registerComponent()];
-  let count = 0;
-
-  function add() {
-    setData(() => {
-      count++;
-    }, [homeCom, render]);
-  }
-
-  return (render = () => (
-    <fragment $id={homeCom}>
-      <button onClick={add}>Add</button>
-      <h1>{count}</h1>
-      <input value={count} />
-    </fragment>
-  ));
-}
-```
-
-## onMounted
-
-- parameter：
-
-  - `Function`
-
-- details：
-
-Life cycle hook function: triggered when the node is mounted.
-
-```jsx
-function Home() {
-  let count = 0;
-  let render;
-
-  onMounted(() => {
-    console.log('HOME mount');
-  });
-
-  function add() {
-    setData(() => {
-      count++;
-    });
-  }
-
-  return (render = () => (
-    <fragment>
-      <button onClick={add}>Add</button>
-      <h1>{count}</h1>
-    </fragment>
-  ));
-}
-```
-
-## onUnmounted
-
-- parameter：
-
-  - `Function`
-
-- details：
-
-Life cycle hook function: called when the page is destroyed.
-
-```js
-onUnmounted(() => {
-  console.log('onUnmounted!');
-});
-```
-
-## nextTick
-
-- parameter：
-
-  - `Function`
-
-- details：
-
-Use it immediately after changing some data to wait for the DOM to update.
-
-```jsx
-function Home() {
-  let count = 0;
-  const h1Ref = Object.create(null);
-  let styleColor = 'color:red';
-  let render;
-
-  function add() {
-    setData(() => {
-      count++;
-      styleColor = 'color:green';
-      nextTick(() => {
-        console.log(domInfo.get(h1Ref)); // <h1 style="color:green">1</h1>
-      });
-    });
-  }
-
-  return (render = () => (
-    <fragment>
-      <button onClick={add}>Add</button>
-      <h1 $ref={h1Ref} style={styleColor}>
-        {count}
-      </h1>
-    </fragment>
-  ));
-}
-```
-
-## domInfo
-
-- details：
-
-Can get DOM information and return `WeakMap` object. An attribute can be defined in the DOM using `$ref`. The attribute value must be a reference type, usually `Object.create(null)`.
-
-```jsx
-function Home() {
-  const h1Ref = Object.create(null);
-  let render;
-
-  function view() {
-    nextTick(() => {
-      console.log(domInfo.get(h1Ref)); // <h1>1</h1>
-    });
-  }
-
-  return (render = () => (
-    <fragment>
-      <button onClick={view}>Btn</button>
-      <h1 $ref={h1Ref}>1</h1>
-    </fragment>
-  ));
-}
-```
-
-## version
-
-- details：
-
-Get the version number of Strve directly.
-
 ## createStateFlow
-
-- details：
 
 A lightweight state manager. The usual way is to pass in an object, and the object properties include `state`, `mutations`, and `actions`.
 
-| Properties | Function                    |
+| Properties | Functions                   |
 | ---------- | --------------------------- |
 | state      | store data                  |
-| mutations  | Synchronized update data    |
-| actions    | Asynchronous operation data |
+| mutations  | Synchronously update data   |
+| actions    | asynchronous operation data |
 
 Below we give a simple example.
 
@@ -325,27 +198,35 @@ export default store;
 import { setData } from 'strve-js';
 import store from './store.js';
 
-function getUserInfo() {
-  setData(() => {
-    store.dispatch('fetchUser').then(() => {
-      console.log(store.state.user); // { name: 'John Doe', age: 30 }
+defineComponent(({ setData }) => {
+  function getUserInfo() {
+    setData(() => {
+      store.dispatch('fetchUser').then(() => {
+        console.log(store.state.user); // { name: 'John Doe', age: 30 }
+      });
     });
-  });
-}
+  }
 
-function add() {
-  setData(() => {
-    store.commit('increment');
-  });
-}
+  function add() {
+    setData(() => {
+      store.commit('increment');
+    });
+  }
 
-function App() {
-  return (
+  return () => (
     <fragment>
       <h1 onClick={getUserInfo}>getUserInfo</h1>
       <button onClick={add}>Add</button>
       <h1>{store.state.count}</h1>
     </fragment>
   );
-}
+});
 ```
+
+## resetView
+
+Used with StrveRouter to clear page content.
+
+## version
+
+Get the version number of Strve directly.

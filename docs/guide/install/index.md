@@ -16,26 +16,25 @@ If you open the above index.html directly in the browser, you will find that it 
 <script type="module">
   import {
     html,
-    setData,
-    createApp,
-  } from 'https://cdn.jsdelivr.net/npm/strve-js@6.2.6/dist/strve.full-esm.prod.js';
+    defineComponent,
+  } from 'https://cdn.jsdelivr.net/npm/strve-js@6.6.6/dist/strve.full-esm.js';
 
-  const state = {
-    count: 0,
-  };
+  defineComponent(
+    {
+      mount: '#app',
+    },
+    ({ setData }) => {
+      let count = 0;
 
-  function add() {
-    setData(() => {
-      state.count++;
-    });
-  }
+      function add() {
+        setData(() => {
+          count++;
+        });
+      }
 
-  function App() {
-    return html`<h1>${state.count}</h1>`;
-  }
-
-  const app = createApp(App);
-  app.mount('#app');
+      return () => html`<h1 onClick=${add}>${count}</h1>`;
+    }
+  );
 </script>
 ```
 
@@ -46,26 +45,26 @@ All top-level APIs of this version are exposed as properties on the global Strve
 :::
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/strve-js@6.2.6/dist/strve.full.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/strve-js@6.6.6/dist/strve.full.prod.js"></script>
 <script>
-  const { html, setData, createApp } = Strve;
+  const { html, defineComponent } = Strve;
 
-  const state = {
-    count: 0,
-  };
+  defineComponent(
+    {
+      mount: '#app',
+    },
+    ({ setData }) => {
+      let count = 0;
 
-  function add() {
-    setData(() => {
-      state.count++;
-    });
-  }
+      function add() {
+        setData(() => {
+          count++;
+        });
+      }
 
-  function App() {
-    return html`<h1>${state.count}</h1>`;
-  }
-
-  const app = createApp(App);
-  app.mount('#app');
+      return () => html`<h1 onClick=${add}>${count}</h1>`;
+    }
+  );
 </script>
 ```
 

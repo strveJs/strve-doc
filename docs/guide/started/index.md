@@ -10,7 +10,7 @@ Strve is an easy-to-use, fast, flexible and lightweight JavaScript library for b
 
 - **Excellent performance:** Adopts the virtual DOM mode. The virtual DOM uses the diff algorithm to calculate the nodes that really need to be updated, minimizing DOM operations and the typesetting and redrawing losses caused by DOM operations. This significantly improves performance. In addition, our JavaScript library has won excellent results on the world-renowned [benchmark](https://github.com/krausest/js-framework-benchmark).
 
-- **Componentization:** A function is a component, which can be arbitrarily combined according to the size of the application. And the unique "island feature" of named components allows the level of virtual DOM tree calculation to be controlled at the component level.
+- **Componentization:** A function is a component, which can be arbitrarily combined according to the size of the application. And the unique "island feature" of the component allows the level of virtual DOM tree calculation to be controlled at the component level.
 
 - **Flexible application scenarios:** It can be used with or without build tools, and can be adapted to application projects developed by other front-end frameworks.
 
@@ -35,26 +35,25 @@ If you open the above index.html directly in the browser, you will find that it 
     <script type="module">
       import {
         html,
-        setData,
-        createApp,
-      } from 'https://cdn.jsdelivr.net/npm/strve-js@6.2.6/dist/strve.full-esm.js';
+        defineComponent,
+      } from 'https://cdn.jsdelivr.net/npm/strve-js@6.6.6/dist/strve.full-esm.js';
 
-      const state = {
-        count: 0,
-      };
+      defineComponent(
+        {
+          mount: '#app',
+        },
+        ({ setData }) => {
+          let count = 0;
 
-      function add() {
-        setData(() => {
-          state.count++;
-        });
-      }
+          function add() {
+            setData(() => {
+              count++;
+            });
+          }
 
-      function App() {
-        return html`<h1 onClick=${add}>${state.count}</h1>`;
-      }
-
-      const app = createApp(App);
-      app.mount('#app');
+          return () => html`<h1 onClick=${add}>${count}</h1>`;
+        }
+      );
     </script>
   </body>
 </html>
@@ -76,26 +75,26 @@ All top-level APIs of this version are exposed as properties on the global Strve
     <title>Strve.js</title>
   </head>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/strve-js@6.2.6/dist/strve.full.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/strve-js@6.6.6/dist/strve.full.prod.js"></script>
     <script>
-      const { html, setData, createApp } = Strve;
+      const { html, defineComponent } = Strve;
 
-      const state = {
-        count: 0,
-      };
+      defineComponent(
+        {
+          mount: '#app',
+        },
+        ({ setData }) => {
+          let count = 0;
 
-      function add() {
-        setData(() => {
-          state.count++;
-        });
-      }
+          function add() {
+            setData(() => {
+              count++;
+            });
+          }
 
-      function App() {
-        return html`<h1 onClick=${add}>${state.count}</h1>`;
-      }
-
-      const app = createApp(App);
-      app.mount('#app');
+          return () => html`<h1 onClick=${add}>${count}</h1>`;
+        }
+      );
     </script>
   </body>
 </html>

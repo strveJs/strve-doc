@@ -4,7 +4,13 @@
 Although the version number uses the version number of Strve, the content includes not only the updated content of Strve, but also the updated content of other official tools in the same period.
 :::
 
-## v6.2.6 (Latest)
+## v6.6.6 (Latest)
+
+- The API and usage are overall optimized and updated to make it easier to use and more efficient;
+- Update [strve-router](https://www.npmjs.com/package/strve-router);
+- Update [create-strve-app](https://www.npmjs.com/package/create-strve-app);
+
+## v6.2.6
 
 - Optimize the Diff algorithm using the longest increasing subsequence;
 - Added the usage of named components and introduced the **"isolated island"** feature;
