@@ -1,6 +1,6 @@
 {
   "name": "strve-doc",
-  "version": "6.6.6",
+  "version": "6.7.0",
   "description": "Strve.js document address",
   "main": "index.js",
   "repository": {

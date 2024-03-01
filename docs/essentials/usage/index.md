@@ -196,28 +196,6 @@ If the virtual DOM tree is too large and the Diff calculation time is greater th
 
 ## Built-in Properties
 
-### $ref
-
-The `$ref` attribute can reference a DOM element. It is used to reference other elements within a component or DOM element.
-
-```jsx
-defineComponent(({ setData }) => {
-  let count = 1;
-  function view() {
-    setData(() => {
-      count++;
-    });
-    console.log(domInfo.h1Ref); // <h1>2</h1>
-  }
-
-  return () => (
-    <fragment>
-      <button onClick={view}>Btn</button>
-      <h1 $ref='h1Ref'>{count}</h1>
-    </fragment>
-  );
-});
-```
 
 ### $is
 
