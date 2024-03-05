@@ -4,7 +4,7 @@
 Although the version number uses the version number of Strve, the content includes not only the updated content of Strve, but also the updated content of other official tools in the same period.
 :::
 
-## v6.7.0 (Latest)
+## v6.7.1 (Latest)
 
 - Code refactoring and improving some APIs;
 - Update [create-strve-app](https://www.npmjs.com/package/create-strve-app);
