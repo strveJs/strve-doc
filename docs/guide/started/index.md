@@ -1,6 +1,6 @@
 # Started
 
-Strve is an easy-to-use, fast, flexible and lightweight JavaScript library for building user interfaces. The HTML template engine based on `tagged template` uses ES6 template strings to write templates and uses the browser's native capabilities for template rendering.
+Strve is a JavaScript library for building user interfaces.
 
 - **Easier to get started:** As long as you are basically familiar with HTML, CSS and JavaScript, you can get started directly.
 

@@ -114,12 +114,3 @@ defineComponent(() => {
 If you are using the VSCode editor, you can go to the store to download the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) plug-in,
 This plugin enables HTML template string highlighting.
 :::
-
-
-## resetView
-
-Used with StrveRouter to clear page content.
-
-## version
-
-Get the version number of Strve directly.

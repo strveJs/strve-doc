@@ -64,6 +64,10 @@ export default {
                 text: 'Usage',
                 link: '/essentials/usage/',
               },
+              {
+                text: 'Example',
+                link: '/essentials/example/',
+              },
             ],
           },
           {
